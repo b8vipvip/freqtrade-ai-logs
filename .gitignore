@@ -1,0 +1,7 @@
+.env
+.env.*
+*.key
+*.secret
+*API_KEY*
+*API_SECRET*
+*PASSPHRASE*
