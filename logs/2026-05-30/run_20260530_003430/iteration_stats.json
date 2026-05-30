@@ -1,0 +1,31 @@
+{
+  "planned_iterations": 1,
+  "advisor_success_count": 1,
+  "codegen_success_count": 1,
+  "generated_versions_count": 1,
+  "train_backtest_count": 1,
+  "validation_backtest_count": 0,
+  "validation_backtest_total_count": 0,
+  "skipped_validation_count": 1,
+  "valid_strategy_count": 0,
+  "invalid_strategy_count": 1,
+  "new_best_update_count": 0,
+  "current_iteration_version": "v001",
+  "history_strategy_total_count": 200,
+  "version_statuses": [
+    {
+      "version": "v001",
+      "strategy_class": "MultiCoin_AI_Strategy_20260530_003430_v001",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "跳过",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间无交易",
+      "final_score": 0.0
+    }
+  ]
+}

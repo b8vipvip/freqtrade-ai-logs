@@ -1,0 +1,69 @@
+{
+  "strategy_class": "MultiCoin_AI_Strategy_20260530_001814_v003",
+  "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260530_001814_v003.py",
+  "why_nearest": [
+    "训练交易数在目标范围内",
+    "但训练区间和其他验证区间不如 historical_best",
+    "仅作为后续优化参考，不覆盖正式 best"
+  ],
+  "train_metrics": {
+    "profit_total_abs": -8.431359579999999,
+    "profit_total_pct": -0.8431359579999999,
+    "profit_factor": 0.3810636885016164,
+    "max_drawdown_pct": 0.9705541861566636,
+    "total_trades": 62,
+    "roi_profit_abs": 5.18179657,
+    "stop_loss_profit_abs": -13.613156150000002
+  },
+  "validation_metrics": [
+    {
+      "label": "valid_apr_2026",
+      "timerange": "20260401-20260430",
+      "total_trades": 61,
+      "profit_total_abs": -3.8297458799999995,
+      "profit_total_pct": -0.38297458799999995,
+      "profit_factor": 0.5939018783491169,
+      "max_drawdown_pct": 0.6610831762505517,
+      "winrate": 0.6885245901639344,
+      "roi_profit_abs": 5.593610770000001,
+      "stop_loss_profit_abs": -9.423356649999999,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0
+    },
+    {
+      "label": "valid_mar_2026",
+      "timerange": "20260301-20260331",
+      "total_trades": 53,
+      "profit_total_abs": -14.16293382,
+      "profit_total_pct": -1.4162933819999999,
+      "profit_factor": 0.2488893649345179,
+      "max_drawdown_pct": 1.4162933820000034,
+      "winrate": 0.5094339622641509,
+      "roi_profit_abs": 4.68550945,
+      "stop_loss_profit_abs": -18.84844327,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0
+    },
+    {
+      "label": "valid_feb_2026",
+      "timerange": "20260201-20260228",
+      "total_trades": 51,
+      "profit_total_abs": -5.14623068,
+      "profit_total_pct": -0.514623068,
+      "profit_factor": 0.5904565582758312,
+      "max_drawdown_pct": 0.89851615801091,
+      "winrate": 0.6862745098039216,
+      "roi_profit_abs": 7.416982020000001,
+      "stop_loss_profit_abs": -12.563212700000001,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0
+    }
+  ],
+  "trade_under_min": false,
+  "validation_strong": false,
+  "trade_count_warning": "",
+  "improvement_vs_baseline": {
+    "profit_total_pct_delta": -0.10313595799999986,
+    "profit_factor_delta": -0.24893631149838358
+  }
+}
