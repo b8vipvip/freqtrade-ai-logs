@@ -1,0 +1,17 @@
+{
+  "strategy_name": "MultiCoin_AI_Strategy_20260530_043127_v012",
+  "mutation_type": "reduce_trade_frequency",
+  "reason": "本轮所有直接减损的 mutation_type（add_entry_filter、tighten_entry_trigger 等）已失败或重复，且严格禁止调整止损宽度。选择未尝试的 reduce_trade_frequency，通过提高入场标准过滤弱势信号，间接降低止损发生频率，从而减少固定止损对 ROI 的吞噬。",
+  "expected_effect": "训练交易数预计从25降至20-24，仍满足 min_trades=25 的候选线；止损次数有望减少，profit_factor 可能回升至 >0.85，同时保持低回撤。",
+  "changes": [
+    "新增入场过滤：ADX > 25，仅在有趋势的市场入场",
+    "新增入场过滤：收盘价位于 EMA50 上方，避免逆势",
+    "延长 CooldownPeriod stop_duration_candles 从 3 至 5，降低连续入场"
+  ],
+  "do_not_change": [
+    "不修改 stoploss",
+    "不修改 ROI 表",
+    "不修改 trailing_stop",
+    "不启用 exit_signal"
+  ]
+}

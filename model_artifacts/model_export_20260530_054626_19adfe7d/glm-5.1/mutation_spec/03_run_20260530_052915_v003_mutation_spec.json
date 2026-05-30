@@ -1,0 +1,22 @@
+{
+  "mutation_type": "add_entry_filter",
+  "reason": "冠军策略核心问题：4次止损亏损-7.58 USDT完全吞噬20次ROI盈利+6.32 USDT，尤其ETH/USDT的PF仅0.44拖累整体。上一轮pair_specific_filter和tighten_entry_trigger均因生成重复指纹而失败。本轮选择add_entry_filter，新增ADX趋势强度+EMA趋势方向+RSI区间三重过滤，精准筛除弱势趋势中的入场信号，从根源减少止损触发次数，而非调整止损/ROI参数。这与已失败的mutation_type方向不同，且能产生不同的策略指纹。",
+  "expected_effect": "止损次数从4次降至1-2次，stop_loss_profit_abs从-7.58收窄至-2~-3 USDT；总交易数维持在25-40区间；profit_factor从0.85提升至1.0+；ETH/USDT的亏损交易被过滤掉大部分",
+  "changes": {
+    "add_entry_filters": [
+      "ADX > 20：确保仅在趋势明确时入场，过滤震荡行情中的MACD假交叉",
+      "close > ema（如EMA50）：确保多头入场时价格在均线上方，避免逆势入场",
+      "RSI介于30-65之间：避免在超买区（RSI>65）追多，减少入场即回调触发止损的概率"
+    ],
+    "target_entry_tag": "macd_cross_momentum",
+    "filter_logic": "所有新增过滤条件与现有MACD交叉条件取AND，不改变原有MACD逻辑，仅叠加过滤层"
+  },
+  "do_not_change": {
+    "stoploss": "-0.035，不放宽也不收紧，避免与黑名单中stoploss=-0.035+trailing_stop=True组合重复",
+    "minimal_roi": "保持当前{0: 0.02, 25: 0.015, 50: 0.01, 100: 0.005}结构",
+    "trailing_stop": "保持True",
+    "use_exit_signal": "保持False",
+    "timeframe": "保持5m",
+    "protection_cooldown": "保持当前CooldownPeriod+MaxDrawdown+StoplossGuard组合"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "mutation_type": "pair_specific_filter",
+  "reason": "历史冠军 v049 的亏损几乎完全来自 BTC/USDT（profit_total_abs=-3.69，winrate=0.4，PF=0.12，stop_loss 主要发生在该币种），而 SOL/ETH/DOGE/XRP 全部盈利。当前 baseline 的固定止损吞噬 ROI 问题最大来源就是 BTC 这种高时长、低胜率的入场。通过对 BTC/USDT 施加更严格的趋势确认过滤，可以直接剔除导致大额止损亏损的低质量交易，而不是靠增加交易数量，符合'减少固定止损吞噬 ROI'的核心目标。",
+  "expected_effect": "剔除 BTC/USDT 上低胜率、长持仓的亏损交易，预计减少 3-5 笔止损单（约 -3.6 USDT 亏损来源），提升整体 profit_factor 至 0.56 以上，降低单笔最大止损亏损，控制回撤在 1.45% 以下。总交易数预计从 47 降至 42-44，仍处于 25~80 目标区间。",
+  "changes": {
+    "scope": "pair == 'BTC/USDT'",
+    "additional_entry_conditions": [
+      "BTC/USDT 入场需 close > ema200（仅在更明确的中期上升趋势中入场，过滤震荡/下跌中的弱信号）",
+      "BTC/USDT 入场需 adx > 25（要求趋势强度足够，避免无趋势区间被止损）",
+      "BTC/USDT 入场需 rsi 处于 45~65 区间（避免在超买顶部或弱势反弹中追单）"
+    ],
+    "note": "仅对 BTC/USDT 收紧入场，其余币种（SOL/ETH/DOGE/XRP）保持原有逻辑不变，因为它们已稳定盈利。"
+  },
+  "do_not_change": [
+    "stoploss 固定值",
+    "ROI 表",
+    "trailing_stop 配置",
+    "SOL/ETH/DOGE/XRP 的入场逻辑",
+    "整体时间周期 timeframe",
+    "全局成交量过滤阈值"
+  ]
+}

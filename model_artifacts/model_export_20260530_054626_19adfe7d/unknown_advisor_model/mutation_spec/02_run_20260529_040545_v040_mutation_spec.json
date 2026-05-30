@@ -1,0 +1,29 @@
+{
+  "mutation_type": "pair_specific_filter",
+  "reason": "历史最佳v049中BTC/USDT是唯一亏损币种（5笔交易，胜率40%，profit_total_abs=-3.69，止损吞噬严重，profit_factor仅0.12），而SOL/ETH/DOGE/XRP均盈利。基准整体PF=0.63且收益为负，主要拖累来自BTC的高止损损失。通过对BTC施加更严格的入场过滤（趋势确认+波动率约束），剔除其低质量做多信号，可直接减少固定止损吞噬ROI，提升整体PF和收益，同时保持其他币种交易不变。这是减少stop_loss损失而非增加交易数的精准修正。",
+  "expected_effect": "预计剔除BTC约3笔亏损止损交易，减少约3-4 USDT的止损损失；总交易数从47降至约43-44（仍在25~80区间内）；profit_factor从0.63提升至0.85+；max_drawdown从1.45%下降至约1.0%以下；profit_total_pct转正或显著改善。不依赖放宽其他币种入场，验证区间回撤同步改善。",
+  "changes": {
+    "pair_specific_rules": {
+      "BTC/USDT": {
+        "require_trend_confirmation": true,
+        "ema_fast_above_ema_slow": true,
+        "min_adx": 25,
+        "max_atr_pct": 2.0,
+        "comment": "仅在BTC明确趋势且波动率受控时入场，过滤掉震荡期的低质量做多信号，避免BTC高止损损失"
+      }
+    },
+    "apply_scope": "entry_long_only",
+    "other_pairs_unchanged": true
+  },
+  "do_not_change": [
+    "stoploss",
+    "minimal_roi",
+    "trailing_stop",
+    "SOL/USDT entry conditions",
+    "ETH/USDT entry conditions",
+    "DOGE/USDT entry conditions",
+    "XRP/USDT entry conditions",
+    "timeframe",
+    "global RSI/EMA/momentum thresholds"
+  ]
+}

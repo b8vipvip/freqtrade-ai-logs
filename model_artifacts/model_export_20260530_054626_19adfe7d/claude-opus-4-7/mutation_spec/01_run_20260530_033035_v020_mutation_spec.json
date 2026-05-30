@@ -1,0 +1,28 @@
+{
+  "mutation_type": "pair_specific_filter",
+  "reason": "本轮所有11种mutation_type都已尝试过且失败，但pair_specific_filter是唯一曾成功的类型（v015冠军即来自此方向）。上一轮v019的pair_specific_filter失败原因是交易数22略低于25下限——问题出在ETH过滤太严导致交易数不足。本轮采用不同策略：不再过滤ETH的入场数量，而是针对ETH添加更严格的趋势确认条件（要求EMA20>EMA50且close>EMA20），同时对SOL略微放宽RSI阈值从32→34以增加1-2笔交易，确保总交易数>=25。核心目标是减少ETH的止损亏损（当前ETH 9笔中2笔止损贡献了大部分亏损），而非减少ETH交易数。",
+  "session_parent_reason": "v015冠军有25笔交易刚好达标，ETH贡献-1.84 USDT亏损（PF=0.51），4笔止损共亏-7.58。本轮通过对ETH增加趋势过滤条件来避免逆势入场被止损，同时对SOL微调RSI以补偿可能减少的ETH交易数。",
+  "expected_effect": "ETH止损次数从2次降至0-1次，止损亏损减少约2-4 USDT，总交易数维持25-28笔，profit_factor提升至1.1-1.3，总收益转正。",
+  "changes": {
+    "entry_conditions": {
+      "ETH/USDT": "增加趋势过滤：要求 dataframe['ema20'] > dataframe['ema50'] 且 dataframe['close'] > dataframe['ema20']，仅在上升趋势中入场，减少逆势止损",
+      "SOL/USDT": "RSI入场阈值从32放宽至34，微增1-2笔交易以补偿ETH可能减少的交易"
+    },
+    "indicators_to_add": "ema20 = ta.EMA(dataframe, timeperiod=20)（如尚未存在）",
+    "stoploss": "保持不变 -0.035",
+    "minimal_roi": "保持不变",
+    "trailing_stop": "保持不变"
+  },
+  "do_not_change": [
+    "stoploss",
+    "minimal_roi",
+    "trailing_stop",
+    "trailing_stop_positive",
+    "trailing_stop_positive_offset",
+    "use_exit_signal",
+    "timeframe",
+    "DOGE/USDT入场条件",
+    "BTC/USDT入场条件",
+    "XRP/USDT入场条件"
+  ]
+}

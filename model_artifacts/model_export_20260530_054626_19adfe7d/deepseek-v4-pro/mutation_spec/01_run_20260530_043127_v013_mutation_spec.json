@@ -1,0 +1,30 @@
+{
+  "mutation_type": "cooldown_or_protection",
+  "reason": "当前最优策略 v001 的训练成绩显示，固定止损亏损（-7.58 USDT）严重侵蚀了 ROI 收益（6.32 USDT）。已失败的 mutation_type（如 adjust_stoploss, tighten_entry_trigger 等）均未能通过减少止损损失来改善整体收益。本轮未失败的 mutation_type 中，cooldown_or_protection 能够通过主动冷却机制，在发生止损后阻止同一交易对短期内再次入场，从而避免连续止损造成的资金大幅回撤。这同时符合跨 run 教训“减少 stoploss 损失，验证区间优先稳健”和本次 session 的硬约束（不增加交易频率、不单纯调整止损）。",
+  "expected_effect": "预计将止损次数从 4 次减少至 2–3 次，使总止损亏损降至 5 USDT 以下，同时由于冷却期会过滤部分低质量信号，总交易数可能从 25 下降至 23–25，仍保持在 20 以上，不会触发验证跳过。这将直接提升净盈亏和 profit_factor，有望使 profit_total_pct 回正，并保持 max_drawdown_pct 在 3% 以内。",
+  "changes": {
+    "protection": {
+      "add": [
+        {
+          "method": "StoplossGuard",
+          "lookback_period_candles": 18,
+          "trade_limit": 1,
+          "stop_duration_candles": 12,
+          "only_per_pair": true
+        }
+      ]
+    }
+  },
+  "do_not_change": [
+    "minimal_roi",
+    "stoploss",
+    "trailing_stop",
+    "use_exit_signal",
+    "timeframe",
+    "entry_trigger_conditions",
+    "entry_filters",
+    "volume_filter",
+    "pair_list",
+    "indicator_set"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "mutation_type": "adjust_roi",
+  "reason": "当前champion的ROI收益6.32 USDT被止损亏损-7.58 USDT吞噬。ETH/USDT的9笔交易中2笔止损导致整体亏损-2.14 USDT。通过调整ROI更激进（更快锁定小利润），可以减少持仓时间，降低被止损的概率，从而减少止损亏损对整体收益的侵蚀。上一轮add_entry_filter/pair_specific_filter/tighten_entry_trigger均因高度重复失败，需要从退出机制入手改变策略指纹。",
+  "expected_effect": "减少止损亏损占比，提高profit_factor从0.85到1.0以上，总收益转正。ROI退出比例增加，止损退出比例减少，整体收益改善。",
+  "changes": {
+    "minimal_roi": {
+      "0": 0.012,
+      "15": 0.008,
+      "30": 0.005,
+      "60": 0.003
+    }
+  },
+  "do_not_change": [
+    "stoploss",
+    "trailing_stop",
+    "trailing_stop_positive",
+    "trailing_stop_positive_offset",
+    "trailing_only_offset_is_reached",
+    "use_exit_signal",
+    "entry_conditions",
+    "protection_cooldown",
+    "timeframe",
+    "indicators"
+  ]
+}

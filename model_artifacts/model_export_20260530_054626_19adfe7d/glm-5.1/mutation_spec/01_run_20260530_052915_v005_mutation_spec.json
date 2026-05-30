@@ -1,0 +1,26 @@
+{
+  "mutation_type": "remove_bad_entry_condition",
+  "reason": "ETH/USDT 贡献 9 笔交易、PF 仅 0.44、亏损 -2.14 USDT，是拖累整体 PF 的核心来源。4 笔 stoploss 合计 -7.58 USDT 完全吞噬 ROI 收益。此前 add_entry_filter / tighten_entry_trigger / pair_specific_filter / adjust_roi 均失败，因为它们没有精准移除导致 stoploss 的劣质入场条件。本轮选择 remove_bad_entry_condition，直接剔除 MACD 柱状图递减时的入场（假突破）和 RSI>65 超买区入场（易反转触发止损），从源头减少 stoploss 命中率。",
+  "expected_effect": "stoploss 笔数从 4 降至 1-2，profit_factor 从 0.85 提升至 >1.0，总交易数维持 25-40 区间，max_drawdown_pct 降至 <1.0%",
+  "changes": {
+    "remove_conditions": [
+      "移除 MACD histogram 在入场前 2 根 K 线内递减时的入场许可（假金叉）",
+      "移除 RSI > 65 时的做多入场（超买区易反转触发固定止损）",
+      "移除价格低于 EMA200 时的 macd_cross_momentum 入场（逆势入场止损率高）"
+    ],
+    "add_guard_conditions": [
+      "要求 MACD histogram 在当前 K 线 > 前一根 K 线（动量确认递增）",
+      "要求 RSI 在 40-65 区间（健康多头区域）",
+      "要求 close > EMA200（趋势过滤，避免逆势入场）"
+    ],
+    "target_pair_focus": "ETH/USDT 的 macd_cross_momentum 入口条件收紧，SOL/USDT 保持现有逻辑不变"
+  },
+  "do_not_change": [
+    "minimal_roi",
+    "stoploss 值",
+    "trailing_stop 配置",
+    "timeframe",
+    "SOL/USDT 入场逻辑",
+    "use_exit_signal"
+  ]
+}

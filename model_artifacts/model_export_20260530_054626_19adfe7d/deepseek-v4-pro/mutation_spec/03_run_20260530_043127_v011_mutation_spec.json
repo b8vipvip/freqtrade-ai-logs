@@ -1,0 +1,7 @@
+{
+  "mutation_type": "cooldown_or_protection",
+  "reason": "冠军策略v001的4次止损亏损-7.58吞噬了全部ROI利润(6.32)，训练交易数25已达下限，直接调整止损值曾导致重复策略，收紧入场过滤可能使交易数低于25。本轮通过强化StopLossGuard和MaxDrawdown保护，在不触动止损参数的前提下减少连续止损次数，从而降低止损净亏损，同时控制回撤。",
+  "expected_effect": "减少连续止损触发次数，降低stop_loss总亏损，提升profit_factor，轻微减少总交易数但预计仍保留在25~80区间，max_drawdown可能下降。",
+  "changes": "StoplossGuard.trade_limit从2降至1；StoplossGuard.stop_duration_candles从8增至10；MaxDrawdown.max_allowed_drawdown从0.02降至0.015；MaxDrawdown.stop_duration_candles从6增至8。",
+  "do_not_change": "stoploss=-0.025；minimal_roi阶梯表；trailing_stop=True；use_exit_signal=False；入场条件及指标组合；pair_filters；timeframe=5m；均保持不变。"
+}

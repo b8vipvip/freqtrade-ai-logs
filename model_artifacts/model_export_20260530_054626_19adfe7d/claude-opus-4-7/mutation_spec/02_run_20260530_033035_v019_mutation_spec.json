@@ -1,0 +1,35 @@
+{
+  "mutation_type": "pair_specific_filter",
+  "reason": "所有11种mutation_type都已尝试且失败，但pair_specific_filter是唯一曾成功的类型（v015冠军）。v015的核心问题是ETH/USDT贡献了-1.84 USDT亏损（9笔交易中2笔止损，PF仅0.51），而SOL表现良好。v017/v018尝试pair_specific_filter失败是因为放宽了ETH入场导致多了止损交易。本轮采用完全不同的方向：不是限制ETH入场条件，而是对ETH增加一个ATR波动率过滤器，仅在低波动环境下入场ETH，从根本上避免ETH在高波动时触发止损。同时微调ROI让ETH的盈利交易更快锁定利润。",
+  "session_parent_reason": "基于v015冠军，ETH的4笔止损中有2笔造成-7.58 USDT总止损亏损的大部分。需要精准过滤ETH的高风险入场而非全面收紧。",
+  "expected_effect": "ETH止损次数从2次降至0-1次，减少约3-4 USDT止损亏损，profit_factor从1.00提升至1.3+，总交易数维持25-30笔（可能ETH减少2-3笔但仍在范围内）。",
+  "changes": {
+    "pair_specific_filter": {
+      "ETH/USDT": {
+        "add_condition": "dataframe['atr_14'] < dataframe['atr_14'].rolling(50).mean() * 1.1",
+        "description": "ETH仅在ATR低于50周期均值1.1倍时入场，过滤高波动环境下的假突破"
+      }
+    },
+    "adjust_roi": {
+      "description": "对ETH缩短ROI持仓时间，更快锁定利润避免回撤转止损",
+      "minimal_roi": {
+        "0": 0.032,
+        "20": 0.018,
+        "40": 0.01,
+        "80": 0.005
+      }
+    },
+    "indicators_to_add": [
+      "atr_14_rolling_mean_50"
+    ],
+    "entry_logic_change": "在populate_entry_trend中，对pair=='ETH/USDT'的行增加ATR波动率过滤条件"
+  },
+  "do_not_change": [
+    "stoploss保持-0.035不变",
+    "trailing_stop保持True不变",
+    "SOL/USDT和DOGE/USDT的入场逻辑不变",
+    "MACD交叉动量核心入场信号不变",
+    "use_exit_signal保持False",
+    "timeframe保持5m"
+  ]
+}

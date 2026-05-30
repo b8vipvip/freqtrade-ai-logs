@@ -1,0 +1,21 @@
+{
+  "mutation_type": "remove_bad_entry_condition",
+  "reason": "历史冠军v049中BTC/USDT单币种亏损-3.69 USDT（5笔交易3笔止损，胜率仅40%，profit_factor=0.12），是固定止损吞噬ROI的主要来源。其余SOL/ETH/DOGE/XRP均盈利且高胜率。问题不在交易频率而在BTC方向的入场条件质量差，导致4次止损共-5.59 USDT。移除对BTC不利的入场条件可直接消除止损亏损，而非靠放宽入场增加交易数。",
+  "expected_effect": "去掉BTC低质量入场后，止损次数从4降至1-2，stop_loss_profit_abs从-5.59改善至约-1.5以内，profit_total转正，profit_factor提升至>0.56，总交易数从47降至约38-42仍处于25~80区间，max_drawdown控制在1%以内，单次止损损失远低于15 USDT上限。",
+  "changes": {
+    "target_condition": "BTC/USDT 在高波动/趋势不明确区间的多头入场（对应v049中BTC亏损的逆势进场）",
+    "remove_entry_logic": "移除当 ADX < 25 或 价格处于 EMA200 下方 时仍允许 BTC 入场的宽松条件分支",
+    "add_guard_for_btc": "BTC 仅在 close > ema200 且 adx > 25 且 当前K线收阳(close>open) 时才允许入场，其余维持原champion入场逻辑",
+    "keep_other_pairs": "SOL/ETH/DOGE/XRP 入场逻辑保持v049原样不变",
+    "scope": "entry_condition_only"
+  },
+  "do_not_change": [
+    "stoploss 数值",
+    "minimal_roi / ROI 表",
+    "trailing_stop 配置",
+    "protection / cooldown 设置",
+    "volume_filter 阈值",
+    "SOL/ETH/DOGE/XRP 的入场触发参数",
+    "timeframe"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "mutation_type": "pair_specific_filter",
+  "reason": "v015冠军中ETH/USDT贡献9笔交易但净亏损-1.84 USDT（PF=0.51），其中2笔止损亏损占总止损的大部分。上一轮pair_specific_filter成功过（产生了v015冠军），本轮采用更精准的ETH入场过滤：要求ETH入场时ADX>28且价格在EMA100之上，而非完全禁止ETH。这样可保留ETH的高质量信号（7笔盈利），同时过滤掉弱势环境下的2笔大额止损。与之前失败的pair_specific_filter不同，本次不是简单排除币种或放宽条件，而是针对ETH增加趋势强度门槛。",
+  "session_parent_reason": "所有11种mutation_type都已尝试过，pair_specific_filter是唯一成功过的类型。本轮回到pair_specific_filter但采用完全不同的实现方式：不排除ETH，而是对ETH施加更严格的ADX+EMA100趋势确认，目标是将ETH的2笔止损亏损（约-3.8 USDT）过滤掉，同时保留其7笔盈利交易中的大部分。",
+  "expected_effect": "ETH交易数从9降至约5-7笔（过滤弱势入场），止损次数从4降至2-3次，总止损亏损从-7.58降至约-5.5 USDT，profit_factor从1.00提升至1.05-1.15，总交易数维持在23-27范围内。",
+  "changes": {
+    "entry_conditions": {
+      "ETH/USDT_additional_filter": "对ETH/USDT入场增加条件：adx > 28 且 close > ema100，确保只在强趋势且价格在长期均线上方时入场",
+      "implementation": "在populate_entry_trend中，对metadata['pair']=='ETH/USDT'的情况额外要求 (dataframe['adx'] > 28) & (dataframe['close'] > dataframe['ema100'])"
+    },
+    "indicators": {
+      "add": "确保populate_indicators中计算ema100（如已有则无需重复）"
+    }
+  },
+  "do_not_change": [
+    "stoploss值保持-0.035不变",
+    "trailing_stop配置不变",
+    "minimal_roi不变",
+    "SOL/USDT和DOGE/USDT的入场条件不变",
+    "基础macd_cross_momentum入场逻辑不变"
+  ]
+}
