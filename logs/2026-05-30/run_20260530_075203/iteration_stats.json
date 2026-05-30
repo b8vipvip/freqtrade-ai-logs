@@ -1,0 +1,43 @@
+{
+  "planned_iterations": 1,
+  "advisor_success_count": 1,
+  "codegen_success_count": 1,
+  "generated_versions_count": 1,
+  "train_backtest_count": 1,
+  "validation_backtest_count": 1,
+  "validation_backtest_total_count": 3,
+  "skipped_validation_count": 0,
+  "valid_strategy_count": 0,
+  "invalid_strategy_count": 1,
+  "new_best_update_count": 0,
+  "current_iteration_version": "v001",
+  "history_strategy_total_count": 200,
+  "random_sample_enabled": false,
+  "random_sample_windows_count": 0,
+  "random_sample_total_backtests": 0,
+  "early_stop_triggered": false,
+  "early_stop_reason": "",
+  "early_stop_checked_counters": {
+    "no_new_best": 0,
+    "final_score_failures": 0,
+    "duplicate_strategies": 0
+  },
+  "version_statuses": [
+    {
+      "version": "v001",
+      "strategy_class": "MultiCoin_AI_Strategy_20260530_075203_v001",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数略低于目标下限，验证强度不足",
+      "final_score": -7.5587227974616695,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0
+    }
+  ]
+}
