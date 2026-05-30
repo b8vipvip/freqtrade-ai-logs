@@ -1,0 +1,296 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260530_102832.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/run.log
+
+========== 日志仓库启动检查 ==========
+
+===== 自动优化中文设置向导 =====
+是否进入交互式设置？（默认：是，回车=是，输入 n=跳过）：本次实际迭代轮数：1
+运行时配置已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/goal.runtime.json
+本地历史数据已存在，覆盖目标区间，跳过下载。
+
+========== AI 模型池配置 ==========
+策略顾问 provider/模型池：
+1. APIHOST_GPT55 / gpt-5.5 @ https://apihost.cn/v1
+2. APIHOST_GPT54 / gpt-5.4 @ https://apihost.cn/v1
+3. apihost_claude_opus47 / claude-opus-4-7 @ https://apihost.cn/v1
+4. apihost_claude_opus46 / claude-opus-4-6 @ https://apihost.cn/v1
+
+代码生成 provider/模型池：
+1. apihost_claude_opus47 / claude-opus-4-7 @ https://apihost.cn/v1
+2. APIHOST_GPT54 / gpt-5.4 @ https://apihost.cn/v1
+3. APIHOST_GPT55 / gpt-5.5 @ https://apihost.cn/v1
+4. APIHOST_GPT53 / gpt-5.3 @ https://apihost.cn/v1
+5. apihost_gpt54 / gpt-5.4 @ https://apihost.cn/v1
+6. deepseek_official / deepseek-v4-pro @ https://api.deepseek.com
+7. glm_official / glm-5.1 @ https://open.bigmodel.cn/api/paas/v4/
+8. apihost_claude_opus47 / claude-opus-4-7 @ https://apihost.cn/v1
+9. apihost_claude_opus46 / claude-opus-4-6 @ https://apihost.cn/v1
+
+模型失败自动轮换：开启
+单次 AI 调用最大尝试次数：5
+AI 请求超时：180 秒
+AI 请求冷却：10 秒
+当前 champion 来源：historical_best
+当前 champion 策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_084755/v001/strategy.py
+
+========== 当前历史最佳策略简述 ==========
+来源：historical_best
+策略名：MultiCoin_AI_Strategy_20260530_084755_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_084755/v001/strategy.py
+训练区间：20260501-20260525
+交易数：20
+收益USDT：0.3326
+收益率：0.03%
+胜率：85.00%
+Profit Factor：1.0635
+最大回撤：0.47%
+验证区间平均收益率：0.01%
+验证区间平均 PF：1.0495
+验证区间最大回撤：0.62%
+是否疑似过拟合：否
+主要优势：本轮 final_score 最高。
+主要风险：仍需在更多验证区间复验稳健性。
+========== 记忆加载状态 ==========
+historical_best：存在
+historical_best 策略文件：有效
+nearest_candidate：存在
+nearest_candidate 策略文件：有效
+last_run_summary：存在
+strategy_memory：存在
+strategy_lessons：存在
+strategy_blacklist：存在
+额外随机采样：未启用
+
+========== 第 1 轮 / v001 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：gpt-5.5, gpt-5.4, claude-opus-4-7, claude-opus-4-6
+当前代码生成模型池：claude-opus-4-7, gpt-5.4, gpt-5.5, gpt-5.3, gpt-5.4, deepseek-v4-pro, glm-5.1, claude-opus-4-7, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v001
+上一轮结果：无
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260530_084755_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260530_084755_v008
+本次 run 已失败 mutation_type：无
+本次 run 已成功 mutation_type：无
+本轮 advisor prompt 已包含上一轮结果：否
+当前正式 champion：MultiCoin_AI_Strategy_20260530_084755_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260530_084755_v001
+当前 session_parent 候选：
+- historical_best: MultiCoin_AI_Strategy_20260530_084755_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260530_084755_v008
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-7, claude-opus-4-6
+当前 provider：APIHOST_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：首次调用
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：APIHOST_GPT55
+实际使用模型：gpt-5.5
+用时：28 秒
+返回字符数：3086
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：claude-opus-4-7, gpt-5.4, gpt-5.5, gpt-5.3, gpt-5.4, deepseek-v4-pro, glm-5.1, claude-opus-4-7, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：19 秒
+返回字符数：6276
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-30_10-29-57.json
+找到策略: MultiCoin_AI_Strategy_20260530_102832_v001
+total_trades: 24
+profit_total_abs: -0.6637959399999995
+profit_total_pct: -0.06637959399999994
+profit_factor: 0.9049503987968017
+max_drawdown_pct: 0.5953713899079769
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260501-20260525 | 24 | -0.07% | -0.6638 | 83.33% | 0.9050 | 0.60% | 6.3199 | -6.9837 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-30_10-30-19.json
+找到策略: MultiCoin_AI_Strategy_20260530_102832_v001
+total_trades: 28
+profit_total_abs: 2.62116537
+profit_total_pct: 0.262116537
+profit_factor: 1.501042248357587
+max_drawdown_pct: 0.1743770676038365
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260401-20260430 | 28 | 0.26% | 2.6212 | 89.29% | 1.5010 | 0.17% | 7.8526 | -5.2314 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-30_10-30-38.json
+找到策略: MultiCoin_AI_Strategy_20260530_102832_v001
+total_trades: 27
+profit_total_abs: -3.6331163800000006
+profit_total_pct: -0.36331163800000005
+profit_factor: 0.6531687213247773
+max_drawdown_pct: 0.9422330502469372
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260301-20260331 | 27 | -0.36% | -3.6331 | 77.78% | 0.6532 | 0.94% | 6.5000 | -10.4752 | 0.3421 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-30_10-30-55.json
+找到策略: MultiCoin_AI_Strategy_20260530_102832_v001
+total_trades: 23
+profit_total_abs: 2.2716897300000003
+profit_total_pct: 0.22716897300000005
+profit_factor: 1.4338660510081416
+max_drawdown_pct: 0.3474779826675467
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260201-20260228 | 23 | 0.23% | 2.2717 | 86.96% | 1.4339 | 0.35% | 7.5076 | -5.2359 | 0.0000 | 0.0000
+第 v001 轮成为新 best，下一轮将以该策略作为 in_memory_champion/session_parent 参考。
+8. 第 1 轮完成：有效，原因：通过
+是否成为新最佳：是
+
+===== 本次运行摘要 =====
+运行目录：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832
+生成策略：v001:MultiCoin_AI_Strategy_20260530_102832_v001
+有效策略：v001:MultiCoin_AI_Strategy_20260530_102832_v001
+无效策略：无
+当前最佳策略是否更新：是
+自动优化完成
+- 最佳策略: MultiCoin_AI_Strategy_20260530_102832_v001
+- 最佳得分: 23.9887
+- 最佳策略文件路径: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/strategy.py
+- leaderboard.json 路径: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/leaderboard.json
+- summary.json 路径: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/summary.json
+========== 最佳策略简述 ==========
+策略名：MultiCoin_AI_Strategy_20260530_102832_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/strategy.py
+训练区间收益：-0.07%
+验证区间平均收益：0.04%
+交易数：24
+胜率：83.33%
+Profit Factor：0.9050
+最大回撤：0.60%
+是否疑似过拟合：否
+主要优势：训练与验证综合评分最高。
+主要风险：仍需更多样本周期验证稳健性。
+为什么成为 best：在满足有效性约束下 final_score 最高。
+
+========== 结束状态 ==========
+当前正式 best：来源=本轮新 best；策略名=MultiCoin_AI_Strategy_20260530_102832_v001；final_score=23.9887
+本轮 session best：策略名=MultiCoin_AI_Strategy_20260530_102832_v001；final_score=23.9887；未成为正式 best 原因：未通过有效性约束
+========== 记忆写入状态 ==========
+nearest_candidate.json：已写入
+last_run_summary.json：已写入
+best_strategy.json：已更新
+strategy_memory.json：已追加
+strategy_lessons.json：已更新
+strategy_blacklist.json：已更新
+下一轮 advisor prompt 将加载 last_run_summary：是
+下一轮 advisor prompt 将加载 nearest_candidate：是
+下一轮 advisor prompt 将加载 historical_best：是
+
+========== 本次迭代统计 ==========
+计划迭代轮数：1
+策略顾问成功次数：1
+代码生成成功次数：1
+实际生成策略版本数：1
+训练回测版本数：1
+验证回测版本数：1
+验证区间回测总次数：3
+跳过验证版本数：0
+有效策略数：1
+无效策略数：0
+新 best 更新次数：1
+当前策略迭代版本：v001（仅本次 run 内版本号）
+strategy_memory 当前保留条数：200
+
+========== 全项目累计统计 ==========
+累计 run 总数：74
+累计有效 run 数：61
+累计尝试版本数/v目录数：482
+累计生成 strategy.py 数：402
+累计生成 mutation_spec.json 数：425
+累计训练回测版本数：121
+累计验证回测版本数：95
+累计 summary.json 数：463
+累计有效策略数：96
+累计 new best 次数：31
+strategy_memory 当前保留条数：200
+说明：strategy_memory 保留条数不是累计策略版本数。
+统计文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/iteration_stats.json
+详细状态：
+v001：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=是 / 新best=是 / 原因=通过
+
+========== Prompt 审计文件 ==========
+Prompt 审计文件：已保存到各版本目录，如需查看请执行：find /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832 -maxdepth 3 -type f \( -name "*prompt*" \) -print
+
+========== 当前最佳策略简述 ==========
+来源：本轮新策略
+策略名：MultiCoin_AI_Strategy_20260530_102832_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/v001/strategy.py
+训练区间：20260501-20260525
+交易数：24
+收益USDT：-0.6638
+收益率：-0.07%
+胜率：83.33%
+Profit Factor：0.9050
+最大回撤：0.60%
+验证区间平均收益率：0.04%
+验证区间平均 PF：1.1960
+验证区间最大回撤：0.94%
+是否疑似过拟合：否
+主要优势：本轮 final_score 最高。
+主要风险：仍需更多区间复验。
+
+========== 本次运行总耗时 ==========
+总耗时：2分29秒（149.3 秒）
+
+========== 日志保存 ==========
+完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260530_102832/run.log
+
+全局日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260530_102832.log
+
+最近一次日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/latest.log
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
