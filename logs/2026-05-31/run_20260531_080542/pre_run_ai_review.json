@@ -1,0 +1,75 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。3个版本全部无效：v001交易数28超上限且训练亏损，v002交易数4远低于下限，v003交易数66严重超标。没有任何版本通过训练区间硬门槛。",
+    "best_candidate": "v001（28笔，PF 0.53）是最接近目标的版本，SOL/USDT表现尚可（17笔，PF 1.09，winrate 76%），但OP/USDT严重拖累（11笔，PF 0.21，winrate 36%）。nearest_candidate仍为上上轮的20260531_064426_v003（50笔，训练亏损，但验证Feb盈利PF 1.47）。",
+    "main_failure_patterns": [
+      "交易数控制失败：3个版本分别28/4/66，无一落入20~24区间",
+      "OP/USDT在训练期表现极差（PF 0.21），是亏损主因",
+      "固定止损吞噬ROI收益：v001的stop_loss_profit_abs=-11.41 vs roi_profit_abs=6.05",
+      "pair_specific_filter未能有效限制OP/USDT的坏交易，反而SOL也被过度过滤或OP过滤不足",
+      "v002过度收紧导致几乎无交易（仅4笔）"
+    ],
+    "dangerous_directions_to_avoid": [
+      "对OP/USDT使用宽松入场条件——该币对在训练期止损率极高",
+      "过度收紧全局入场条件导致交易数骤降至个位数",
+      "不加约束地增加交易对数量——当前仅OP和SOL为active pairs",
+      "继续使用单一macd_cross_momentum标签而不区分币对特征",
+      "大幅放宽止损——当前止损已是核心亏损来源"
+    ],
+    "promising_directions_to_continue": [
+      "SOL/USDT在v001训练期表现正向（17笔PF 1.09），验证期Apr也正向（19笔PF 1.40）——SOL的入场逻辑基本可用",
+      "nearest_candidate在Feb验证期50笔PF 1.47说明某些市场环境下策略有盈利能力",
+      "v001的Apr验证期SOL表现好（PF 1.40, winrate 84%），说明SOL的MACD逻辑在多个月份有效",
+      "需要针对OP/USDT单独增加更严格的入场过滤或降低OP的交易频率",
+      "控制总交易数到20~24的关键是：SOL约12~15笔 + OP约5~9笔，且OP必须有额外过滤"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "official_best（如存在）或 nearest_candidate（20260531_064426_v003），以其为基础微调交易数和OP过滤",
+    "preferred_mutation_types": [
+      "add_op_specific_entry_filter（针对OP/USDT增加趋势确认或波动率过滤）",
+      "adjust_timeframe_or_lookback（微调指标周期使交易数落入20~24）",
+      "replace_exit_mechanism（用trailing stop或动态止损替代固定止损以减少止损吞噬）",
+      "add_volume_or_volatility_filter（减少OP在高波动低胜率时段的入场）"
+    ],
+    "forbidden_mutation_types": [
+      "tighten_entry_trigger（上轮v002证明过度收紧导致交易数骤降）",
+      "add_more_pairs（当前仅2个active pair，增加pair会使交易数失控）",
+      "remove_entry_condition（会导致交易数暴增如v003的66笔）",
+      "only_rename_or_comment_change（禁止等价代码）"
+    ],
+    "trade_count_target": "20~24，理想 20~20",
+    "must_fix": [
+      "OP/USDT入场质量：必须增加OP专属过滤条件，将OP交易数控制在5~8笔且提升winrate",
+      "固定止损吞噬问题：考虑缩小止损幅度或增加trailing stop机制",
+      "总交易数必须落入20~24：SOL目标12~16笔，OP目标4~8笔"
+    ],
+    "do_not_do": [
+      "不要生成与v001/nearest_candidate行为等价的策略",
+      "不要移除SOL/USDT的现有有效入场逻辑",
+      "不要将全局止损放大（当前止损已是亏损主因）",
+      "不要只改类名/注释/变量名",
+      "不要让OP/USDT的交易数超过10笔（该币对胜率太低）"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "OP/USDT专属入场过滤：如要求OP入场时ADX>25或RSI<35等额外条件",
+      "交易数校准：通过调整指标参数（如MACD快慢线周期、信号线阈值）使总交易数落入20~24",
+      "至少一个可检测的止损改进：trailing_stop启用或custom_stoploss逻辑",
+      "populate_entry_trend中必须有pair-specific条件分支（if pair == 'OP/USDT'）"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改MACD参数1~2个点而不改变实际入场逻辑",
+      "不要添加永远为True的过滤条件",
+      "不要添加指标但不在入场条件中使用",
+      "不要复制nearest_candidate代码只改类名"
+    ],
+    "required_detectable_changes": [
+      "OP/USDT的交易数必须与父策略有明显差异（减少至少3笔）",
+      "总交易数必须落入20~24区间",
+      "止损机制必须有可观测变化（trailing_stop=True或custom_stoploss函数）",
+      "至少一个新指标被计算并用于入场条件"
+    ]
+  }
+}
