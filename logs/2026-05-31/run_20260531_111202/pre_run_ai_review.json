@@ -1,0 +1,78 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。3个版本全部无效：v001交易数13过低，v002交易数19略低且PF仅0.36，v003交易数172严重超标。所有版本均亏损且固定止损吞噬ROI收益。",
+    "best_candidate": "nearest_candidate MultiCoin_AI_Strategy_20260531_064426_v003：训练50笔交易在目标范围内，验证feb_2026盈利PF=1.47，但训练PF=0.62亏损，止损亏损19.6远超ROI收益12.1。这是当前最接近可用的参考基线。",
+    "main_failure_patterns": [
+      "固定止损亏损吞噬ROI收益：所有版本stop_loss_profit_abs远大于roi_profit_abs",
+      "交易数控制失败：v001过度过滤导致13笔，v003过度放宽导致172笔",
+      "入场质量低：高winrate但单笔止损亏损过大，说明入场时机不精准导致深度回撤触发止损",
+      "DOGE/USDT零交易：v001中DOGE完全无入场信号，说明过滤条件对某些币种过于严格",
+      "OP/USDT和SOL/USDT是主要亏损来源：PF分别为0.30和0.71"
+    ],
+    "dangerous_directions_to_avoid": [
+      "过度添加entry_filter导致交易数跌破20",
+      "完全移除过滤条件导致交易数爆炸超过60",
+      "仅依赖MACD单一信号族作为入场依据",
+      "止损设置过宽（-2.5%）导致单笔亏损过大",
+      "对所有币种使用完全相同的入场逻辑而不考虑波动率差异"
+    ],
+    "promising_directions_to_continue": [
+      "nearest_candidate在feb_2026验证期PF=1.47且winrate=72%，说明其核心逻辑在某些市场环境下有效",
+      "BTC/USDT和BNB/USDT在v001中100%胜率且盈利，这两个币种的入场逻辑可保留",
+      "收紧止损至-1.5%~-2.0%区间以减少单笔亏损幅度",
+      "针对OP/USDT和SOL/USDT增加波动率过滤或ATR动态止损",
+      "在已有盈利后启用trailing stop保护利润"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (MultiCoin_AI_Strategy_20260531_064426_v003)，因其交易数50在目标范围内且有验证期盈利记录",
+    "preferred_mutation_types": [
+      "tighten_stoploss",
+      "add_volatility_filter",
+      "pair_specific_entry_threshold",
+      "add_trailing_after_profit",
+      "adjust_roi_table"
+    ],
+    "forbidden_mutation_types": [
+      "add_entry_filter（上轮已因此导致交易数过低）",
+      "remove_all_filters（导致交易数爆炸）",
+      "remove_bad_entry_condition（上轮forbidden列表中）",
+      "tighten_entry_trigger（上轮forbidden列表中）"
+    ],
+    "trade_count_target": "20~60，理想25~45。nearest_candidate有50笔，微调即可落入理想区间",
+    "must_fix": [
+      "止损亏损与ROI收益比例：目标stop_loss_profit_abs < roi_profit_abs * 1.0",
+      "收紧stoploss从-2.5%到-1.5%~-2.0%区间",
+      "确保所有5个币种都有交易信号（DOGE不能为0）",
+      "OP/USDT入场质量需提升，当前PF仅0.30"
+    ],
+    "do_not_do": [
+      "不要只改class name、注释、变量名",
+      "不要使用trailing stop作为主要止损机制",
+      "不要将stoploss设置宽于-2.5%",
+      "不要添加超过2个新的entry filter（防止交易数跌破20）",
+      "不要移除所有现有过滤条件"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "stoploss收紧至-0.015~-0.020区间",
+      "trailing_stop=True且trailing_stop_positive=0.005~0.01，trailing_stop_positive_offset=0.015~0.02（仅在盈利后启用）",
+      "对OP/USDT和SOL/USDT增加ATR或波动率相关的入场门槛",
+      "ROI table调整：首档0.012~0.015以更快锁定小利润",
+      "populate_entry_trend中必须有可检测的条件变化"
+    ],
+    "avoid_equivalent_code": [
+      "不要生成与nearest_candidate行为等价的策略（仅改名）",
+      "不要生成与上轮v001相同的trend_macd_filtered单一入场标签",
+      "不要复制上轮的pair_filters列表中包含eth/usdt（当前交易对不含ETH）"
+    ],
+    "required_detectable_changes": [
+      "stoploss数值必须与nearest_candidate不同",
+      "trailing_stop配置必须新增或修改",
+      "populate_entry_trend中至少有一个新的条件或阈值变化",
+      "entry_tag必须反映实际入场逻辑变化",
+      "minimal_roi至少一个档位数值变化"
+    ]
+  }
+}
