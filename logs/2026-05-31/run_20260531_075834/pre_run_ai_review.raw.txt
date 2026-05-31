@@ -1,0 +1,79 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。3个版本全部无效：v001训练亏损(PF=0.73, 23笔)，v002交易数不足(15笔)，v003交易数略低(17笔)且验证不稳。nearest_candidate仍为上上轮的v003(50笔交易，训练亏损)。",
+    "best_candidate": "v003(17笔, PF=1.70, 训练盈利+0.22%)最接近目标但交易数差3笔；v001(23笔)交易数达标但OP/USDT止损严重拖累整体",
+    "main_failure_patterns": [
+      "OP/USDT止损亏损严重：v001中OP 8笔交易PF=0.41，3笔止损吞噬全部ROI收益",
+      "交易数控制失败：v002过滤太严(15笔)，v003略低(17笔)，只有v001达标(23笔)",
+      "SOL/USDT在验证期(3月)表现不稳定：v001中SOL 3月PF=0.44，4笔止损",
+      "单一entry_tag(macd_trend_confirmed)缺乏多样性，无法区分高质量和低质量入场",
+      "固定止损(-1.39%)对OP/USDT和SOL/USDT波动期杀伤力过大"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续只用OP/USDT+SOL/USDT双币种——OP在训练期持续亏损，SOL在3月验证期崩溃",
+      "过度收紧入场条件导致交易数跌破20",
+      "只依赖MACD单一信号体系",
+      "扩大stoploss幅度(违反optimization_goal)",
+      "生成与v001行为等价的策略(同样的MACD+trend条件)"
+    ],
+    "promising_directions_to_continue": [
+      "v003的PF=1.70思路值得保留：其入场质量高但需增加3-5笔交易",
+      "引入第3-4个币种(BNB/AVAX/LINK/ADA在cooldown中但止损可控且有交易数)分散风险",
+      "为OP/USDT添加pair-specific波动率过滤，减少高波动期入场",
+      "增加辅助确认指标(RSI/Bollinger/ATR)配合MACD，提升入场精度",
+      "考虑动态ROI或trailing stop替代纯固定止损，保护已有利润"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate(MultiCoin_AI_Strategy_20260531_064426_v003)或上一轮v003(PF=1.70但17笔)",
+    "preferred_mutation_types": [
+      "add_pair(增加1-2个币种达到交易数目标)",
+      "pair_specific_filter(为OP/USDT和SOL/USDT添加波动率/趋势强度过滤)",
+      "add_secondary_indicator(RSI/BB/ATR辅助确认)",
+      "adjust_roi_table(微调ROI梯度保护利润)",
+      "loosen_entry_slightly(在高PF基础上适度放宽入场获取更多交易)"
+    ],
+    "forbidden_mutation_types": [
+      "tighten_entry_trigger(已导致交易数不足)",
+      "add_entry_filter(在交易数不足时禁止继续添加过滤)",
+      "remove_bad_entry_condition(当前只有一个entry条件，移除会崩溃)",
+      "expand_stoploss(违反max_stoploss_loss_usdt=15约束)",
+      "equivalent_rename(禁止只改类名/注释)"
+    ],
+    "trade_count_target": "20~24，理想 20~20",
+    "must_fix": [
+      "交易数必须达到20笔下限——当前最佳候选只有17笔",
+      "OP/USDT止损问题：要么添加pair-specific过滤减少坏入场，要么引入新币种替代部分OP仓位",
+      "验证期3月SOL/USDT崩溃问题：需要趋势强度确认避免逆势入场"
+    ],
+    "do_not_do": [
+      "不要只用2个币种——至少3个以分散风险",
+      "不要生成与上一轮v001相同的MACD-only策略",
+      "不要在训练期交易数已不足时继续添加过滤条件",
+      "不要忽略验证期表现只优化训练期"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators中必须计算至少一个MACD以外的辅助指标(RSI/BB/ATR)",
+      "populate_entry_trend中必须使用辅助指标作为确认条件",
+      "如果增加币种，pairlist或策略内部必须实际包含新币种的逻辑",
+      "如果添加pair_specific_filter，必须在entry条件中体现pair判断",
+      "entry_tag必须区分不同入场类型(不能全部是同一个tag)"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改class name和注释而保持相同的entry/exit逻辑",
+      "不要用不同变量名计算相同的MACD信号",
+      "不要添加永远为True的虚假过滤条件",
+      "不要复制v001的macd_trend_confirmed逻辑只改阈值0.01以内"
+    ],
+    "required_detectable_changes": [
+      "新增至少1个指标列在dataframe中",
+      "entry条件数量或结构与父策略有可检测差异",
+      "交易数在20-24范围内(通过条件松紧平衡实现)",
+      "至少2个不同的entry_tag标记不同入场场景"
+    ]
+  }
+}
+```
