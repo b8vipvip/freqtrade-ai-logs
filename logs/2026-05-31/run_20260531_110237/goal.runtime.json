@@ -1,0 +1,234 @@
+{
+  "strategy_family": "MultiCoin_AI_Strategy",
+  "config": "user_data/backtest_results/ai_optimization_runs/run_20260531_110237/config.active_pairs.json",
+  "timeframe": "5m",
+  "timerange": "20260501-20260525",
+  "pairs": [
+    "BTC/USDT",
+    "OP/USDT",
+    "SOL/USDT",
+    "BNB/USDT",
+    "DOGE/USDT"
+  ],
+  "max_iterations": 3,
+  "data_download": {
+    "exchange": "okx",
+    "timeframes": [
+      "5m",
+      "1h"
+    ],
+    "download_timerange": "20260101-20260525",
+    "auto_download": true,
+    "prepend": true
+  },
+  "train_period": {
+    "name": "train_may_2026",
+    "timerange": "20260501-20260525",
+    "weight": 1.0
+  },
+  "validation_periods": [
+    {
+      "name": "valid_apr_2026",
+      "timerange": "20260401-20260430",
+      "weight": 1.0
+    },
+    {
+      "name": "valid_mar_2026",
+      "timerange": "20260301-20260331",
+      "weight": 1.0
+    },
+    {
+      "name": "valid_feb_2026",
+      "timerange": "20260201-20260228",
+      "weight": 1.0
+    }
+  ],
+  "overfit_guard": {
+    "enabled": true,
+    "max_train_validation_profit_gap_pct": 3.0,
+    "min_validation_profit_factor": 0.7,
+    "max_validation_drawdown_pct": 5.0,
+    "reject_if_train_positive_but_all_validation_negative": true,
+    "reject_if_any_validation_drawdown_above_pct": 8.0,
+    "reject_if_validation_trades_too_low": true
+  },
+  "target": {
+    "min_profit_total_pct": 0,
+    "max_drawdown_pct": 3,
+    "min_profit_factor": 0.56,
+    "min_trades": 20,
+    "max_trades": 60,
+    "prefer_exit_signal": false,
+    "max_stoploss_loss_usdt": 15,
+    "ideal_min_trades": 25,
+    "ideal_max_trades": 45
+  },
+  "constraints": {
+    "spot_only": true,
+    "long_only": true,
+    "no_leverage": true,
+    "no_short": true,
+    "no_martingale": true,
+    "no_unlimited_position_adjustment": true,
+    "no_openai_call_inside_strategy": true,
+    "do_not_use_manual_trade_history": true
+  },
+  "baseline": {
+    "profit_total_abs": -7.43,
+    "profit_total_pct": -0.74,
+    "profit_factor": 0.63,
+    "max_drawdown_pct": 1.45,
+    "total_trades": 47
+  },
+  "prompt_guidance": {
+    "advisor_rules": [
+      "当前固定使用 BTC/USDT、OP/USDT、SOL/USDT、BNB/USDT、DOGE/USDT 五个交易对。",
+      "不要简单用 trailing 替代 fixed stoploss。trailing 只能在已有盈利后启用，不能让移动止损成为主要亏损来源。",
+      "当前核心目标是减少低质量入场和亏损单数量，不是盲目提高交易频率。",
+      "如果某个 family 连续产生高频亏损，应降低该 family 权重。",
+      "保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。"
+    ],
+    "codegen_rules": [
+      "必须真实落地 mutation_spec。",
+      "禁止只改 class name、注释、变量名。",
+      "如果新增过滤条件，populate_entry_trend 必须实际出现对应条件。",
+      "如果新增指标，populate_indicators 必须实际计算。",
+      "如果生成的策略与父策略行为等价，应主动报错，不要输出等价代码。",
+      "上一轮如果因为策略重复失败，本轮禁止继续使用同一个 codegen provider，且必须改变 entry_conditions 或 indicators，不允许只改变类名、注释、变量名。",
+      "保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。"
+    ]
+  },
+  "pre_run_ai_review": {
+    "enabled": true,
+    "provider_role": "strategy_advisor",
+    "save_file": "pre_run_ai_review.json"
+  },
+  "language": "zh-CN",
+  "pair_selection": {
+    "enabled": true,
+    "candidate_pairs": [
+      "BTC/USDT",
+      "OP/USDT",
+      "SOL/USDT",
+      "BNB/USDT",
+      "DOGE/USDT"
+    ],
+    "min_pair_trades": 8,
+    "max_pair_drawdown_pct": 3,
+    "min_pair_profit_factor": 0.9,
+    "prefer_validation_profit_positive": true,
+    "active_pair_count": 5,
+    "watch_pair_count": 5,
+    "reevaluate_every_runs": 5,
+    "min_active_score": 1.0,
+    "use_multi_strategy_vote": true,
+    "auto_strategy_candidates": true,
+    "max_strategy_candidates": 5,
+    "strategy_lookback_runs": 80,
+    "min_strategy_train_trades": 15,
+    "min_strategy_validation_periods": 2,
+    "prefer_positive_validation": true,
+    "min_strategy_diversity": true,
+    "min_pair_strategy_appearances": 2
+  },
+  "auto_trade_count_target": {
+    "enabled": true,
+    "min_trades_per_pair": 4,
+    "ideal_min_trades_per_pair": 5,
+    "ideal_max_trades_per_pair": 9,
+    "max_trades_per_pair": 12,
+    "hard_max_trades": 120
+  },
+  "runtime_active_pairs": [
+    "BTC/USDT",
+    "OP/USDT",
+    "SOL/USDT",
+    "BNB/USDT",
+    "DOGE/USDT"
+  ],
+  "runtime_pair_selection_log": {
+    "source": "default_auto",
+    "source_label": "recommended_pairs.json",
+    "default_recommended_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/recommended_pairs.json",
+    "default_recommended_exists": true,
+    "recommended_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/recommended_pairs.json",
+    "pairs_file": "",
+    "base_config": "user_data/config.5coins.json",
+    "temp_config": "user_data/backtest_results/ai_optimization_runs/run_20260531_110237/config.active_pairs.json",
+    "original_config_pairs": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "SOL/USDT",
+      "XRP/USDT",
+      "DOGE/USDT"
+    ],
+    "active_pairs": [
+      "BTC/USDT",
+      "OP/USDT",
+      "SOL/USDT",
+      "BNB/USDT",
+      "DOGE/USDT"
+    ],
+    "effective_pairs": [
+      "BTC/USDT",
+      "OP/USDT",
+      "SOL/USDT",
+      "BNB/USDT",
+      "DOGE/USDT"
+    ],
+    "recommended_data": {
+      "created_at": "2026-05-31T08:52:54.001728",
+      "source": "manual_fixed_5_pairs",
+      "source_strategy": "manual_selected_pairs",
+      "source_strategy_path": null,
+      "active_pair_count_requested": 5,
+      "active_pair_count_actual": 5,
+      "min_active_score": null,
+      "active_pairs": [
+        {
+          "pair": "BTC/USDT",
+          "score": null,
+          "reason": "用户指定的固定测试币种"
+        },
+        {
+          "pair": "OP/USDT",
+          "score": null,
+          "reason": "用户指定的固定测试币种"
+        },
+        {
+          "pair": "SOL/USDT",
+          "score": null,
+          "reason": "用户指定的固定测试币种"
+        },
+        {
+          "pair": "BNB/USDT",
+          "score": null,
+          "reason": "用户指定的固定测试币种"
+        },
+        {
+          "pair": "DOGE/USDT",
+          "score": null,
+          "reason": "用户指定的固定测试币种"
+        }
+      ],
+      "watch_pairs": [],
+      "cooldown_pairs": [],
+      "reason": "固定使用 BTC/OP/SOL/BNB/DOGE 作为后续策略结构探索与常规优化交易对。",
+      "pair_metrics": {}
+    },
+    "fallback_reason": ""
+  },
+  "auto_trade_count_target_runtime": {
+    "enabled": true,
+    "pair_count": 5,
+    "source": "recommended_pairs",
+    "computed_min_trades": 20,
+    "computed_ideal_min_trades": 25,
+    "computed_ideal_max_trades": 45,
+    "computed_max_trades": 60
+  },
+  "min_trades": 20,
+  "ideal_min_trades": 25,
+  "ideal_max_trades": 45,
+  "max_trades": 60
+}
