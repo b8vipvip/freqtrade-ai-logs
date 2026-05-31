@@ -1,0 +1,876 @@
+{
+  "created_at": "2026-05-31T08:31:15.397558",
+  "source_strategy": "MultiCoin_AI_Strategy_20260529_040545_v008",
+  "source_strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v008/strategy.py",
+  "source_strategy_path": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v008/strategy.py",
+  "strategy_candidate": {
+    "candidate_id": "run_20260529_040545_v008",
+    "strategy_name": "MultiCoin_AI_Strategy_20260529_040545_v008",
+    "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v008/strategy.py",
+    "reason": "top_validation_pf",
+    "strategy_candidate_score": 26.3903,
+    "metrics": {
+      "train_profit_pct": 0.047054188000000004,
+      "train_profit_factor": 1.11220985344091,
+      "train_total_trades": 20,
+      "train_max_drawdown_pct": 0.3174202258840401,
+      "validation_avg_profit_pct": -0.2253038473333334,
+      "validation_avg_profit_factor": 1.6935046618421297,
+      "validation_worst_profit_pct": -0.8662759080000001,
+      "validation_worst_profit_factor": 0.22493992204745536,
+      "validation_max_drawdown_pct": 0.9918060792225722,
+      "validation_positive_periods": 1.0,
+      "final_score": -6.300562364487831,
+      "official_best": false,
+      "nearest_candidate": false,
+      "new_best": false,
+      "stoploss_to_roi_ratio": 1.116604003732709,
+      "multi_validation_stable": false
+    }
+  },
+  "scan_periods": {
+    "train_period": "20260501-20260525",
+    "validation_periods": [
+      "20260401-20260430",
+      "20260301-20260331",
+      "20260201-20260228"
+    ],
+    "holdout_periods": []
+  },
+  "scan_windows": [],
+  "train_period": "20260501-20260525",
+  "validation_periods": [
+    {
+      "name": "valid_apr_2026",
+      "timerange": "20260401-20260430",
+      "weight": 1.0
+    },
+    {
+      "name": "valid_mar_2026",
+      "timerange": "20260301-20260331",
+      "weight": 1.0
+    },
+    {
+      "name": "valid_feb_2026",
+      "timerange": "20260201-20260228",
+      "weight": 1.0
+    }
+  ],
+  "candidate_pairs": [
+    "BTC/USDT",
+    "ETH/USDT",
+    "SOL/USDT",
+    "XRP/USDT",
+    "DOGE/USDT",
+    "ADA/USDT",
+    "BNB/USDT",
+    "AVAX/USDT",
+    "LINK/USDT",
+    "LTC/USDT",
+    "OP/USDT",
+    "ARB/USDT",
+    "APT/USDT",
+    "SUI/USDT",
+    "NEAR/USDT"
+  ],
+  "items": [
+    {
+      "pair": "BTC/USDT",
+      "train_total_trades": 4,
+      "train_profit_pct": -0.22953906400000001,
+      "train_profit_abs": -2.29539064,
+      "train_profit_factor": 0.17908495050901715,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.50074599,
+      "train_stoploss_profit_abs": -2.79613663,
+      "validation_avg_profit_pct": -0.07275345899999999,
+      "validation_avg_profit_factor": 0.47960820462796977,
+      "validation_worst_profit_pct": -0.114767049,
+      "validation_worst_profit_factor": 0.17908912643295263,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 5.583942130020851,
+      "validation_periods": [
+        {
+          "pair": "BTC/USDT",
+          "trades": 4,
+          "profit_total_abs": -0.38798753000000014,
+          "profit_total_pct": -0.03879875300000001,
+          "profit_factor": 0.7224798013520961,
+          "winrate": 0.75,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "BTC/USDT",
+          "trades": 2,
+          "profit_total_abs": -1.1476704899999999,
+          "profit_total_pct": -0.114767049,
+          "profit_factor": 0.17908912643295263,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "BTC/USDT",
+          "trades": 4,
+          "profit_total_abs": -0.6469457499999998,
+          "profit_total_pct": -0.06469457499999998,
+          "profit_factor": 0.5372556860988608,
+          "winrate": 0.75,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "ETH/USDT",
+      "train_total_trades": 2,
+      "train_profit_pct": 0.050057335,
+      "train_profit_abs": 0.50057335,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.50057335,
+      "train_stoploss_profit_abs": 0.0,
+      "validation_avg_profit_pct": -0.014173819333333337,
+      "validation_avg_profit_factor": 0.11939791501737572,
+      "validation_worst_profit_pct": -0.269174309,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 0.0,
+      "validation_periods": [
+        {
+          "pair": "ETH/USDT",
+          "trades": 3,
+          "profit_total_abs": 0.82018121,
+          "profit_total_pct": 0.082018121,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "ETH/USDT",
+          "trades": 8,
+          "profit_total_abs": -2.69174309,
+          "profit_total_pct": -0.269174309,
+          "profit_factor": 0.35819374505212714,
+          "winrate": 0.625,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "ETH/USDT",
+          "trades": 5,
+          "profit_total_abs": 1.4463472999999998,
+          "profit_total_pct": 0.14463473,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "SOL/USDT",
+      "train_total_trades": 6,
+      "train_profit_pct": 0.16057242500000002,
+      "train_profit_abs": 1.6057242500000002,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 1.5042277300000002,
+      "train_stoploss_profit_abs": 0.10149652,
+      "validation_avg_profit_pct": -0.0060529953333333135,
+      "validation_avg_profit_factor": 0.06101833103420693,
+      "validation_worst_profit_pct": -0.22792010099999993,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 0.06747417161362927,
+      "validation_periods": [
+        {
+          "pair": "SOL/USDT",
+          "trades": 6,
+          "profit_total_abs": 1.74705071,
+          "profit_total_pct": 0.174705071,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "SOL/USDT",
+          "trades": 4,
+          "profit_total_abs": -2.2792010099999995,
+          "profit_total_pct": -0.22792010099999993,
+          "profit_factor": 0.1830549931026208,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "SOL/USDT",
+          "trades": 2,
+          "profit_total_abs": 0.35056044000000003,
+          "profit_total_pct": 0.035056044,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "XRP/USDT",
+      "train_total_trades": 6,
+      "train_profit_pct": 0.015887443,
+      "train_profit_abs": 0.15887443,
+      "train_profit_factor": 1.1137032133305373,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.74919539,
+      "train_stoploss_profit_abs": -0.5903209599999999,
+      "validation_avg_profit_pct": -0.059671981333333325,
+      "validation_avg_profit_factor": 0.0,
+      "validation_worst_profit_pct": -0.279271701,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 0.7879399257915881,
+      "validation_periods": [
+        {
+          "pair": "XRP/USDT",
+          "trades": 2,
+          "profit_total_abs": 0.75177946,
+          "profit_total_pct": 0.075177946,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "XRP/USDT",
+          "trades": 1,
+          "profit_total_abs": 0.25077811,
+          "profit_total_pct": 0.025077811,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "XRP/USDT",
+          "trades": 2,
+          "profit_total_abs": -2.7927170099999996,
+          "profit_total_pct": -0.279271701,
+          "profit_factor": 0.0,
+          "winrate": 0.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "交易数太少"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "DOGE/USDT",
+      "train_total_trades": 2,
+      "train_profit_pct": 0.050076049000000004,
+      "train_profit_abs": 0.50076049,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.50076049,
+      "train_stoploss_profit_abs": 0.0,
+      "validation_avg_profit_pct": -0.07265159233333336,
+      "validation_avg_profit_factor": 0.06012411124882778,
+      "validation_worst_profit_pct": -0.27949226000000005,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 0.0,
+      "validation_periods": [
+        {
+          "pair": "DOGE/USDT",
+          "trades": 5,
+          "profit_total_abs": 1.75852874,
+          "profit_total_pct": 0.175852874,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "DOGE/USDT",
+          "trades": 2,
+          "profit_total_abs": -2.7949226,
+          "profit_total_pct": -0.27949226000000005,
+          "profit_factor": 0.0,
+          "winrate": 0.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "DOGE/USDT",
+          "trades": 2,
+          "profit_total_abs": -1.14315391,
+          "profit_total_pct": -0.11431539100000002,
+          "profit_factor": 0.18037233374648334,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "ADA/USDT",
+      "train_total_trades": 7,
+      "train_profit_pct": 0.17463948,
+      "train_profit_abs": 1.7463948,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 1.7463948,
+      "train_stoploss_profit_abs": 0.0,
+      "validation_avg_profit_pct": -0.07402251000000003,
+      "validation_avg_profit_factor": 0.1613652312228204,
+      "validation_worst_profit_pct": -0.28763277900000006,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 0.0,
+      "validation_periods": [
+        {
+          "pair": "ADA/USDT",
+          "trades": 2,
+          "profit_total_abs": -1.15485274,
+          "profit_total_pct": -0.11548527399999998,
+          "profit_factor": 0.17371075178312703,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "ADA/USDT",
+          "trades": 7,
+          "profit_total_abs": 1.81050523,
+          "profit_total_pct": 0.181050523,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "ADA/USDT",
+          "trades": 6,
+          "profit_total_abs": -2.8763277900000004,
+          "profit_total_pct": -0.28763277900000006,
+          "profit_factor": 0.3103849418853341,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "BNB/USDT",
+      "train_total_trades": 4,
+      "train_profit_pct": -0.063828878,
+      "train_profit_abs": -0.6382887800000001,
+      "train_profit_factor": 0.5432168699079603,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.75906751,
+      "train_stoploss_profit_abs": -1.39735629,
+      "validation_avg_profit_pct": 0.01209967233333333,
+      "validation_avg_profit_factor": 0.607700153005506,
+      "validation_worst_profit_pct": -0.112879113,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 1.8408853910767438,
+      "validation_periods": [
+        {
+          "pair": "BNB/USDT",
+          "trades": 5,
+          "profit_total_abs": 0.48374545999999985,
+          "profit_total_pct": 0.048374545999999984,
+          "profit_factor": 1.6323671182901802,
+          "winrate": 0.8,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "BNB/USDT",
+          "trades": 4,
+          "profit_total_abs": 1.00803584,
+          "profit_total_pct": 0.10080358400000002,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "BNB/USDT",
+          "trades": 2,
+          "profit_total_abs": -1.12879113,
+          "profit_total_pct": -0.112879113,
+          "profit_factor": 0.1907333407263377,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "验证表现稳定，止损/回撤可控"
+    },
+    {
+      "pair": "AVAX/USDT",
+      "train_total_trades": 2,
+      "train_profit_pct": -0.11438093899999999,
+      "train_profit_abs": -1.14380939,
+      "train_profit_factor": 0.17923423843267777,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.2497787,
+      "train_stoploss_profit_abs": -1.39358809,
+      "validation_avg_profit_pct": -0.18899866099999998,
+      "validation_avg_profit_factor": 0.18628949494913064,
+      "validation_worst_profit_pct": -0.22888566800000001,
+      "validation_worst_profit_factor": 0.17910799818904694,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 5.579291148524674,
+      "validation_periods": [
+        {
+          "pair": "AVAX/USDT",
+          "trades": 2,
+          "profit_total_abs": -1.14167682,
+          "profit_total_pct": -0.114167682,
+          "profit_factor": 0.18140744908103248,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "AVAX/USDT",
+          "trades": 4,
+          "profit_total_abs": -2.23942633,
+          "profit_total_pct": -0.223942633,
+          "profit_factor": 0.1983530375773126,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "AVAX/USDT",
+          "trades": 3,
+          "profit_total_abs": -2.28885668,
+          "profit_total_pct": -0.22888566800000001,
+          "profit_factor": 0.17910799818904694,
+          "winrate": 0.3333333333333333,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "LINK/USDT",
+      "train_total_trades": 3,
+      "train_profit_pct": -0.089823374,
+      "train_profit_abs": -0.89823374,
+      "train_profit_factor": 0.35711436527312346,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.49895681999999997,
+      "train_stoploss_profit_abs": -1.39719056,
+      "validation_avg_profit_pct": -0.16400443433333334,
+      "validation_avg_profit_factor": 0.5138576302765002,
+      "validation_worst_profit_pct": -0.316866078,
+      "validation_worst_profit_factor": 0.24346537125859452,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 2.800223394080474,
+      "validation_periods": [
+        {
+          "pair": "LINK/USDT",
+          "trades": 5,
+          "profit_total_abs": -0.2090294499999999,
+          "profit_total_pct": -0.02090294499999999,
+          "profit_factor": 0.8503388138268371,
+          "winrate": 0.8,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "LINK/USDT",
+          "trades": 7,
+          "profit_total_abs": -1.5424428000000003,
+          "profit_total_pct": -0.15424428000000004,
+          "profit_factor": 0.44776870574406896,
+          "winrate": 0.7142857142857143,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "LINK/USDT",
+          "trades": 6,
+          "profit_total_abs": -3.16866078,
+          "profit_total_pct": -0.316866078,
+          "profit_factor": 0.24346537125859452,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "LTC/USDT",
+      "train_total_trades": 1,
+      "train_profit_pct": -0.139720745,
+      "train_profit_abs": -1.39720745,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.0,
+      "train_stoploss_profit_abs": -1.39720745,
+      "validation_avg_profit_pct": -0.02374869,
+      "validation_avg_profit_factor": 0.3008486710538929,
+      "validation_worst_profit_pct": -0.088340564,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 999.0,
+      "validation_periods": [
+        {
+          "pair": "LTC/USDT",
+          "trades": 3,
+          "profit_total_abs": 0.81548519,
+          "profit_total_pct": 0.081548519,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "LTC/USDT",
+          "trades": 4,
+          "profit_total_abs": -0.6445402499999999,
+          "profit_total_pct": -0.064454025,
+          "profit_factor": 0.5382212604227682,
+          "winrate": 0.75,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "LTC/USDT",
+          "trades": 3,
+          "profit_total_abs": -0.8834056399999999,
+          "profit_total_pct": -0.088340564,
+          "profit_factor": 0.3643247527389106,
+          "winrate": 0.6666666666666666,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "OP/USDT",
+      "train_total_trades": 4,
+      "train_profit_pct": -0.06176882399999999,
+      "train_profit_abs": -0.6176882399999999,
+      "train_profit_factor": 0.5493497533750057,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.7529717,
+      "train_stoploss_profit_abs": -1.37065994,
+      "validation_avg_profit_pct": 0.016699815666666677,
+      "validation_avg_profit_factor": 0.1504740728414526,
+      "validation_worst_profit_pct": -0.152833353,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 1.820333938181209,
+      "validation_periods": [
+        {
+          "pair": "OP/USDT",
+          "trades": 6,
+          "profit_total_abs": -1.52833353,
+          "profit_total_pct": -0.152833353,
+          "profit_factor": 0.45142221852435777,
+          "winrate": 0.6666666666666666,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "OP/USDT",
+          "trades": 3,
+          "profit_total_abs": 0.7647889400000001,
+          "profit_total_pct": 0.076478894,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "OP/USDT",
+          "trades": 4,
+          "profit_total_abs": 1.2645390600000002,
+          "profit_total_pct": 0.12645390600000003,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "验证表现稳定，止损/回撤可控"
+    },
+    {
+      "pair": "ARB/USDT",
+      "train_total_trades": 5,
+      "train_profit_pct": -0.16779424100000004,
+      "train_profit_abs": -1.6779424100000002,
+      "train_profit_factor": 0.3993484790700501,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.50226976,
+      "train_stoploss_profit_abs": -2.18021217,
+      "validation_avg_profit_pct": -0.083913144,
+      "validation_avg_profit_factor": 0.22839810586476597,
+      "validation_worst_profit_pct": -0.31845215,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 4.340719556757707,
+      "validation_periods": [
+        {
+          "pair": "ARB/USDT",
+          "trades": 6,
+          "profit_total_abs": -3.1845215,
+          "profit_total_pct": -0.31845215,
+          "profit_factor": 0.23874319144706632,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "ARB/USDT",
+          "trades": 5,
+          "profit_total_abs": 1.43889634,
+          "profit_total_pct": 0.14388963400000002,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "ARB/USDT",
+          "trades": 2,
+          "profit_total_abs": -0.77176916,
+          "profit_total_pct": -0.077176916,
+          "profit_factor": 0.4464511261472316,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "APT/USDT",
+      "train_total_trades": 3,
+      "train_profit_pct": -0.089484567,
+      "train_profit_abs": -0.89484567,
+      "train_profit_factor": 0.358983641492834,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.50113379,
+      "train_stoploss_profit_abs": -1.39597946,
+      "validation_avg_profit_pct": -0.11457698166666665,
+      "validation_avg_profit_factor": 0.05974543267350526,
+      "validation_worst_profit_pct": -0.22898416099999996,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 2.785642253339173,
+      "validation_periods": [
+        {
+          "pair": "APT/USDT",
+          "trades": 4,
+          "profit_total_abs": -2.28984161,
+          "profit_total_pct": -0.22898416099999996,
+          "profit_factor": 0.17923629802051577,
+          "winrate": 0.5,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "APT/USDT",
+          "trades": 1,
+          "profit_total_abs": -1.39812478,
+          "profit_total_pct": -0.13981247800000002,
+          "profit_factor": 0.0,
+          "winrate": 0.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "APT/USDT",
+          "trades": 1,
+          "profit_total_abs": 0.25065694,
+          "profit_total_pct": 0.025065694000000003,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "验证平均收益为负",
+        "存在亏损验证区间",
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "止损/回撤可控"
+    },
+    {
+      "pair": "SUI/USDT",
+      "train_total_trades": 4,
+      "train_profit_pct": 0.135827549,
+      "train_profit_abs": 1.35827549,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.50039006,
+      "train_stoploss_profit_abs": 0.8578854300000001,
+      "validation_avg_profit_pct": 0.12472203333333332,
+      "validation_avg_profit_factor": 0.0,
+      "validation_worst_profit_pct": 0.099954768,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 1.714433396218942,
+      "validation_periods": [
+        {
+          "pair": "SUI/USDT",
+          "trades": 3,
+          "profit_total_abs": 1.17775016,
+          "profit_total_pct": 0.117775016,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "SUI/USDT",
+          "trades": 4,
+          "profit_total_abs": 1.5643631599999999,
+          "profit_total_pct": 0.156436316,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "SUI/USDT",
+          "trades": 3,
+          "profit_total_abs": 0.99954768,
+          "profit_total_pct": 0.099954768,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "验证表现稳定，止损/回撤可控"
+    },
+    {
+      "pair": "NEAR/USDT",
+      "train_total_trades": 1,
+      "train_profit_pct": -0.13831063999999998,
+      "train_profit_abs": -1.3831064,
+      "train_profit_factor": 0.0,
+      "train_max_drawdown_pct": 0.0,
+      "train_roi_profit_abs": 0.0,
+      "train_stoploss_profit_abs": -1.3831064,
+      "validation_avg_profit_pct": 0.11837712666666667,
+      "validation_avg_profit_factor": 0.0,
+      "validation_worst_profit_pct": 0.075540709,
+      "validation_worst_profit_factor": 0.0,
+      "validation_max_drawdown_pct": 0.0,
+      "stoploss_to_roi_ratio": 999.0,
+      "validation_periods": [
+        {
+          "pair": "NEAR/USDT",
+          "trades": 4,
+          "profit_total_abs": 1.51008255,
+          "profit_total_pct": 0.151008255,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "NEAR/USDT",
+          "trades": 4,
+          "profit_total_abs": 1.28582416,
+          "profit_total_pct": 0.128582416,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        },
+        {
+          "pair": "NEAR/USDT",
+          "trades": 3,
+          "profit_total_abs": 0.7554070900000001,
+          "profit_total_pct": 0.075540709,
+          "profit_factor": 0.0,
+          "winrate": 1.0,
+          "max_drawdown_pct": 0.0
+        }
+      ],
+      "score": 0.0,
+      "penalty_reasons": [
+        "固定止损亏损大于 ROI 收益",
+        "交易数太少",
+        "训练 PF 偏低"
+      ],
+      "reason": "验证表现稳定，止损/回撤可控"
+    }
+  ]
+}

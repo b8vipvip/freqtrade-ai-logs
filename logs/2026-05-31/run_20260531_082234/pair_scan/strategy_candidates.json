@@ -1,0 +1,130 @@
+{
+  "created_at": "2026-05-31T08:22:38.207416",
+  "items": [
+    {
+      "candidate_id": "run_20260529_040545_v007",
+      "strategy_name": "MultiCoin_AI_Strategy_20260529_040545_v007",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v007/strategy.py",
+      "reason": "top_validation_pf",
+      "strategy_candidate_score": 47.9778,
+      "metrics": {
+        "train_profit_pct": 0.40204271099999994,
+        "train_profit_factor": 3.877338293948284,
+        "train_total_trades": 21,
+        "train_max_drawdown_pct": 0.1392389305442743,
+        "validation_avg_profit_pct": -0.33926316533333334,
+        "validation_avg_profit_factor": 1.6262227459798615,
+        "validation_worst_profit_pct": -1.094074429,
+        "validation_worst_profit_factor": 0.21650281082157868,
+        "validation_max_drawdown_pct": 1.1692062366518745,
+        "validation_positive_periods": 1.0,
+        "final_score": -4.165411906923786,
+        "official_best": false,
+        "nearest_candidate": false,
+        "new_best": false,
+        "stoploss_to_roi_ratio": 0.3098680533801668,
+        "multi_validation_stable": false
+      }
+    },
+    {
+      "candidate_id": "run_20260529_082737_v004",
+      "strategy_name": "MultiCoin_AI_Strategy_20260529_082737_v004",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_082737/v004/strategy.py",
+      "reason": "top_validation_pf",
+      "strategy_candidate_score": 46.0331,
+      "metrics": {
+        "train_profit_pct": 0.37700490900000005,
+        "train_profit_factor": 3.6981478136341295,
+        "train_total_trades": 20,
+        "train_max_drawdown_pct": 0.13927367973243482,
+        "validation_avg_profit_pct": -0.3559551683333333,
+        "validation_avg_profit_factor": 1.6023167971900898,
+        "validation_worst_profit_pct": -1.094074429,
+        "validation_worst_profit_factor": 0.21650281082157868,
+        "validation_max_drawdown_pct": 1.1692062366518745,
+        "validation_positive_periods": 1.0,
+        "final_score": -34.6492642538211,
+        "official_best": false,
+        "nearest_candidate": false,
+        "new_best": false,
+        "stoploss_to_roi_ratio": 0.3280851122151072,
+        "multi_validation_stable": false
+      }
+    },
+    {
+      "candidate_id": "run_20260529_082737_v002",
+      "strategy_name": "MultiCoin_AI_Strategy_20260529_082737_v002",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_082737/v002/strategy.py",
+      "reason": "top_validation_pf",
+      "strategy_candidate_score": 40.5799,
+      "metrics": {
+        "train_profit_pct": 0.10947727099999999,
+        "train_profit_factor": 1.1958409816095208,
+        "train_total_trades": 28,
+        "train_max_drawdown_pct": 0.406186417377931,
+        "validation_avg_profit_pct": -0.025667936333333325,
+        "validation_avg_profit_factor": 1.7136044618564137,
+        "validation_worst_profit_pct": -0.5008245100000001,
+        "validation_worst_profit_factor": 0.40242044126172116,
+        "validation_max_drawdown_pct": 0.6266949265545017,
+        "validation_positive_periods": 2.0,
+        "final_score": -4.0878253278035,
+        "official_best": false,
+        "nearest_candidate": false,
+        "new_best": false,
+        "stoploss_to_roi_ratio": 1.0630268230257085,
+        "multi_validation_stable": true
+      }
+    },
+    {
+      "candidate_id": "run_20260531_014140_v001",
+      "strategy_name": "MultiCoin_AI_Strategy_20260531_014140_v001",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py",
+      "reason": "official_best",
+      "strategy_candidate_score": 37.5362,
+      "metrics": {
+        "train_profit_pct": -0.06418593600000008,
+        "train_profit_factor": 0.9322957295987265,
+        "train_total_trades": 36,
+        "train_max_drawdown_pct": 0.7734913804846555,
+        "validation_avg_profit_pct": -0.17683640900000006,
+        "validation_avg_profit_factor": 0.8732579241617816,
+        "validation_worst_profit_pct": -0.3959945070000001,
+        "validation_worst_profit_factor": 0.6867714127347466,
+        "validation_max_drawdown_pct": 1.062022207867945,
+        "validation_positive_periods": 1.0,
+        "final_score": 22.954944900382664,
+        "official_best": true,
+        "nearest_candidate": false,
+        "new_best": true,
+        "stoploss_to_roi_ratio": 1.0726210238358749,
+        "multi_validation_stable": false
+      }
+    },
+    {
+      "candidate_id": "run_20260529_040545_v008",
+      "strategy_name": "MultiCoin_AI_Strategy_20260529_040545_v008",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v008/strategy.py",
+      "reason": "top_validation_pf",
+      "strategy_candidate_score": 26.3903,
+      "metrics": {
+        "train_profit_pct": 0.047054188000000004,
+        "train_profit_factor": 1.11220985344091,
+        "train_total_trades": 20,
+        "train_max_drawdown_pct": 0.3174202258840401,
+        "validation_avg_profit_pct": -0.2253038473333334,
+        "validation_avg_profit_factor": 1.6935046618421297,
+        "validation_worst_profit_pct": -0.8662759080000001,
+        "validation_worst_profit_factor": 0.22493992204745536,
+        "validation_max_drawdown_pct": 0.9918060792225722,
+        "validation_positive_periods": 1.0,
+        "final_score": -6.300562364487831,
+        "official_best": false,
+        "nearest_candidate": false,
+        "new_best": false,
+        "stoploss_to_roi_ratio": 1.116604003732709,
+        "multi_validation_stable": false
+      }
+    }
+  ]
+}

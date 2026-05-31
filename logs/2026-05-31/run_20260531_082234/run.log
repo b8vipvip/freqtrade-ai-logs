@@ -1,0 +1,326 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260531_082234.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/run.log
+
+========== 启动交互配置 ==========
+交互式设置：跳过（--setup n）
+中途人工确认：关闭（--confirm n）
+
+========== 日志仓库启动检查 ==========
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
+日志仓库启动拉取完成：git -C /opt/freqtrade-ai-logs pull --ff-only origin main
+
+===== 自动优化中文设置向导 =====
+交互式设置已跳过（--setup n）。
+
+========== Prompt 额外规则 ==========
+策略顾问规则数量：7
+代码生成规则数量：7
+本次实际迭代轮数：0
+运行时配置已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/goal.runtime.json
+本地历史数据已存在，覆盖目标区间，跳过下载。
+当前模式：交易对筛选 pair-scan
+AI 调用：关闭
+
+========== 自动多策略筛币 ==========
+是否启用：是
+策略来源：auto
+扫描最近 run 数：80
+候选策略数量：339
+最终用于筛币策略数量：5
+
+1. MultiCoin_AI_Strategy_20260529_040545_v007
+   /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v007/strategy.py
+   来源：top_validation_pf
+   train_profit_pct：0.40204271099999994
+   train_profit_factor：3.877338293948284
+   validation_avg_profit_pct：-0.33926316533333334
+   validation_avg_profit_factor：1.6262227459798615
+   validation_worst_profit_pct：-1.094074429
+   strategy_candidate_score：47.9778
+
+2. MultiCoin_AI_Strategy_20260529_082737_v004
+   /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_082737/v004/strategy.py
+   来源：top_validation_pf
+   train_profit_pct：0.37700490900000005
+   train_profit_factor：3.6981478136341295
+   validation_avg_profit_pct：-0.3559551683333333
+   validation_avg_profit_factor：1.6023167971900898
+   validation_worst_profit_pct：-1.094074429
+   strategy_candidate_score：46.0331
+
+3. MultiCoin_AI_Strategy_20260529_082737_v002
+   /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_082737/v002/strategy.py
+   来源：top_validation_pf
+   train_profit_pct：0.10947727099999999
+   train_profit_factor：1.1958409816095208
+   validation_avg_profit_pct：-0.025667936333333325
+   validation_avg_profit_factor：1.7136044618564137
+   validation_worst_profit_pct：-0.5008245100000001
+   strategy_candidate_score：40.5799
+
+4. MultiCoin_AI_Strategy_20260531_014140_v001
+   /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+   来源：official_best
+   train_profit_pct：-0.06418593600000008
+   train_profit_factor：0.9322957295987265
+   validation_avg_profit_pct：-0.17683640900000006
+   validation_avg_profit_factor：0.8732579241617816
+   validation_worst_profit_pct：-0.3959945070000001
+   strategy_candidate_score：37.5362
+
+5. MultiCoin_AI_Strategy_20260529_040545_v008
+   /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260529_040545/v008/strategy.py
+   来源：top_validation_pf
+   train_profit_pct：0.047054188000000004
+   train_profit_factor：1.11220985344091
+   validation_avg_profit_pct：-0.2253038473333334
+   validation_avg_profit_factor：1.6935046618421297
+   validation_worst_profit_pct：-0.8662759080000001
+   strategy_candidate_score：26.3903
+
+===== 执行候选策略 pair-scan：run_20260529_040545_v007 / MultiCoin_AI_Strategy_20260529_040545_v007 =====
+正在回测 train：20260501-20260525
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v007/backtests/pair_scan_train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_08-23-02.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v007
+total_trades: 61
+profit_total_abs: 0.20998240000000046
+profit_total_pct: 0.020998240000000046
+profit_factor: 1.0150785531434934
+max_drawdown_pct: 0.319883287797449
+正在回测 valid_apr_2026：20260401-20260430
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v007/backtests/pair_scan_valid_apr_2026_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_08-23-32.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v007
+total_trades: 74
+profit_total_abs: -3.6399911300000007
+profit_total_pct: -0.3639991130000001
+profit_factor: 0.8321505459182149
+max_drawdown_pct: 0.9248117274239825
+正在回测 valid_mar_2026：20260301-20260331
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v007/backtests/pair_scan_valid_mar_2026_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_08-23-59.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v007
+total_trades: 71
+profit_total_abs: -10.62731904
+profit_total_pct: -1.062731904
+profit_factor: 0.5929351613568089
+max_drawdown_pct: 1.506214396183822
+正在回测 valid_feb_2026：20260201-20260228
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v007/backtests/pair_scan_valid_feb_2026_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_08-24-24.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v007
+total_trades: 59
+profit_total_abs: -11.7383728
+profit_total_pct: -1.17383728
+profit_factor: 0.5322469841330871
+max_drawdown_pct: 1.5064933898919952
+
+===== 执行候选策略 pair-scan：run_20260529_082737_v004 / MultiCoin_AI_Strategy_20260529_082737_v004 =====
+正在回测 train：20260501-20260525
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v004/backtests/pair_scan_train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_08-24-55.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v004
+total_trades: 60
+profit_total_abs: -0.0369605599999997
+profit_total_pct: -0.0036960559999999697
+profit_factor: 0.9973459119994188
+max_drawdown_pct: 0.31996213407884405
+正在回测 valid_apr_2026：20260401-20260430
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v004/backtests/pair_scan_valid_apr_2026_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_08-25-24.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v004
+total_trades: 74
+profit_total_abs: -3.6399911300000007
+profit_total_pct: -0.3639991130000001
+profit_factor: 0.8321505459182149
+max_drawdown_pct: 0.9248117274239825
+正在回测 valid_mar_2026：20260301-20260331
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v004/backtests/pair_scan_valid_mar_2026_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_08-25-49.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v004
+total_trades: 71
+profit_total_abs: -10.62731904
+profit_total_pct: -1.062731904
+profit_factor: 0.5929351613568089
+max_drawdown_pct: 1.506214396183822
+正在回测 valid_feb_2026：20260201-20260228
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v004/backtests/pair_scan_valid_feb_2026_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_08-26-12.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v004
+total_trades: 58
+profit_total_abs: -11.835403099999997
+profit_total_pct: -1.1835403099999997
+profit_factor: 0.528380501424728
+max_drawdown_pct: 1.516163758781568
+
+===== 执行候选策略 pair-scan：run_20260529_082737_v002 / MultiCoin_AI_Strategy_20260529_082737_v002 =====
+正在回测 train：20260501-20260525
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v002/backtests/pair_scan_train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_08-26-36.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v002
+total_trades: 67
+profit_total_abs: -9.557473900000002
+profit_total_pct: -0.9557473900000002
+profit_factor: 0.5970981740355071
+max_drawdown_pct: 1.5382747567689643
+正在回测 valid_apr_2026：20260401-20260430
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v002/backtests/pair_scan_valid_apr_2026_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_08-27-00.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v002
+total_trades: 56
+profit_total_abs: -2.75746821
+profit_total_pct: -0.275746821
+profit_factor: 0.8350780131558488
+max_drawdown_pct: 0.7849144486677485
+正在回测 valid_mar_2026：20260301-20260331
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v002/backtests/pair_scan_valid_mar_2026_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_08-27-24.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v002
+total_trades: 66
+profit_total_abs: -5.39929691
+profit_total_pct: -0.539929691
+profit_factor: 0.7235754756195685
+max_drawdown_pct: 0.8005236713470057
+正在回测 valid_feb_2026：20260201-20260228
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_082737_v002/backtests/pair_scan_valid_feb_2026_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_08-27-46.json
+找到策略: MultiCoin_AI_Strategy_20260529_082737_v002
+total_trades: 56
+profit_total_abs: -3.596258699999998
+profit_total_pct: -0.35962586999999985
+profit_factor: 0.8013140367495429
+max_drawdown_pct: 0.7118456955388957
+
+===== 执行候选策略 pair-scan：run_20260531_014140_v001 / MultiCoin_AI_Strategy_20260531_014140_v001 =====
+正在回测 train：20260501-20260525
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260531_014140_v001/backtests/pair_scan_train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_08-28-12.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 125
+profit_total_abs: -10.28206117
+profit_total_pct: -1.028206117
+profit_factor: 0.7474740292030702
+max_drawdown_pct: 2.2288067493571857
+正在回测 valid_apr_2026：20260401-20260430
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260531_014140_v001/backtests/pair_scan_valid_apr_2026_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_08-28-39.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 154
+profit_total_abs: -16.69769317
+profit_total_pct: -1.669769317
+profit_factor: 0.6845840124931373
+max_drawdown_pct: 1.851361024614033
+正在回测 valid_mar_2026：20260301-20260331
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260531_014140_v001/backtests/pair_scan_valid_mar_2026_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_08-29-06.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 159
+profit_total_abs: -24.376567720000004
+profit_total_pct: -2.4376567720000004
+profit_factor: 0.6081199536600678
+max_drawdown_pct: 3.634722385924132
+正在回测 valid_feb_2026：20260201-20260228
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260531_014140_v001/backtests/pair_scan_valid_feb_2026_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_08-29-32.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 147
+profit_total_abs: -36.386833179999996
+profit_total_pct: -3.6386833179999996
+profit_factor: 0.49398090650804577
+max_drawdown_pct: 4.504254082486276
+
+===== 执行候选策略 pair-scan：run_20260529_040545_v008 / MultiCoin_AI_Strategy_20260529_040545_v008 =====
+正在回测 train：20260501-20260525
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v008/backtests/pair_scan_train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_08-29-55.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v008
+total_trades: 54
+profit_total_abs: -5.075909909999999
+profit_total_pct: -0.5075909909999999
+profit_factor: 0.6964538178109995
+max_drawdown_pct: 0.7838253343328385
+正在回测 valid_apr_2026：20260401-20260430
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v008/backtests/pair_scan_valid_apr_2026_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_08-30-19.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v008
+total_trades: 60
+profit_total_abs: -0.8316396999999993
+profit_total_pct: -0.08316396999999992
+profit_factor: 0.9483811327967088
+max_drawdown_pct: 0.7861764679327695
+正在回测 valid_mar_2026：20260301-20260331
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v008/backtests/pair_scan_valid_mar_2026_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_08-30-47.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v008
+total_trades: 60
+profit_total_abs: -6.614879569999999
+profit_total_pct: -0.661487957
+profit_factor: 0.6617715532720589
+max_drawdown_pct: 1.040779436087099
+正在回测 valid_feb_2026：20260201-20260228
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_scan/run_20260529_040545_v008/backtests/pair_scan_valid_feb_2026_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_08-31-12.json
+找到策略: MultiCoin_AI_Strategy_20260529_040545_v008
+total_trades: 48
+profit_total_abs: -10.63356934
+profit_total_pct: -1.063356934
+profit_factor: 0.49150460195687395
+max_drawdown_pct: 1.2679366518694684
+警告：优质币数量不足，本次只使用实际筛出的 active_pairs。
+
+========== 多策略筛币投票结果 ==========
+候选币种数量：15
+请求 active 数量：5
+实际 active 数量：2
+min_pair_strategy_appearances：2
+min_active_score：1.0
+
+========== active_pairs ==========
+BNB/USDT / 8.4819 / 2 / 5 / 多个历史策略下表现稳定，验证PF中位数较好，止损/ROI比可控
+SOL/USDT / 6.3487 / 2 / 5 / 多个历史策略下表现稳定，验证PF中位数较好，止损/ROI比可控
+
+========== watch_pairs ==========
+无
+
+========== cooldown_pairs ==========
+ETH/USDT / -4.3434 / 1 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+SUI/USDT / -12.4409 / 1 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+OP/USDT / -13.9695 / 1 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+BTC/USDT / -15.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+XRP/USDT / -15.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+DOGE/USDT / -15.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+ADA/USDT / -15.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+APT/USDT / -15.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+AVAX/USDT / -25.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+LINK/USDT / -25.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+LTC/USDT / -25.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+ARB/USDT / -25.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+NEAR/USDT / -25.0 / 0 / 5 / 多数策略下表现偏弱或最差验证/止损风险较高
+
+========== 交易对筛选质量检查 ==========
+请求 active 数量：5
+实际 active 数量：2
+min_active_score：1.0
+score<=0 的币是否进入 active：否
+source_strategy_path：
+scan_periods：{'train_period': '20260501-20260525', 'validation_periods': ['20260401-20260430', '20260301-20260331', '20260201-20260228'], 'holdout_periods': []}
+警告：优质币数量不足，本次只使用实际筛出的 active_pairs。
+pair_strategy_vote.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_strategy_vote.json
+pair_leaderboard.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/pair_leaderboard.json
+recommended_pairs.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_082234/recommended_pairs.json
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
