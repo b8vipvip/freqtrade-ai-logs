@@ -1,0 +1,79 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。所有候选策略训练期均为负收益，最佳 v001 得分 22.95 但 profit_total_pct=-0.064%，PF=0.93，未达到 min_profit_total_pct>=0 的硬门槛。",
+    "best_candidate": "v001（36 trades, PF=0.93, drawdown=0.77%, 验证期 Apr 盈利但 Mar/Feb 亏损严重）是最接近成功的版本，v002（27 trades, PF=0.93）交易数更接近目标区间但验证更弱。",
+    "main_failure_patterns": [
+      "固定止损亏损吞噬 ROI 收益：5 笔止损 -9.48 USDT 抵消 31 笔 ROI +8.84 USDT，净亏损",
+      "ETH/USDT 在训练期是最大亏损源（8 trades, PF=0.32, -2.59 USDT），2 笔止损造成 -3.39 USDT",
+      "SOL/USDT 在验证 Mar 期间大幅亏损（18 trades, PF=0.48, -3.92 USDT），4 笔止损",
+      "v003 因行为重复被跳过，说明 mutation 多样性不足",
+      "v005 尝试更激进方向导致 final_score 为负，PF=0.74"
+    ],
+    "dangerous_directions_to_avoid": [
+      "放宽入场条件导致交易数超 40 且止损笔数同步增加",
+      "只改类名/注释/变量名导致行为重复被判定无效",
+      "扩大 stoploss 幅度（会增加单笔亏损）",
+      "过度收紧导致交易数低于 20",
+      "对所有币种使用相同过滤逻辑（不同币种问题不同）"
+    ],
+    "promising_directions_to_continue": [
+      "v001 的 MACD 交叉动量框架整体有效（winrate 86%），核心问题是少数止损笔亏损过大",
+      "XRP 在训练期表现优秀（6 trades, 100% winrate, +1.57 USDT），可保持或微增",
+      "Apr 验证期整体盈利（PF=1.15），说明策略在某些市场环境下有效",
+      "针对 ETH 和 SOL 的坏交易增加额外过滤条件（如波动率过滤、趋势强度确认）",
+      "用 trailing stop 或动态止损替代部分固定止损场景，减少单笔止损损失"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "official_best (v001, 36 trades, MACD cross momentum framework)",
+    "preferred_mutation_types": [
+      "为 ETH/USDT 增加额外入场过滤（如 ADX>25 或 ATR 波动率门槛），减少其止损触发",
+      "为 SOL/USDT 在 Mar 类震荡行情增加趋势确认过滤（如 EMA 斜率或 Bollinger Band 宽度）",
+      "微调 ROI table 使盈利交易更早锁定利润（如增加中间档位）",
+      "增加 trailing_stop 机制减少已盈利交易回吐",
+      "调整 MACD 参数或增加 volume 确认减少假信号"
+    ],
+    "forbidden_mutation_types": [
+      "扩大 stoploss 绝对值",
+      "移除所有过滤条件以增加交易数",
+      "只改类名/注释/变量名的伪 mutation",
+      "完全替换 MACD 框架为全新指标体系（风险太大）",
+      "对所有币种统一收紧到交易数低于 20"
+    ],
+    "trade_count_target": "20~30",
+    "must_fix": [
+      "ETH/USDT 止损笔数过多（训练期 2/8 笔止损，PF=0.32），需增加入场质量过滤",
+      "固定止损单笔亏损约 1.9 USDT，5 笔即 -9.48 USDT，需通过减少触发次数或引入 trailing stop 缓解",
+      "训练期整体 profit_total 必须 >=0（当前 -0.064%）"
+    ],
+    "do_not_do": [
+      "不要生成与 v001 行为等价的策略",
+      "不要把交易数压到 20 以下",
+      "不要只针对训练期过拟合而忽视验证期 Mar 的 SOL 亏损",
+      "不要移除 MACD 核心逻辑",
+      "不要使用与上一轮 v003 相同的 mutation 方向"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators 中必须新增至少一个实际计算的指标（如 ADX、ATR、Bollinger Band width、volume MA）",
+      "populate_entry_trend 中必须对新增指标有实际条件引用",
+      "如果引入 trailing_stop，必须在类属性中设置 trailing_stop=True 及相关参数",
+      "entry_conditions 必须与 v001 有可检测的逻辑差异（不能只是阈值微调 ±1）"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改 MACD fast/slow/signal 参数 ±1 而无其他变化",
+      "不要添加永远为 True 的虚假过滤条件",
+      "不要添加指标但不在 entry/exit 条件中使用",
+      "不要复制 v001 代码只改类名"
+    ],
+    "required_detectable_changes": [
+      "新增指标列必须在 dataframe 中可见",
+      "entry 条件数量或逻辑结构必须与 v001 不同",
+      "预期交易数应在 20~30 范围（通过增加过滤从 36 降到目标区间）",
+      "至少一个币种的止损触发率应低于 v001"
+    ]
+  }
+}
+```

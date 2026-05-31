@@ -1,0 +1,109 @@
+{
+  "planned_iterations": 3,
+  "advisor_success_count": 3,
+  "codegen_success_count": 3,
+  "generated_versions_count": 3,
+  "train_backtest_count": 3,
+  "validation_backtest_count": 3,
+  "validation_backtest_total_count": 9,
+  "skipped_validation_count": 0,
+  "valid_strategy_count": 2,
+  "invalid_strategy_count": 1,
+  "new_best_update_count": 0,
+  "current_iteration_version": "v003",
+  "strategy_memory_retained_count": 200,
+  "global_stats": {
+    "run_count": 88,
+    "nonempty_run_count": 74,
+    "version_dir_count": 544,
+    "strategy_file_count": 442,
+    "mutation_spec_count": 487,
+    "train_backtested_count": 161,
+    "validation_backtested_count": 130,
+    "summary_count": 524,
+    "valid_strategy_count": 113,
+    "new_best_count": 41,
+    "strategy_memory_retained_count": 200
+  },
+  "random_sample_enabled": false,
+  "random_sample_windows_count": 0,
+  "random_sample_total_backtests": 0,
+  "early_stop_triggered": false,
+  "early_stop_reason": "",
+  "early_stop_checked_counters": {
+    "no_new_best": 2,
+    "final_score_failures": 0,
+    "duplicate_strategies": 0
+  },
+  "version_statuses": [
+    {
+      "version": "v001",
+      "strategy_class": "MultiCoin_AI_Strategy_20260531_023806_v001",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": true,
+      "is_best": false,
+      "invalid_reason": "",
+      "final_score": 22.690842654803028,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "official best 硬门槛未通过：avg_validation_profit_pct=-0.1887 < 0；official best 硬门槛未通过：avg_validation_profit_factor=0.8420 < 1.0；official best 硬门槛未通过：worst_validation_profit_factor=0.6313 < 0.7；official best 硬门槛未通过：avg_validation_profit_pct=-0.1887 低于当前 official_best=-0.1768",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false
+    },
+    {
+      "version": "v002",
+      "strategy_class": "MultiCoin_AI_Strategy_20260531_023806_v002",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": true,
+      "is_best": false,
+      "invalid_reason": "",
+      "final_score": 21.463624748723984,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "official best 硬门槛未通过：train_profit_total_pct=-0.1054 < 0；official best 硬门槛未通过：train_profit_factor=0.8888 < 1.0；official best 硬门槛未通过：avg_validation_profit_pct=-0.3200 < 0；official best 硬门槛未通过：avg_validation_profit_factor=0.7356 < 1.0；official best 硬门槛未通过：worst_validation_profit_factor=0.5917 < 0.7；official best 硬门槛未通过：avg_validation_profit_pct=-0.3200 低于当前 official_best=-0.1768",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false
+    },
+    {
+      "version": "v003",
+      "strategy_class": "MultiCoin_AI_Strategy_20260531_023806_v003",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数超过目标上限",
+      "final_score": -40.41382678265748,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false
+    }
+  ]
+}
