@@ -1,0 +1,78 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。session_best (v002) 通过了 valid 但 avg_validation_profit_pct=-0.1968 未超越 official_best(-0.1768)，且训练交易数仅 24 仍偏低。nearest_candidate (v008 from 0530) 交易数 45 超标且全期亏损。",
+    "best_candidate": "v001 (run_20260531_032659) — 训练 24 笔、PF 0.854、drawdown 0.6%，结构清晰但亏损；核心问题是 stop_loss 4 笔吞噬全部 ROI 利润，ETH/BTC 贡献负收益",
+    "main_failure_patterns": [
+      "固定止损 4 笔即吞噬 20 笔 ROI 利润，止损单笔损失约 1.9 USDT 远超 ROI 单笔盈利 0.32 USDT",
+      "ETH/USDT 和 BTC/USDT 在训练和验证中持续亏损，拖累整体 PF",
+      "SOL/USDT 在 valid_mar_2026 大幅亏损（PF 0.455），4 笔止损集中爆发",
+      "DOGE/USDT 零交易，pair 选择未充分利用",
+      "训练交易数 24 虽达标但偏低，验证期交易数波动大（27~33），稳定性不足",
+      "单一 entry_tag (macd_cross_trend_confirmed) 无法区分好坏交易"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续只用 MACD 交叉作为唯一入场信号——无法过滤假突破",
+      "扩大 stoploss 幅度——会增大单笔损失",
+      "过度收紧导致交易数低于 20",
+      "只改类名/注释/变量名的等价策略",
+      "在 ETH/USDT 上不加过滤地保留全部交易"
+    ],
+    "promising_directions_to_continue": [
+      "OP/USDT 在 pair_leaderboard 得分 34.2，应纳入 active pairs 替代表现差的 ETH 或 DOGE",
+      "XRP/USDT 在训练期 winrate 100%、PF 极高，可保留并适度放宽",
+      "SOL/USDT 训练期微正但验证期 Mar 崩溃——需加波动率/趋势强度过滤",
+      "增加第二入场条件（如 RSI 区间、ADX 趋势确认）来减少止损触发率",
+      "对 BTC/ETH 加 pair-specific 过滤（如更严格的趋势确认或跳过横盘期）"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "official_best（如存在）或 v001 (run_20260531_032659) 作为结构基础",
+    "preferred_mutation_types": [
+      "add_entry_filter（RSI/ADX/Bollinger 带宽等二次确认）",
+      "pair_specific_filter（对 ETH/BTC 加更严趋势门槛或直接移除 ETH 换入 OP）",
+      "replace_pair（用 OP/USDT 替换 DOGE/USDT 或 ETH/USDT）",
+      "adjust_roi_table（缩短持仓时间以减少止损暴露）",
+      "add_volatility_guard（高波动期暂停入场，减少 SOL Mar 类崩溃）"
+    ],
+    "forbidden_mutation_types": [
+      "tighten_entry_trigger（已禁止，会压低交易数）",
+      "widen_stoploss",
+      "cosmetic_only_change",
+      "remove_all_filters"
+    ],
+    "trade_count_target": "20~30",
+    "must_fix": [
+      "止损单笔损失与 ROI 单笔盈利比值过大（约 6:1），需通过过滤减少触发止损的低质量入场",
+      "ETH/USDT 连续多期亏损，必须加 pair filter 或替换为 OP/USDT",
+      "DOGE/USDT 零交易浪费 pair 名额，替换为 OP/USDT",
+      "SOL/USDT 在趋势不明朗月份（Mar）止损集中，需加 ADX 或 ATR 过滤"
+    ],
+    "do_not_do": [
+      "不要生成训练交易数低于 20 的策略",
+      "不要只改类名/注释产生等价代码",
+      "不要扩大 stoploss",
+      "不要移除所有过滤条件试图增加交易数",
+      "不要继续生成与 v001/v004 行为几乎一致的策略"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "至少一个新的技术指标（如 ADX、RSI、Bollinger bandwidth）在 populate_indicators 中实际计算",
+      "populate_entry_trend 中必须出现新指标作为入场条件的逻辑判断",
+      "pair 列表必须包含 OP/USDT，替换 DOGE/USDT 或 ETH/USDT",
+      "如果保留 ETH/USDT，必须有 pair-specific 更严格入场条件",
+      "entry_tag 必须能区分不同入场逻辑（如 macd_adx_confirmed vs macd_rsi_confirmed）"
+    ],
+    "avoid_equivalent_code": [
+      "不得只改 class name、注释、变量名而逻辑不变",
+      "不得添加永远为 True 的条件伪装为新过滤",
+      "不得用不同变量名计算相同指标"
+    ],
+    "required_detectable_changes": [
+      "新增至少一个 populate_indicators 中未曾出现的指标列",
+      "populate_entry_trend 的布尔条件数量或结构必须与父策略不同",
+      "pair_whitelist 必须与父策略不同（至少一个 pair 替换）",
+      "回测结果的 entry_tag 分布必须与父策略可区分"
+    ]
+  }
+}
