@@ -1,0 +1,74 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮无任何候选通过 official_best 硬门槛；nearest_candidate (v003 from run_20260531_064426) 训练交易数50远超目标24，验证仅1/3月份盈利；session_best (v002) 也未通过验证强度要求。iteration_stats 和 leaderboard 缺失，无法确认全部迭代细节。",
+    "best_candidate": "run_20260531_080542_v001 (pair_specific_filter, SOL+OP, 25 trades)：训练交易数25接近目标上限，drawdown仅0.36%极低，winrate 80%，profit_factor 0.83偏低但结构清晰；验证Feb盈利+5.43 USDT、PF 2.3极强，但Mar/Apr亏损。OP/USDT在Mar表现好但Apr崩溃，SOL/USDT在Mar崩溃但Apr/Feb稳定。",
+    "main_failure_patterns": [
+      "交易数失控：nearest_candidate 50笔，远超目标24上限",
+      "止损吞噬ROI利润：v001训练期5笔止损-6.96 vs 20笔ROI仅+5.81，单笔止损约-1.39远大于单笔ROI+0.29",
+      "OP/USDT验证不稳定：Mar全胜10/10但Apr仅75%且PF 0.43，方向性风险大",
+      "SOL/USDT在Mar验证崩溃：6笔止损导致PF 0.33",
+      "pair_leaderboard全null说明上一轮pair评估流程可能未正常完成"
+    ],
+    "dangerous_directions_to_avoid": [
+      "不加限制地使用OP/USDT：月间波动极大，Apr验证PF仅0.43",
+      "放宽entry条件追求更多交易数：nearest_candidate 50笔证明放宽导致质量下降",
+      "仅依赖MACD单一信号：所有entry_tag均为macd_cross_momentum，缺乏多维过滤",
+      "继续生成与v001行为等价的策略（仅改类名/注释）"
+    ],
+    "promising_directions_to_continue": [
+      "BNB/USDT（推荐分8.48）+ SOL/USDT（推荐分6.35）作为核心pair组合",
+      "v001的Feb验证PF 2.3证明MACD+momentum框架在趋势月有效，需增加过滤减少震荡月亏损",
+      "控制交易数在20-24：v001的25笔已接近，需微调entry门槛",
+      "增加波动率/趋势强度过滤以避免Mar类震荡期的止损集中爆发",
+      "缩小单笔止损损失或增加trailing stop以改善止损/ROI比"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "run_20260531_080542_v001（结构最接近目标，25笔交易，低drawdown，Feb验证极强）",
+    "preferred_mutation_types": [
+      "add_entry_filter（增加ADX/ATR波动率过滤减少震荡期入场）",
+      "add_volatility_guard（高波动时跳过入场）",
+      "replace_pair_set（用BNB/USDT替换OP/USDT，保留SOL/USDT）",
+      "add_trailing_stop（改善止损/ROI比）",
+      "tighten_entry_trigger（微收紧MACD信号阈值减少2-5笔低质量交易）"
+    ],
+    "forbidden_mutation_types": [
+      "adjust_roi（当前ROI不是瓶颈）",
+      "widen_stoploss（会增大单笔损失）",
+      "remove_all_filters（会导致交易数爆炸）",
+      "only_rename_class（等价策略禁止）",
+      "add_ETH_USDT（已在cooldown）"
+    ],
+    "trade_count_target": "20~24，理想 20~20",
+    "must_fix": [
+      "止损单笔损失过大vs ROI单笔收益过小的比例问题",
+      "缺乏趋势/波动率过滤导致震荡月集中止损",
+      "交易数需从25精确压到20-24范围"
+    ],
+    "do_not_do": [
+      "不要使用ETH/USDT（cooldown中）",
+      "不要生成交易数>30的策略",
+      "不要只改变类名/注释/变量名",
+      "不要同时改变超过3个核心参数（避免不可归因）",
+      "不要移除MACD核心逻辑（Feb验证证明有效）"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "在populate_indicators中计算ADX或ATR并在populate_entry_trend中作为过滤条件实际使用",
+      "pair白名单改为BNB/USDT + SOL/USDT（或至少包含这两个作为核心）",
+      "entry条件中增加至少一个非MACD维度的过滤（如ADX>20、ATR百分位、EMA趋势方向）",
+      "如使用trailing_stop需在策略类属性中明确设置trailing_stop=True及相关参数"
+    ],
+    "avoid_equivalent_code": [
+      "不要生成与v001仅pair列表不同但entry逻辑完全相同的策略",
+      "不要添加永远为True的虚假过滤条件",
+      "不要在populate_indicators中计算指标但在populate_entry_trend中不引用"
+    ],
+    "required_detectable_changes": [
+      "populate_entry_trend中的条件数量必须与父策略不同（增加至少1个有效过滤）",
+      "回测交易数必须与父策略v001的25笔有可观测差异（目标20-24）",
+      "至少一个新指标在populate_indicators中计算且在entry条件中被引用"
+    ]
+  }
+}
