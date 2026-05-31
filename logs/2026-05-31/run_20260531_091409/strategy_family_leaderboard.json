@@ -1,0 +1,110 @@
+{
+  "created_at": "2026-05-31T09:28:33.753321",
+  "items": [
+    {
+      "strategy_family": "trend_following",
+      "generated_count": 1,
+      "valid_count": 0,
+      "train_avg_profit_pct": -0.305146704,
+      "validation_avg_profit_pct": -0.3418947776666667,
+      "best_strategy": {
+        "version": "v001",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_091409_v001",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_091409_v001.py",
+        "family_score": -73.23871129096884,
+        "final_score": -73.10746559095217
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "strategy_family": "pullback_reversal",
+      "generated_count": 1,
+      "valid_count": 0,
+      "train_avg_profit_pct": -0.27318436500000004,
+      "validation_avg_profit_pct": -0.6477837863333334,
+      "best_strategy": {
+        "version": "v002",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_091409_v002",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_091409_v002.py",
+        "family_score": -77.54104042650897,
+        "final_score": -77.33811682517565
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "strategy_family": "breakout_momentum",
+      "generated_count": 1,
+      "valid_count": 0,
+      "train_avg_profit_pct": -2.9222947099999996,
+      "validation_avg_profit_pct": 0.0,
+      "best_strategy": {
+        "version": "v003",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_091409_v003",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_091409_v003.py",
+        "family_score": -0.43834420649999994,
+        "final_score": 0
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "训练区间亏损超过 baseline；Profit factor 低于 baseline；最大回撤超过目标；交易数超过目标上限；固定止损亏损吞噬 ROI 收益。；高频风险：交易数超过目标上限 1.5 倍",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "strategy_family": "low_volatility_mean_reversion",
+      "generated_count": 1,
+      "valid_count": 0,
+      "train_avg_profit_pct": 0.08970422,
+      "validation_avg_profit_pct": 0.0,
+      "best_strategy": {
+        "version": "v004",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_091409_v004",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_091409_v004.py",
+        "family_score": 0.013455633,
+        "final_score": 0
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "训练区间交易数低于目标下限",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "strategy_family": "strict_risk_filter",
+      "generated_count": 1,
+      "valid_count": 0,
+      "train_avg_profit_pct": -0.8228655709999999,
+      "validation_avg_profit_pct": -0.7437358636666668,
+      "best_strategy": {
+        "version": "v005",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_091409_v005",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_091409_v005.py",
+        "family_score": -75.0346127129871,
+        "final_score": -74.72524891142044
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "训练区间亏损超过 baseline；Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "preferred_families_for_next_optimize": [
+    "low_volatility_mean_reversion",
+    "breakout_momentum",
+    "trend_following"
+  ]
+}
