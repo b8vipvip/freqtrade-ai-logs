@@ -1,0 +1,164 @@
+{
+  "created_at": "2026-05-31T12:53:36.633798",
+  "items": [
+    {
+      "strategy_family": "trend_following",
+      "attempt_count": 4,
+      "generated_count": 4,
+      "valid_count": 0,
+      "near_miss_count": 0,
+      "high_frequency_failure_count": 0,
+      "validation_high_frequency_failure_count": 0,
+      "consecutive_high_frequency_failure": 0,
+      "low_trade_profitable_near_miss_count": 0,
+      "trailing_failure_count": 0,
+      "average_final_score": -40.10492962688782,
+      "weight": 0.198,
+      "blocked_for_rest_of_run": false,
+      "train_avg_profit_pct": -0.63907463975,
+      "validation_avg_profit_pct": -0.5269853036666667,
+      "best_strategy": {
+        "version": "v001",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_122748_v001",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_122748_v001.py",
+        "family_score": -14.210942697783981,
+        "final_score": -14.076580143267314
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "训练区间亏损超过 baseline；Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+          "count": 2
+        },
+        {
+          "reason": "final_score<=0",
+          "count": 1
+        },
+        {
+          "reason": "Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+          "count": 1
+        }
+      ],
+      "last_low_trade_near_miss": null
+    },
+    {
+      "strategy_family": "pullback_reversal",
+      "attempt_count": 2,
+      "generated_count": 2,
+      "valid_count": 0,
+      "near_miss_count": 0,
+      "high_frequency_failure_count": 0,
+      "validation_high_frequency_failure_count": 0,
+      "consecutive_high_frequency_failure": 0,
+      "low_trade_profitable_near_miss_count": 0,
+      "trailing_failure_count": 0,
+      "average_final_score": -37.80142384095619,
+      "weight": 0.30250000000000005,
+      "blocked_for_rest_of_run": false,
+      "train_avg_profit_pct": -0.3778043790000001,
+      "validation_avg_profit_pct": -0.480415598,
+      "best_strategy": {
+        "version": "v002",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_122748_v002",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_122748_v002.py",
+        "family_score": -0.0515609388,
+        "final_score": 0
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+          "count": 1
+        },
+        {
+          "reason": "固定止损亏损吞噬 ROI 收益。",
+          "count": 1
+        }
+      ],
+      "last_low_trade_near_miss": null
+    },
+    {
+      "strategy_family": "breakout_momentum",
+      "attempt_count": 2,
+      "generated_count": 2,
+      "valid_count": 0,
+      "near_miss_count": 0,
+      "high_frequency_failure_count": 0,
+      "validation_high_frequency_failure_count": 0,
+      "consecutive_high_frequency_failure": 0,
+      "low_trade_profitable_near_miss_count": 0,
+      "trailing_failure_count": 0,
+      "average_final_score": -46.79680255012088,
+      "weight": 0.09982500000000002,
+      "blocked_for_rest_of_run": false,
+      "train_avg_profit_pct": -1.4405486969999999,
+      "validation_avg_profit_pct": -0.7233083381666666,
+      "best_strategy": {
+        "version": "v003",
+        "strategy_class": "MultiCoin_AI_Strategy_20260531_122748_v003",
+        "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260531_122748_v003.py",
+        "family_score": -0.3042226902,
+        "final_score": 0
+      },
+      "main_failure_reasons": [
+        {
+          "reason": "训练区间亏损超过 baseline；Profit factor 低于 baseline；交易数超过目标上限；固定止损亏损吞噬 ROI 收益。；高频风险：交易数超过目标上限",
+          "count": 1
+        },
+        {
+          "reason": "训练区间亏损超过 baseline；Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。；高频风险：交易数超过目标上限",
+          "count": 1
+        }
+      ],
+      "last_low_trade_near_miss": null
+    },
+    {
+      "strategy_family": "low_volatility_mean_reversion",
+      "attempt_count": 0,
+      "generated_count": 0,
+      "valid_count": 0,
+      "near_miss_count": 0,
+      "high_frequency_failure_count": 0,
+      "validation_high_frequency_failure_count": 0,
+      "consecutive_high_frequency_failure": 0,
+      "low_trade_profitable_near_miss_count": 0,
+      "trailing_failure_count": 0,
+      "average_final_score": 0.0,
+      "weight": 1.0,
+      "blocked_for_rest_of_run": false,
+      "train_avg_profit_pct": 0.0,
+      "validation_avg_profit_pct": 0.0,
+      "best_strategy": null,
+      "main_failure_reasons": [],
+      "last_low_trade_near_miss": null
+    },
+    {
+      "strategy_family": "strict_risk_filter",
+      "attempt_count": 0,
+      "generated_count": 0,
+      "valid_count": 0,
+      "near_miss_count": 0,
+      "high_frequency_failure_count": 0,
+      "validation_high_frequency_failure_count": 0,
+      "consecutive_high_frequency_failure": 0,
+      "low_trade_profitable_near_miss_count": 0,
+      "trailing_failure_count": 0,
+      "average_final_score": 0.0,
+      "weight": 1.0,
+      "blocked_for_rest_of_run": false,
+      "train_avg_profit_pct": 0.0,
+      "validation_avg_profit_pct": 0.0,
+      "best_strategy": null,
+      "main_failure_reasons": [],
+      "last_low_trade_near_miss": null
+    }
+  ],
+  "recommended_next_families": [
+    "pullback_reversal",
+    "breakout_momentum",
+    "trend_following"
+  ],
+  "preferred_families_for_next_optimize": [
+    "pullback_reversal",
+    "breakout_momentum",
+    "trend_following"
+  ]
+}

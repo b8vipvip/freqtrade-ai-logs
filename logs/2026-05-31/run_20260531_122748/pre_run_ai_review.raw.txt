@@ -1,0 +1,77 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。5个版本全部无效：v001/v004 final_score<=0（止损吞噬ROI），v002 零交易，v003 交易数106严重超标，v005 回测失败。",
+    "best_candidate": "v004（train PF=0.78, avg_val PF=0.92, 41 trades）是最接近可用的失败版本，止损亏损仍是主要问题；nearest_candidate 仍为 run_20260531_064426_v003（50 trades, train PF=0.62, 验证2月盈利 PF=1.47）",
+    "main_failure_patterns": [
+      "固定止损亏损吞噬 ROI 收益：v001/v004 止损单虽少但单笔亏损大，9笔止损=-9.35 vs 34笔ROI=+6.22",
+      "OP/USDT 和 BTC/USDT 是主要亏损来源：OP PF=0.24, BTC PF=0.38",
+      "入场过滤不足导致在高波动币种上频繁触发止损",
+      "v003 条件过松导致106笔交易严重超标",
+      "v002 条件过严导致零交易"
+    ],
+    "dangerous_directions_to_avoid": [
+      "大幅放宽入场条件（导致交易数爆炸如v003）",
+      "过度收紧所有条件（导致零交易如v002）",
+      "不加币种区分的统一止损策略（OP/BTC需要更严格入场而非更宽止损）",
+      "仅调整ROI/stoploss数值而不改善入场质量"
+    ],
+    "promising_directions_to_continue": [
+      "v004 的框架方向正确（41 trades, val PF=0.92），需要针对OP/BTC增加入场过滤",
+      "nearest_candidate 在2月验证期表现优异（PF=1.47, winrate=72%），说明策略逻辑在趋势明确时有效",
+      "BNB/SOL 在 v001 中表现良好（BNB PF=∞, SOL PF=1.12），应保持这些币种的入场逻辑",
+      "针对 OP/USDT 增加波动率过滤或趋势强度门槛",
+      "缩小止损幅度或对高波动币种使用更严格的入场确认"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (MultiCoin_AI_Strategy_20260531_064426_v003)",
+    "preferred_mutation_types": [
+      "pair_specific_filter（针对OP/BTC增加入场门槛）",
+      "reduce_stoploss_exposure（缩小止损幅度或增加止损前的确认信号）",
+      "add_volatility_filter（高ATR时禁止入场）",
+      "tighten_entry_for_weak_pairs（对历史表现差的币种增加额外确认）"
+    ],
+    "forbidden_mutation_types": [
+      "remove_all_filters（会导致交易数爆炸）",
+      "widen_entry_conditions（已证明导致超标）",
+      "adjust_stoploss_only（不解决入场质量问题）",
+      "trailing_as_primary_exit（规则禁止）",
+      "只改类名/注释/变量名"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "OP/USDT 入场质量：当前 PF=0.24，需增加趋势确认或波动率过滤",
+      "BTC/USDT 入场质量：当前 PF=0.38，止损单亏损过大",
+      "止损单平均亏损过高（约1.04 USDT/单），需要缩小仓位或收紧止损触发条件",
+      "确保入场条件变化是实质性的，不能与父策略行为等价"
+    ],
+    "do_not_do": [
+      "不要对所有币种统一放宽条件",
+      "不要移除已有的趋势过滤（BNB/SOL依赖它盈利）",
+      "不要将止损设为大于-2%（当前止损亏损已经是主要问题）",
+      "不要生成与 nearest_candidate 行为等价的策略",
+      "不要追求高交易数来提升总利润（质量优先）"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators 中必须新增至少一个用于过滤的指标（如ATR百分位、ADX阈值、或币种特定的波动率指标）",
+      "populate_entry_trend 中必须对 OP/USDT 或 BTC/USDT 增加额外入场条件",
+      "新增的过滤条件必须在 entry_conditions 中实际引用，不能只计算不使用",
+      "如果使用 pair_specific_filter，必须在代码中体现 metadata['pair'] 的条件分支"
+    ],
+    "avoid_equivalent_code": [
+      "不要只重命名 nearest_candidate 的指标变量",
+      "不要只调整已有阈值的小数点后几位",
+      "不要添加永远为True的过滤条件",
+      "不要添加与已有条件逻辑等价的冗余条件"
+    ],
+    "required_detectable_changes": [
+      "新增至少一个在 populate_indicators 中计算的指标列",
+      "entry_conditions 中至少有一个新的布尔条件引用新指标",
+      "回测结果的交易数或交易分布必须与父策略有可观测差异（>10%变化）"
+    ]
+  }
+}
+```
