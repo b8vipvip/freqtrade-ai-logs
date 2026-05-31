@@ -1,0 +1,95 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260531_074019.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/run.log
+
+========== 启动交互配置 ==========
+交互式设置：跳过（--setup n）
+中途人工确认：关闭（--confirm n）
+
+========== 日志仓库启动检查 ==========
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
+日志仓库启动拉取完成：git -C /opt/freqtrade-ai-logs pull --ff-only origin main
+
+===== 自动优化中文设置向导 =====
+交互式设置已跳过（--setup n）。
+
+========== Prompt 额外规则 ==========
+策略顾问规则数量：7
+代码生成规则数量：7
+本次实际迭代轮数：0
+运行时配置已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/goal.runtime.json
+当前模式：交易对筛选 pair-scan
+AI 调用：关闭
+source_strategy：MultiCoin_AI_Strategy_20260531_014140_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+本地历史数据已存在，覆盖目标区间，跳过下载。
+正在回测 train：20260501-20260525
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/backtests/pair_scan_train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_07-40-45.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 125
+profit_total_abs: -10.28206117
+profit_total_pct: -1.028206117
+profit_factor: 0.7474740292030702
+max_drawdown_pct: 2.2288067493571857
+正在回测 valid_apr_2026：20260401-20260430
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/backtests/pair_scan_valid_apr_2026_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_07-41-17.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 154
+profit_total_abs: -16.69769317
+profit_total_pct: -1.669769317
+profit_factor: 0.6845840124931373
+max_drawdown_pct: 1.851361024614033
+正在回测 valid_mar_2026：20260301-20260331
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/backtests/pair_scan_valid_mar_2026_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_07-41-46.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 159
+profit_total_abs: -24.376567720000004
+profit_total_pct: -2.4376567720000004
+profit_factor: 0.6081199536600678
+max_drawdown_pct: 3.634722385924132
+正在回测 valid_feb_2026：20260201-20260228
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/backtests/pair_scan_valid_feb_2026_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_07-42-12.json
+找到策略: MultiCoin_AI_Strategy_20260531_014140_v001
+total_trades: 147
+profit_total_abs: -36.386833179999996
+profit_total_pct: -3.6386833179999996
+profit_factor: 0.49398090650804577
+max_drawdown_pct: 4.504254082486276
+
+========== 交易对筛选结果 ==========
+候选币种数量：15
+active_pairs：OP/USDT, SOL/USDT
+watch_pairs：无
+cooldown_pairs：BTC/USDT, ETH/USDT, XRP/USDT, DOGE/USDT, ADA/USDT, BNB/USDT, AVAX/USDT, LINK/USDT, LTC/USDT, ARB/USDT, APT/USDT, SUI/USDT, NEAR/USDT
+推荐原因：
+- OP/USDT: score=34.1987，验证表现稳定，止损/回撤可控，交易数达标
+- SOL/USDT: score=13.8333，PF 较好，止损/回撤可控，交易数达标
+
+========== 交易对筛选质量检查 ==========
+请求 active 数量：5
+实际 active 数量：2
+min_active_score：1.0
+score<=0 的币是否进入 active：否
+source_strategy_path：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+scan_periods：{'train_period': '20260501-20260525', 'validation_periods': ['20260401-20260430', '20260301-20260331', '20260201-20260228'], 'holdout_periods': []}
+警告：优质币数量不足，本次只使用实际筛出的 active_pairs。
+pair_leaderboard.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/pair_leaderboard.json
+recommended_pairs.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_074019/recommended_pairs.json
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
