@@ -1,0 +1,42 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_033637/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260531_033637.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_033637/run.log
+
+========== 启动交互配置 ==========
+交互式设置：进入（--setup y）
+中途人工确认：关闭（--confirm n）
+
+========== 日志仓库启动检查 ==========
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
+日志仓库启动拉取完成：git -C /opt/freqtrade-ai-logs pull --ff-only origin main
+
+===== 自动优化中文设置向导 =====
+交互式设置已进入（--setup y）。
+策略家族名（默认：MultiCoin_AI_Strategy）：配置文件路径（默认：user_data/config.5coins.json）：主周期 timeframe（默认：5m）：训练区间（默认：20260501-20260525）：当前验证区间列表：
+  1. valid_apr_2026 -> 20260401-20260430
+  2. valid_mar_2026 -> 20260301-20260331
+  3. valid_feb_2026 -> 20260201-20260228
+验证区间：回车=使用默认；输入 n=手动输入：数据下载区间（默认：20260101-20260525）：是否自动下载数据（默认：是，输入 y/n）：是否强制重新下载历史数据（默认：否，输入 y/n）：最大迭代轮数（默认：3）：
+========== 异常 traceback ==========
+Traceback (most recent call last):
+  File "/opt/freqtrade-okx/freqtrade-ai/ai_tools/auto_optimize_strategy.py", line 6685, in main
+    runtime_goal = goal if args.no_wizard else run_wizard(goal, args)
+  File "/opt/freqtrade-okx/freqtrade-ai/ai_tools/auto_optimize_strategy.py", line 846, in run_wizard
+    runtime["max_iterations"] = ask_int("最大迭代轮数", int(default_iter))
+  File "/opt/freqtrade-okx/freqtrade-ai/ai_tools/auto_optimize_strategy.py", line 740, in ask_int
+    v = input(f"{prompt}（默认：{default}）：").strip()
+EOFError: EOF when reading a line
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
