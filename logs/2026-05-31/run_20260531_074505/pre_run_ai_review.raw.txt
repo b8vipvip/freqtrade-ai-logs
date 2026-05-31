@@ -1,0 +1,83 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮所有候选策略均为负收益，nearest_candidate v003 训练期 PF=0.618、亏损 -0.75%，验证期仅 Feb 盈利，Mar/Apr 均亏损。没有任何版本通过 official_best 门槛。",
+    "best_candidate": "MultiCoin_AI_Strategy_20260531_064426_v003（nearest_candidate）：训练 50 笔交易、PF 0.618、drawdown 1.12%；验证 Feb PF 1.47 盈利，但 Mar PF 0.57 亏损、Apr PF 0.67 亏损。止损吞噬 ROI 仍是核心问题（训练期 ROI +12.1 vs SL -19.6）。",
+    "main_failure_patterns": [
+      "固定止损吞噬 ROI：所有版本 stop_loss_profit_abs 远超 roi_profit_abs，PF 始终 < 0.7",
+      "交易数过多（v001=36, v003=50），远超目标 20~24，导致低质量信号被执行",
+      "OP/USDT 在训练期表现极差（v001: PF 0.205, 7/11 笔亏损），拖累整体",
+      "SOL/USDT 在 Mar 验证期大幅亏损（PF 0.317），稳定性不足",
+      "单一 entry_tag macd_cross_momentum 缺乏多样化过滤，信号质量低",
+      "策略重复问题：部分版本与已测试策略高度重复被标记"
+    ],
+    "dangerous_directions_to_avoid": [
+      "不要扩大 stoploss 幅度（会增加单笔亏损）",
+      "不要继续使用纯 MACD 交叉作为唯一入场信号",
+      "不要保留 OP/USDT 作为 active pair（训练期 PF 极低）",
+      "不要生成 50+ 笔交易的宽松策略",
+      "不要只改类名/注释/变量名产生等价策略",
+      "不要继续单纯收紧 ETH/USDT"
+    ],
+    "promising_directions_to_continue": [
+      "v003 在 Feb 验证期 PF 1.47、winrate 72% 表明底层逻辑在趋势明确月份有效，需增加趋势确认过滤",
+      "XRP/USDT 在 v001 训练期 4/4 全胜、Mar 验证 PF 1.77，值得保留",
+      "BTC/USDT 在 Mar 验证 PF 1.62、winrate 87.5%，可作为稳定 pair",
+      "recommended_pairs 中 OP/USDT score=34 和 SOL/USDT score=13 来自旧策略扫描，但本轮实测 OP 表现极差，需重新评估",
+      "减少交易数到 20~24 区间本身就能过滤掉大量低质量信号"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (v003) 作为结构参考，但必须大幅修改 entry 条件和 pair 选择",
+    "preferred_mutation_types": [
+      "tighten_entry_trigger（增加趋势方向确认，如 EMA 斜率/ADX 过滤）",
+      "remove_bad_entry_condition（移除在 OP/USDT 产生大量亏损信号的条件）",
+      "add_volatility_filter（用 ATR 或 Bollinger 宽度过滤震荡市低质量信号）",
+      "reduce_pair_set（移除 OP/USDT，聚焦 SOL/BTC/XRP + 1~2 个稳定 pair）",
+      "add_momentum_confirmation（RSI 区间过滤或 volume 确认）"
+    ],
+    "forbidden_mutation_types": [
+      "add_entry_filter（上轮已标记 forbidden，且单纯加 filter 不解决根本问题）",
+      "adjust_roi（ROI 不是瓶颈，止损才是）",
+      "pair_specific_filter（上轮 forbidden）",
+      "widen_stoploss",
+      "equivalent_rename_only"
+    ],
+    "trade_count_target": "20~24，理想 20~20",
+    "must_fix": [
+      "交易数必须从 36~50 降到 20~24：通过更严格的入场条件实现",
+      "止损吞噬问题：不扩大 SL，而是通过更高质量入场减少触发 SL 的概率",
+      "移除或大幅限制 OP/USDT 的交易（训练期 PF 0.205 不可接受）",
+      "入场信号必须包含趋势方向确认，不能只靠 MACD 交叉"
+    ],
+    "do_not_do": [
+      "不要生成与 v001/v003 行为等价的策略",
+      "不要保留 5 个 pair 全部 active（当前数据显示只有 2~3 个 pair 稳定盈利）",
+      "不要在没有趋势确认的情况下做 MACD 交叉入场",
+      "不要产生超过 24 笔交易",
+      "不要使用与上轮相同的 codegen provider 如果上轮因重复失败"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators 中必须新增至少一个趋势方向指标（如 EMA slope、ADX、或 Supertrend）",
+      "populate_entry_trend 中 MACD 交叉必须搭配趋势方向确认条件（如 close > EMA200 且 EMA slope > 0）",
+      "pair 白名单应缩减为 3~4 个（建议 SOL/BTC/XRP + 可选 ADA 或 LINK），或通过 pair-level 条件严格限制 OP",
+      "入场条件必须足够严格以将训练期交易数控制在 20~24 笔",
+      "entry_tag 必须与实际条件对应，便于后续诊断"
+    ],
+    "avoid_equivalent_code": [
+      "不要只把 macd_cross_momentum 改名为其他 tag 而条件不变",
+      "不要添加永远为 True 的虚假过滤条件",
+      "不要用不同变量名计算相同指标",
+      "不要只调整 MACD 参数（如 fast=12→11）而不改变逻辑结构"
+    ],
+    "required_detectable_changes": [
+      "新增至少 1 个在 populate_indicators 中计算的趋势确认指标",
+      "populate_entry_trend 的布尔条件数量必须比父策略多至少 1 个实质性条件",
+      "训练期回测交易数必须在 20~24 范围内（如果超出说明条件不够严格）",
+      "至少有 1 个 pair 的交易分布与父策略明显不同（如 OP 交易数从 11 降到 0~2）"
+    ]
+  }
+}
+```
