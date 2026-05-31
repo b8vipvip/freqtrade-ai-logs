@@ -1,0 +1,75 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。三个版本均未通过 official best 硬门槛，主要卡在验证区间全部亏损（avg_validation_profit_pct < 0）和 profit_factor < 1.0。",
+    "best_candidate": "v001（MultiCoin_AI_Strategy_20260531_023806_v001）：训练微正（+0.015%），PF=1.02，交易数31在目标范围，验证4月几乎持平（+0.001%），但3月和2月亏损拖累整体验证。ETH/USDT 在训练期是主要亏损来源（-2.59 USDT，PF=0.32），而 XRP 和 SOL 贡献正收益。",
+    "main_failure_patterns": [
+      "ETH/USDT 止损亏损严重：训练期8笔ETH交易中2笔止损吞噬全部ROI收益，PF仅0.32",
+      "验证3月SOL大幅亏损（-3.92 USDT，PF=0.48），4笔止损+1笔force_exit",
+      "v002过度过滤导致训练期也亏损（PF=0.89），说明收紧方向错误",
+      "v003放宽导致交易数超标（41笔）且亏损加剧（PF=0.75）",
+      "固定止损（-1.9 USDT/笔）仍是核心问题：每笔止损约等于7笔ROI盈利"
+    ],
+    "dangerous_directions_to_avoid": [
+      "全面放宽入场条件（v003证明交易数增加但质量下降）",
+      "过度收紧所有币种（v002证明会压低训练收益）",
+      "只改类名/注释的等价策略",
+      "扩大stoploss（optimization_goal明确禁止）",
+      "调整ROI（上轮推荐的forbidden类型）"
+    ],
+    "promising_directions_to_continue": [
+      "v001的pair_specific_filter思路正确：XRP表现优秀（6笔全赢），需要针对ETH增加更强过滤",
+      "验证4月ETH反而全赢（7笔，PF=∞），说明ETH问题是时段性的，需要市场状态过滤而非完全排除",
+      "SOL在训练期表现尚可（PF=1.21）但验证3月崩溃，需要波动率或趋势强度过滤",
+      "BTC在验证3月表现优秀（6笔全赢），可适当保留",
+      "当前交易数31已在目标范围，微调过滤即可保持20~30"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "v001（MultiCoin_AI_Strategy_20260531_023806_v001）——训练微正、交易数在范围、验证4月持平，是最接近突破的版本",
+    "preferred_mutation_types": [
+      "pair_specific_filter（针对ETH增加趋势/波动率过滤，减少逆势入场）",
+      "add_entry_filter（增加市场状态判断，如ADX阈值或波动率过滤，避免震荡期止损）",
+      "tag_specific_filter（对macd_cross_momentum信号增加确认条件，减少假突破）",
+      "timeframe_condition（增加高时间框架趋势确认，减少逆势交易）"
+    ],
+    "forbidden_mutation_types": [
+      "adjust_roi",
+      "widen_stoploss",
+      "remove_all_filters（会回到v003的过多交易问题）",
+      "只改变类名注释变量名的等价变更"
+    ],
+    "trade_count_target": "20~30",
+    "must_fix": [
+      "ETH/USDT训练期止损问题：2笔止损=-7.58 USDT，需要过滤掉ETH在弱势/高波动时的入场",
+      "验证3月SOL大幅亏损：需要趋势强度或波动率门槛避免SOL在下跌趋势中入场",
+      "整体验证avg_profit必须转正：当前-0.19%，需要同时改善3月和2月表现"
+    ],
+    "do_not_do": [
+      "不要完全排除ETH（验证4月ETH全赢，排除会损失收益）",
+      "不要把交易数压到20以下",
+      "不要生成与v001行为等价的策略",
+      "不要同时改变多个核心逻辑（一次只改一个维度，便于归因）",
+      "不要扩大stoploss数值"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "针对ETH/USDT增加额外入场过滤条件（如ADX>20、EMA趋势对齐、或ATR波动率阈值），在populate_entry_trend中必须体现pair判断逻辑",
+      "如果新增指标（如ADX、ATR、高时间框架EMA），populate_indicators必须实际计算",
+      "保留v001的macd_cross_momentum核心逻辑和XRP/SOL/BTC的基本入场条件",
+      "过滤条件必须是可量化的（阈值明确），不能是模糊判断"
+    ],
+    "avoid_equivalent_code": [
+      "不要只重命名v001的变量/类名而逻辑不变",
+      "不要添加永远为True的条件（如threshold设为0）",
+      "不要添加在回测数据范围内永远不触发的条件"
+    ],
+    "required_detectable_changes": [
+      "新增至少一个在populate_indicators中计算的指标列",
+      "populate_entry_trend中必须出现新的条件判断（与v001可diff出实质差异）",
+      "预期训练交易数从31降至22~28（通过过滤掉ETH/SOL的坏交易实现）"
+    ]
+  }
+}
+```
