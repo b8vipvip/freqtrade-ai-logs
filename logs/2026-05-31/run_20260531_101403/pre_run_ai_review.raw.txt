@@ -1,0 +1,81 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。5个版本全部失败，0个valid策略。核心问题仍是固定止损吞噬ROI收益，profit_factor全部低于1.0（除v004但交易数仅14不达标）。",
+    "best_candidate": "v004（profit_factor=1.86，训练盈利+0.09%，但交易数仅14低于下限20）。说明过滤条件过严时能盈利但交易数不足；v001（26笔，PF=0.59）在交易数范围内但亏损。nearest_candidate仍为上上轮的MultiCoin_AI_Strategy_20260531_064426_v003（50笔，PF=0.618，验证feb盈利PF=1.47）。",
+    "main_failure_patterns": [
+      "固定止损亏损吞噬ROI收益：所有版本stop_loss_profit_abs远超roi_profit_abs",
+      "v003交易数195严重超标（目标上限60），说明宽松条件导致高频低质交易",
+      "v004交易数14低于下限20，过滤过严",
+      "v001/v002/v005训练和验证均亏损，profit_factor 0.34~0.59",
+      "SOL/USDT在v001中12笔全亏（PF=0.61），BTC/USDT 3笔PF=0.29，是主要亏损来源",
+      "OP/USDT在v001中0笔交易，未被有效利用"
+    ],
+    "dangerous_directions_to_avoid": [
+      "不要继续用相同的trend_follow_multi_confirm单一entry tag——该信号在当前市场环境下止损率过高",
+      "不要放宽entry条件到无过滤状态（v003的195笔证明会爆交易数）",
+      "不要过度收紧到只剩14笔（v004路线）",
+      "不要只改类名/注释/变量名",
+      "不要继续依赖纯EMA/MACD趋势跟踪而不加波动率或动量确认"
+    ],
+    "promising_directions_to_continue": [
+      "nearest_candidate（064426_v003）在feb验证期PF=1.47、winrate=72%，说明其核心逻辑在低波动趋势市有效，应以此为parent",
+      "v004证明严格过滤能实现PF>1.8，需要找到中间地带：比v004宽松但比v001严格",
+      "v001在apr验证期SOL/USDT和BTC/USDT盈利（PF=inf），说明这两个币在特定条件下信号质量高",
+      "减少止损触发次数是关键：考虑trailing stop或动态止损替代固定-1%止损",
+      "按币种差异化entry条件：SOL需要更严格的入场确认，BNB/DOGE需要波动率过滤"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate（MultiCoin_AI_Strategy_20260531_064426_v003）",
+    "preferred_mutation_types": [
+      "replace_stoploss_with_trailing（用trailing stop替代固定止损，减少止损吞噬）",
+      "add_volatility_filter（ATR或Bollinger带宽过滤高波动期入场）",
+      "add_momentum_confirmation（RSI divergence或MACD histogram方向确认）",
+      "pair_specific_entry_threshold（对SOL/BNB设置更严格的入场阈值）",
+      "reduce_losing_pair_exposure（对历史亏损币种增加额外过滤）"
+    ],
+    "forbidden_mutation_types": [
+      "remove_all_filters（会导致交易数爆炸如v003）",
+      "tighten_all_entry_to_extreme（会导致交易数不足如v004）",
+      "only_rename_or_comment_change",
+      "add_cooldown_or_protection（不解决根本问题）",
+      "widen_stoploss_beyond_2pct"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "止损吞噬ROI是第一优先级：stop_loss_profit_abs必须小于roi_profit_abs的1.5倍",
+      "确保5个币种都有交易（OP/USDT上一轮0笔需要修复）",
+      "训练期profit_factor必须>1.0才有意义进入验证"
+    ],
+    "do_not_do": [
+      "不要生成与064426_v003行为等价的策略",
+      "不要只改entry filter数量而不改止损机制",
+      "不要在5个版本中重复同一种mutation思路",
+      "不要忽略pair-level分析直接全局优化"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "至少1个版本必须实现trailing_stop或custom_stoploss（动态止损）替代固定-1%止损",
+      "populate_indicators中必须新增至少1个当前parent未使用的指标（如ATR、Bollinger bandwidth、ADX）",
+      "populate_entry_trend中必须体现新增指标的实际条件判断",
+      "entry条件必须产生可检测的交易数变化（与parent差异>3笔）",
+      "如果使用pair_specific逻辑，必须在代码中体现pair判断分支"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改EMA周期1-2个点（如EMA20改EMA21）",
+      "不要只改ROI table的时间点而不改止损逻辑",
+      "不要添加永远为True的条件（如volume>0）",
+      "不要复制parent代码只改class name"
+    ],
+    "required_detectable_changes": [
+      "custom_stoploss方法或trailing_stop参数的引入",
+      "新指标列在dataframe中的实际计算",
+      "entry条件中引用新指标的布尔判断",
+      "交易数与parent差异至少3笔以上",
+      "至少1个版本的止损触发次数比parent减少20%以上"
+    ]
+  }
+}
+```

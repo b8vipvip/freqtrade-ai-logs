@@ -1,0 +1,40 @@
+{
+  "created_at": "2026-05-31T08:52:54.001728",
+  "source": "manual_fixed_5_pairs",
+  "source_strategy": "manual_selected_pairs",
+  "source_strategy_path": null,
+  "active_pair_count_requested": 5,
+  "active_pair_count_actual": 5,
+  "min_active_score": null,
+  "active_pairs": [
+    {
+      "pair": "BTC/USDT",
+      "score": null,
+      "reason": "用户指定的固定测试币种"
+    },
+    {
+      "pair": "OP/USDT",
+      "score": null,
+      "reason": "用户指定的固定测试币种"
+    },
+    {
+      "pair": "SOL/USDT",
+      "score": null,
+      "reason": "用户指定的固定测试币种"
+    },
+    {
+      "pair": "BNB/USDT",
+      "score": null,
+      "reason": "用户指定的固定测试币种"
+    },
+    {
+      "pair": "DOGE/USDT",
+      "score": null,
+      "reason": "用户指定的固定测试币种"
+    }
+  ],
+  "watch_pairs": [],
+  "cooldown_pairs": [],
+  "reason": "固定使用 BTC/OP/SOL/BNB/DOGE 作为后续策略结构探索与常规优化交易对。",
+  "pair_metrics": {}
+}
