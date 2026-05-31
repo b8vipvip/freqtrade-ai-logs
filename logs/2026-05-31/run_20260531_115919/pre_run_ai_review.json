@@ -1,0 +1,80 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。5个版本中2个valid但均未通过official best硬门槛，核心瓶颈是验证区间平均利润为负且profit_factor<1.0，表明训练期微利策略在验证期系统性亏损。",
+    "best_candidate": "v001 (MultiCoin_AI_Strategy_20260531_114018_v001) — final_score 22.18，训练期39笔交易微利(+0.03%)，验证期avg_profit=-0.33%，avg_PF=0.76。虽未通过硬门槛但drawdown控制良好(<1.25%)，winrate高(87%)，是最接近可用的版本。",
+    "main_failure_patterns": [
+      "验证区间平均利润持续为负(所有版本avg_validation_profit_pct在-0.33%~-0.46%)，策略过拟合训练期",
+      "验证区间worst_profit_factor<0.7(v001=0.695, v004=0.628)，某个月份严重亏损拖累整体",
+      "训练期利润极薄(v001仅+0.03%)，没有足够安全边际应对验证期波动",
+      "BTC/USDT在训练和验证中持续亏损(v001训练期BTC PF=0.29，仅3笔但亏损严重)",
+      "止损单虽少但单笔亏损大(5笔止损吞噬34笔ROI利润)",
+      "v002直接训练期亏损，过度过滤导致只剩低质量信号",
+      "v005因行为重复被拒绝，mutation多样性不足"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续使用pair_specific_filter作为主要mutation类型(上轮已用且forbidden列表中)",
+      "过度收紧入场条件导致交易数<25且训练利润极薄",
+      "依赖BTC/USDT贡献利润(该币种在当前策略框架下持续亏损)",
+      "仅改变阈值参数而不改变信号逻辑(容易产生行为重复)",
+      "使用trailing stop作为主要退出机制(nearest_candidate显示trailing贡献极小)"
+    ],
+    "promising_directions_to_continue": [
+      "SOL/USDT和OP/USDT在v001训练期表现稳定(PF>1.2)，应保持这两个币种的信号质量",
+      "高winrate(87%)说明ROI退出机制有效，问题在于止损单亏损过大——可探索更智能的止损回避",
+      "v001的macd_cross_momentum信号框架基本可用，需要增加验证期鲁棒性的过滤器",
+      "nearest_candidate在valid_feb_2026表现优异(PF=1.47, +0.58%)，说明某些市场状态下策略有效，需要识别并过滤掉不利市场状态",
+      "BNB/USDT在验证期apr表现好(PF=1.57)，可作为稳定利润来源加强"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "official_best（基于nearest_candidate MultiCoin_AI_Strategy_20260531_064426_v003的逻辑框架，但以official_best为基准确保不退步）",
+    "preferred_mutation_types": [
+      "add_regime_filter",
+      "modify_exit_logic",
+      "add_volatility_filter",
+      "replace_entry_indicator",
+      "adjust_stoploss_logic"
+    ],
+    "forbidden_mutation_types": [
+      "pair_specific_filter",
+      "tighten_entry_trigger",
+      "add_entry_filter",
+      "only_change_thresholds",
+      "add_trailing_stop_as_primary_exit"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "验证期平均利润必须>=0（当前official_best为-0.1768%，需要正向突破）",
+      "worst_validation_profit_factor必须>=0.7",
+      "减少BTC/USDT的亏损贡献（考虑对BTC增加更严格的入场条件或市场状态过滤）",
+      "止损单的单笔亏损需要控制（当前5笔止损=-9.46 USDT，平均每笔-1.89）"
+    ],
+    "do_not_do": [
+      "不要产生与上轮v001-v004行为等价的策略",
+      "不要将交易数压到20以下",
+      "不要移除ROI退出机制（当前高winrate依赖它）",
+      "不要用trailing stop替代fixed stoploss",
+      "不要只改class name/注释/变量名",
+      "不要盲目增加交易频率来提升利润（nearest_candidate 50笔但验证期更差）"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "至少一个新的市场状态/regime过滤指标（如ADX趋势强度、波动率区间、或多时间框架确认）",
+      "对BTC/USDT的差异化入场条件（BTC波动特征与altcoin不同）",
+      "改进的止损逻辑（如基于ATR的动态止损宽度，或入场后N根K线内不触发止损的保护期）",
+      "entry条件中必须有可检测的逻辑差异（不能只改阈值0.001的微调）"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改MACD参数(fast/slow/signal)的微小数值",
+      "不要只改RSI阈值±2以内的调整",
+      "不要只增加一个几乎不触发的极端条件作为伪过滤器",
+      "不要复制nearest_candidate的exact逻辑只改类名"
+    ],
+    "required_detectable_changes": [
+      "新增至少一个populate_indicators中未出现过的技术指标计算",
+      "populate_entry_trend中的布尔条件组合必须与父策略有结构性差异",
+      "exit逻辑或stoploss逻辑必须有可观测的行为变化（不同的退出价格或时机）"
+    ]
+  }
+}
