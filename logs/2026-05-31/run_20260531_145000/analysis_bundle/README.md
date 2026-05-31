@@ -6,4 +6,4 @@
 
 - run_20260531_145000_analysis_bundle.txt：完整可读分析包
 - 来源 run：user_data/backtest_results/ai_optimization_runs/run_20260531_145000
-- 生成时间：2026-05-31 14:57:44
+- 生成时间：2026-05-31 15:11:44
