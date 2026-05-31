@@ -1,0 +1,82 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮 run (20260531_061917) 未产生新 official_best，session_best v002 因训练交易数略低于 20 被判无效，nearest_candidate (v008 from 0530 run) 交易数 45 超标且全期亏损。",
+    "best_candidate": "v001 (MultiCoin_AI_Strategy_20260531_061917_v001) — 训练 20 笔交易但 PF 仅 0.505，亏损 -0.31%，SOL/USDT 和 BTC/USDT 止损拖累严重；v002 被标记为 session_best (score 21.6) 但交易数不足被跳过验证。",
+    "main_failure_patterns": [
+      "固定止损吞噬 ROI：v001 止损亏损 6.19 vs ROI 盈利 3.13，比值 1.98x",
+      "SOL/USDT 是最大亏损源：8 笔交易亏 -2.30，PF 仅 0.26，2 笔止损占全部止损的 50%",
+      "BTC/USDT 单笔止损 -1.55 占总亏损 25%，交易数仅 1 笔无统计意义",
+      "交易数卡在边界：v001 刚好 20 笔但质量差，v002 低于 20 被淘汰",
+      "tighten_entry_trigger 方向未能有效过滤坏交易，反而压缩了好交易数量",
+      "验证区间全部跳过，无法评估泛化能力"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续 tighten_entry_trigger：已被 forbidden 且实测压缩交易数到边界",
+      "pair_specific_filter 单独使用：已被 forbidden，且 BTC 仅 1 笔无法统计过滤",
+      "remove_bad_entry_condition：已被 forbidden",
+      "扩大 stoploss（如 -0.035 以上）：optimization_goal 明确禁止",
+      "只改类名/注释/变量名的伪 mutation"
+    ],
+    "promising_directions_to_continue": [
+      "add_entry_filter：增加趋势确认过滤（如 EMA 斜率、ADX 阈值提高）来排除 SOL 的逆势入场",
+      "调整 ROI 梯度：当前 ROI 从 2% 快速下降到 0.2%，可能过早止盈导致盈利不足以覆盖止损",
+      "增加 trailing_stop：用 trailing 替代部分固定止损，让盈利交易跑得更远",
+      "tag_specific_filter：针对 macd_cross 信号增加二次确认条件",
+      "OP/USDT 是 pair_leaderboard 最高分 (34.2)，考虑纳入 active pairs 替换表现差的 BTC/USDT"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "official_best (MultiCoin_AI_Strategy_20260531_014140_v001，训练 36 笔 PF 0.93 回撤 0.77%)",
+    "preferred_mutation_types": [
+      "add_entry_filter（趋势方向确认，如 EMA20 斜率 > 0 或 ADX > 某阈值）",
+      "adjust_roi_table（放宽早期 ROI 让盈利交易持有更久）",
+      "add_trailing_stop（保护已有利润，减少固定止损触发率）",
+      "replace_weak_pair（用 OP/USDT 替换 BTC/USDT 或 DOGE/USDT）"
+    ],
+    "forbidden_mutation_types": [
+      "tighten_entry_trigger",
+      "pair_specific_filter（单独使用）",
+      "remove_bad_entry_condition",
+      "widen_stoploss",
+      "cosmetic_only_changes"
+    ],
+    "trade_count_target": "20~30",
+    "must_fix": [
+      "固定止损亏损必须低于 ROI 盈利的 1.2 倍",
+      "SOL/USDT 止损交易需要被过滤或通过 trailing 减少损失",
+      "训练交易数必须 >= 20，目标 22~28",
+      "至少通过 1 个验证区间（不能全部跳过）"
+    ],
+    "do_not_do": [
+      "不要生成训练交易数预计低于 20 的策略",
+      "不要只改 class name、注释、变量名",
+      "不要继续单纯收紧 ETH/USDT",
+      "不要生成与 v001/v004 行为几乎一致的策略",
+      "不要扩大 stoploss 绝对值",
+      "不要过度过滤把交易数压到 20 以下"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators 中必须计算新增过滤指标（如 EMA 斜率、volume 比率等）",
+      "populate_entry_trend 中必须实际使用新增过滤条件，不能只声明不引用",
+      "如果启用 trailing_stop，必须在策略类属性中设置 trailing_stop = True 及相关参数",
+      "如果调整 ROI，minimal_roi 字典必须有可检测的数值变化",
+      "如果替换 pair，pair_filters 必须反映新的 pair 列表"
+    ],
+    "avoid_equivalent_code": [
+      "不要生成与 historical_best (0531_014140_v001) 指纹相同的策略",
+      "不要生成与上轮 v001 (hash 0b0415a961f7dc8dfad3) 相同的策略",
+      "不要只改变 entry_tag 字符串而不改变实际条件逻辑",
+      "不要添加永远为 True 的过滤条件（如 RSI < 100）"
+    ],
+    "required_detectable_changes": [
+      "entry_conditions 必须有新增或修改的布尔条件",
+      "indicators 列表必须有新增项 或 minimal_roi/trailing_stop 有数值变化",
+      "策略 fingerprint hash 必须与父策略不同",
+      "至少一个 pair 的交易行为必须与父策略可区分"
+    ]
+  }
+}
+```
