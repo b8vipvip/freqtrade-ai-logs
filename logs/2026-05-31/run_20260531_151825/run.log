@@ -1,0 +1,1425 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260531_151825.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/run.log
+
+========== 启动交互配置 ==========
+交互式设置：跳过（--setup n）
+中途人工确认：关闭（--confirm n）
+
+========== 日志仓库启动检查 ==========
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
+日志仓库启动拉取完成：git -C /opt/freqtrade-ai-logs pull --ff-only origin main
+
+===== 自动优化中文设置向导 =====
+交互式设置已跳过（--setup n）。
+
+========== 交易对选择状态 ==========
+recommended_pairs 默认文件：/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/recommended_pairs.json
+是否存在：是
+本次是否使用 recommended_pairs：是
+使用来源：默认自动读取
+active_pairs 数量：5
+active_pair_count_actual：5
+active_pairs：BTC/USDT, OP/USDT, SOL/USDT, BNB/USDT, DOGE/USDT
+临时 config 路径：user_data/backtest_results/ai_optimization_runs/run_20260531_151825/config.active_pairs.json
+========== 自动交易数目标 ==========
+是否启用：是
+交易对数量 pair_count：5
+交易对来源：recommended_pairs
+min_trades_per_pair：4
+ideal_min_trades_per_pair：5
+ideal_max_trades_per_pair：9
+max_trades_per_pair：12
+自动计算结果：
+min_trades: 20
+ideal_min_trades: 25
+ideal_max_trades: 45
+max_trades: 60
+上限：
+ideal_max_trades_cap: 75
+max_trades_cap: 90
+
+========== Prompt 额外规则 ==========
+策略顾问规则数量：7
+  1. 来源=optimization_goal.json：当前固定使用 BTC/USDT、OP/USDT、SOL/USDT、BNB/USDT、DOGE/USDT 五个交易对。
+  2. 来源=optimization_goal.json：本次交易数目标由 auto_trade_count_target 自动计算，当前为 20~60，理想区间 25~45。
+  3. 来源=optimization_goal.json：不要生成明显高频策略，训练交易数超过 60 的策略没有意义。
+  4. 来源=optimization_goal.json：如果某个策略盈利但交易数低于 20，应优先轻微放宽入场，把交易数提升到 20~25，而不是换完全不同结构。
+  5. 来源=optimization_goal.json：不要简单用 trailing 替代 fixed stoploss。trailing 只能在已有盈利后启用，不能让移动止损成为主要亏损来源。
+  6. 来源=optimization_goal.json：当前核心目标是减少低质量入场和亏损单数量，不是盲目提高交易频率。
+  7. 来源=optimization_goal.json：如果某个 family 连续产生高频亏损，应降低该 family 权重。
+代码生成规则数量：11
+  1. 来源=optimization_goal.json：必须真实落地 mutation_spec。
+  2. 来源=optimization_goal.json：禁止只改 class name、注释、变量名。
+  3. 来源=optimization_goal.json：如果新增过滤条件，populate_entry_trend 必须实际出现对应条件。
+  4. 来源=optimization_goal.json：如果新增指标，populate_indicators 必须实际计算。
+  5. 来源=optimization_goal.json：如果生成的策略与父策略行为等价，应主动报错，不要输出等价代码。
+  6. 来源=optimization_goal.json：上一轮如果因为策略重复失败，本轮禁止继续使用同一个 codegen provider，且必须改变 entry_conditions 或 indicators，不允许只改变类名、注释、变量名。
+  7. 来源=optimization_goal.json：如果 mutation_spec 预计交易数 20~24，代码实现不得因为过度过滤把交易数压到 20 以下。
+  8. 来源=runtime patch：保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。
+  9. 来源=内置规则：Bollinger 安全规则：禁止直接使用 bollinger['middle']；qtpylib.bollinger_bands 只允许读取 upper/lower。
+  10. 来源=内置规则：bb_middle 必须用 dataframe['bb_middle'] = (dataframe['bb_upper'] + dataframe['bb_lower']) / 2 计算。
+  11. 来源=内置规则：下一轮实现应以 trend_following + market regime/choppy/volatility contraction filter 为主，不要用 trailing 直接替代 fixed stoploss。
+本次实际迭代轮数：50
+运行时配置已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/goal.runtime.json
+本地历史数据已存在，覆盖目标区间，跳过下载。
+
+========== AI 模型池配置 ==========
+策略顾问 provider/模型池：
+1. apihost_claude_opus47 / claude-opus-4-7 @ https://apihost.cn/v1
+2. APIHOST_GPT55 / gpt-5.5 @ https://apihost.cn/v1
+3. APIHOST_GPT54 / gpt-5.4 @ https://apihost.cn/v1
+4. glm_official / glm-5.1 @ https://open.bigmodel.cn/api/paas/v4/
+5. apihost_claude_opus46 / claude-opus-4-6 @ https://apihost.cn/v1
+
+代码生成 provider/模型池：
+1. OPENROUTER_GPT53C / openai/gpt-5.3-codex @ https://openrouter.ai/api/v1
+2. deepseek_official / deepseek-v4-pro @ https://api.deepseek.com
+3. glm_official / glm-5.1 @ https://open.bigmodel.cn/api/paas/v4/
+4. APIHOST_GPT53 / gpt-5.3 @ https://apihost.cn/v1
+5. apihost_claude_opus46 / claude-opus-4-6 @ https://apihost.cn/v1
+
+模型失败自动轮换：开启
+单次 AI 调用最大尝试次数：5
+AI 请求超时：120 秒
+AI 请求冷却：10 秒
+
+========== 本次实际测试交易对 ==========
+交易对来源：recommended_pairs.json
+交易对数量：5
+交易对列表：
+1. BTC/USDT
+2. OP/USDT
+3. SOL/USDT
+4. BNB/USDT
+5. DOGE/USDT
+
+本次临时 config：
+user_data/backtest_results/ai_optimization_runs/run_20260531_151825/config.active_pairs.json
+
+========== 优质交易对筛选来源 ==========
+recommended_pairs 文件：/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/recommended_pairs.json
+source_strategy：manual_selected_pairs
+created_at：2026-05-31T08:52:54.001728
+scan_periods：
+active_pairs 数量：5
+active_pair_count_actual：5
+watch_pairs 数量：0
+cooldown_pairs 数量：0
+
+========== 优质交易对 active_pairs ==========
+1. BTC/USDT | score=None | reason=用户指定的固定测试币种
+2. OP/USDT | score=None | reason=用户指定的固定测试币种
+3. SOL/USDT | score=None | reason=用户指定的固定测试币种
+4. BNB/USDT | score=None | reason=用户指定的固定测试币种
+5. DOGE/USDT | score=None | reason=用户指定的固定测试币种
+
+========== 观察交易对 watch_pairs ==========
+无
+
+========== 暂时冷却交易对 cooldown_pairs ==========
+无
+说明：cooldown_pairs 只是当前区间暂时不参与优化，不是永久剔除。
+当前 champion 来源：historical_best
+当前 champion 策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+
+========== 当前历史最佳策略简述 ==========
+来源：historical_best
+策略名：MultiCoin_AI_Strategy_20260531_014140_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+训练区间：20260501-20260525
+交易数：36
+收益USDT：-0.6419
+收益率：-0.06%
+胜率：86.11%
+Profit Factor：0.9323
+最大回撤：0.77%
+验证区间平均收益率：-0.18%
+验证区间平均 PF：0.8733
+验证区间最大回撤：1.06%
+是否疑似过拟合：否
+主要优势：本轮 final_score 最高。
+主要风险：仍需在更多验证区间复验稳健性。
+========== 记忆加载状态 ==========
+historical_best：存在
+historical_best 策略文件：有效
+nearest_candidate：存在
+nearest_candidate 策略文件：有效
+last_run_summary：存在
+strategy_memory：存在
+strategy_lessons：存在
+strategy_blacklist：存在
+额外随机采样：未启用
+
+========== 运行前 AI 复盘 ==========
+是否启用：是
+使用 provider：待调用
+使用模型：待调用
+复盘文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/pre_run_ai_review.json
+recommended_pairs active_pair_count_actual：5
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：首次调用
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：37 秒
+返回字符数：2437
+使用 provider：apihost_claude_opus47
+使用模型：claude-opus-4-7
+主要结论：
+- overall_result: 无实质突破。5个版本全部无效，0个valid策略，0次best更新。所有版本均亏损，核心问题是固定止损亏损吞噬ROI收益。
+- best_candidate: v004（final_score -15.05）是最接近可用的版本：31笔交易在目标范围内，profit_factor 0.81最高，训练亏损最小（-0.17%），验证avg_pf 0.70接近门槛。v001的entry_tag数据显示trend_regime_ema_filtered标签盈利（PF 1.49），而trend_regime_macd_filtered标签严重亏损（PF 0.54）。
+- 固定止损亏损吞噬ROI收益：所有版本stop_loss_profit_abs远超roi_profit_abs
+- MACD类入场信号质量极差：v001中macd_filtered标签PF仅0.54，31笔中14笔止损
+- OP/USDT和BTC/USDT在训练期持续亏损，拖累整体
+下一轮建议：
+- preferred_parent: nearest_candidate（MultiCoin_AI_Strategy_20260531_064426_v003）作为主要父本，v004结构作为辅助参考
+- remove_bad_entry_condition
+- improve_entry_quality
+- add_volatility_contraction_filter
+- add_market_regime_filter
+
+========== 本次实际父策略选择 ==========
+pre_run 建议父策略：nearest_candidate（MultiCoin_AI_Strategy_20260531_064426_v003）作为主要父本，v004结构作为辅助参考
+实际父策略：MultiCoin_AI_Strategy_20260531_014140_v001
+选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+是否覆盖 historical_best 作为本次 session_parent：否
+
+========== 第 1 轮 / v001 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v001
+上一轮结果：无
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：无
+本次 run 已成功 mutation_type：无
+本轮 advisor prompt 已包含上一轮结果：否
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：18 秒
+返回字符数：2804
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v001/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：29 秒
+返回字符数：8832
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v001/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v001/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-20-32.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v001
+total_trades: 35
+profit_total_abs: -0.6661891399999995
+profit_total_pct: -0.06661891399999995
+profit_factor: 0.9295911931237173
+max_drawdown_pct: 0.803651036833645
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260501-20260525 | 35 | -0.07% | -0.6662 | 85.71% | 0.9296 | 0.80% | 8.7955 | -9.4617 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v001/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-20-55.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v001
+total_trades: 40
+profit_total_abs: -0.8134173299999998
+profit_total_pct: -0.08134173299999999
+profit_factor: 0.9139690941475583
+max_drawdown_pct: 0.3972580859577548
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260401-20260430 | 40 | -0.08% | -0.8134 | 87.50% | 0.9140 | 0.40% | 8.6415 | -9.4549 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v001/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-21-14.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v001
+total_trades: 32
+profit_total_abs: -0.17265169000000036
+profit_total_pct: -0.017265169000000035
+profit_factor: 0.9772093661747715
+max_drawdown_pct: 0.6590261556369308
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260301-20260331 | 32 | -0.02% | -0.1727 | 87.50% | 0.9772 | 0.66% | 7.4029 | -7.5756 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v001/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-21-32.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v001
+total_trades: 35
+profit_total_abs: -2.0481317
+profit_total_pct: -0.20481316999999996
+profit_factor: 0.819784106901403
+max_drawdown_pct: 0.7813790107550431
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v001 | 20260201-20260228 | 35 | -0.20% | -2.0481 | 82.86% | 0.8198 | 0.78% | 9.3167 | -11.3649 | 0.0000 | 0.0000
+official best 硬门槛未通过，本轮只能作为 nearest_candidate，不能覆盖 best_strategy.json。
+- official best 硬门槛未通过：train_profit_total_pct=-0.0666 < 0
+- official best 硬门槛未通过：train_profit_factor=0.9296 < 1.0
+- official best 硬门槛未通过：avg_validation_profit_pct=-0.1011 < 0
+- official best 硬门槛未通过：avg_validation_profit_factor=0.9037 < 1.0
+8. 第 1 轮完成：有效，原因：通过
+是否成为新最佳：否
+未成为 best 原因：
+- official best 硬门槛未通过：train_profit_total_pct=-0.0666 < 0；official best 硬门槛未通过：train_profit_factor=0.9296 < 1.0；official best 硬门槛未通过：avg_validation_profit_pct=-0.1011 < 0；official best 硬门槛未通过：avg_validation_profit_factor=0.9037 < 1.0
+
+========== 第 2 轮 / v002 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v002
+上一轮结果：v001，有效，原因 通过
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：无
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：83.4 秒
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：21 秒
+返回字符数：1581
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v002/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：29 秒
+返回字符数：8604
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=v001, score=1.00, is_duplicate=是
+final_duplicate_decision: skip_backtest
+重复策略草稿已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v002/strategy.duplicate.py
+重复原因已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v002/duplicate_reason.json
+重复 diff 摘要已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v002/duplicate_diff_summary.txt
+策略与本次 run 已测试策略高度重复，跳过训练/验证回测。
+重复对象：v001 MultiCoin_AI_Strategy_20260531_151825_v001，相似度 1.00
+
+========== 第 3 轮 / v003 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+已连续 1 次生成重复策略，本轮强制切换 codegen provider/模型起点 offset=1。
+========== 本轮迭代上下文 ==========
+当前轮：v003
+上一轮结果：v002，无效，原因 策略与本次 run 已测试策略高度重复
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：1.4 秒
+本次请求前等待：8.6 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：21 秒
+返回字符数：2400
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v003/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：deepseek_official
+当前模型：deepseek-v4-pro
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 正在生成策略中，已等待 80 秒……
+AI 正在生成策略中，已等待 90 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：deepseek_official
+实际使用模型：deepseek-v4-pro
+用时：91 秒
+返回字符数：9634
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=v001, score=1.00, is_duplicate=是
+final_duplicate_decision: skip_backtest
+重复策略草稿已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v003/strategy.duplicate.py
+重复原因已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v003/duplicate_reason.json
+重复 diff 摘要已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v003/duplicate_diff_summary.txt
+策略与本次 run 已测试策略高度重复，跳过训练/验证回测。
+重复对象：v001 MultiCoin_AI_Strategy_20260531_151825_v001，相似度 1.00
+
+========== 第 4 轮 / v004 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+已连续 2 次生成重复策略，本轮强制切换 codegen provider/模型起点 offset=2。
+========== 本轮迭代上下文 ==========
+当前轮：v004
+上一轮结果：v003，无效，原因 策略与本次 run 已测试策略高度重复
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter', 'add_entry_filter']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：1.6 秒
+本次请求前等待：8.4 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：22 秒
+返回字符数：2231
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v004/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：glm_official
+当前模型：glm-5.1
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：glm_official
+实际使用模型：glm-5.1
+用时：52 秒
+返回字符数：8726
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v004/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v004/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-26-42.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v004
+total_trades: 42
+profit_total_abs: -2.9148248400000005
+profit_total_pct: -0.29148248400000004
+profit_factor: 0.7640984874562244
+max_drawdown_pct: 0.8838230508251493
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v004 | 20260501-20260525 | 42 | -0.29% | -2.9148 | 80.95% | 0.7641 | 0.88% | 9.4413 | -12.3561 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v004/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-27-02.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v004
+total_trades: 50
+profit_total_abs: 0.0676211899999998
+profit_total_pct: 0.0067621189999999805
+profit_factor: 1.0062778138256256
+max_drawdown_pct: 0.4216018167350965
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v004 | 20260401-20260430 | 50 | 0.01% | 0.0676 | 86.00% | 1.0063 | 0.42% | 10.8391 | -10.7715 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v004/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-27-26.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v004
+total_trades: 48
+profit_total_abs: -8.65966921
+profit_total_pct: -0.8659669210000001
+profit_factor: 0.5327769182678859
+max_drawdown_pct: 1.4231436798096344
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v004 | 20260301-20260331 | 48 | -0.87% | -8.6597 | 75.00% | 0.5328 | 1.42% | 9.8747 | -18.5343 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v004/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-27-45.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v004
+total_trades: 45
+profit_total_abs: 1.8055327199999995
+profit_total_pct: 0.18055327199999996
+profit_factor: 1.1674309521609652
+max_drawdown_pct: 0.5937306455125372
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v004 | 20260201-20260228 | 45 | 0.18% | 1.8055 | 84.44% | 1.1674 | 0.59% | 12.5893 | -10.7837 | 0.0000 | 0.0000
+8. 第 4 轮完成：无效，原因：final_score<=0
+是否成为新最佳：否
+未成为 best 原因：
+- 训练区间收益低于 MultiCoin_AI_Strategy_20260531_014140_v001：-0.29% < -0.06%
+- 训练区间 PF 低于 MultiCoin_AI_Strategy_20260531_014140_v001：0.7641 < 0.9323
+- 训练区间回撤高于 MultiCoin_AI_Strategy_20260531_014140_v001：0.88% > 0.77%
+- 验证区间表现不稳定：20260401-20260430,20260201-20260228 盈利，但 20260301-20260331 亏损
+- 最差验证 PF 仅 0.5328
+- 固定止损亏损吞噬 ROI 收益：训练 ROI +9.4413，固定止损 -12.3561
+- final_score=-8.5597，未通过评分门槛
+
+========== 第 5 轮 / v005 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v005
+上一轮结果：v004，无效，原因 final_score<=0
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter', 'add_entry_filter', 'cooldown_or_protection']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：85.1 秒
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：18 秒
+返回字符数：2671
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v005/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：26 秒
+返回字符数：8287
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v005/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v005/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-29-04.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v005
+total_trades: 47
+profit_total_abs: -6.8338775200000015
+profit_total_pct: -0.6833877520000001
+profit_factor: 0.5742832609429143
+max_drawdown_pct: 0.8805387239302785
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v005 | 20260501-20260525 | 47 | -0.68% | -6.8339 | 72.34% | 0.5743 | 0.88% | 9.2188 | -16.0526 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v005/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-29-28.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v005
+total_trades: 54
+profit_total_abs: -1.2466583700000002
+profit_total_pct: -0.12466583700000002
+profit_factor: 0.8993018276229265
+max_drawdown_pct: 0.3426666570568227
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v005 | 20260401-20260430 | 54 | -0.12% | -1.2467 | 81.48% | 0.8993 | 0.34% | 11.1335 | -12.3801 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v005/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-29-47.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v005
+total_trades: 49
+profit_total_abs: -8.090375559999998
+profit_total_pct: -0.8090375559999998
+profit_factor: 0.5352991430624716
+max_drawdown_pct: 1.030306578450599
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v005 | 20260301-20260331 | 49 | -0.81% | -8.0904 | 71.43% | 0.5353 | 1.03% | 9.3195 | -17.4099 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v005/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-30-04.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v005
+total_trades: 48
+profit_total_abs: 0.8802802299999997
+profit_total_pct: 0.08802802299999996
+profit_factor: 1.0708065222011132
+max_drawdown_pct: 0.6855840821511268
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v005 | 20260201-20260228 | 48 | 0.09% | 0.8803 | 79.17% | 1.0708 | 0.69% | 13.3125 | -12.4322 | 0.0000 | 0.0000
+8. 第 5 轮完成：无效，原因：final_score<=0
+是否成为新最佳：否
+未成为 best 原因：
+- 训练区间收益低于 MultiCoin_AI_Strategy_20260531_014140_v001：-0.68% < -0.06%
+- 训练区间 PF 低于 MultiCoin_AI_Strategy_20260531_014140_v001：0.5743 < 0.9323
+- 训练区间回撤高于 MultiCoin_AI_Strategy_20260531_014140_v001：0.88% > 0.77%
+- 验证区间表现不稳定：20260201-20260228 盈利，但 20260401-20260430,20260301-20260331 亏损
+- 最差验证 PF 仅 0.5353
+- 固定止损亏损吞噬 ROI 收益：训练 ROI +9.2188，固定止损 -16.0526
+- final_score=-10.6813，未通过评分门槛
+
+========== 第 6 轮 / v006 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v006
+上一轮结果：v005，无效，原因 final_score<=0
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter', 'add_entry_filter', 'cooldown_or_protection', 'adjust_stoploss']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：82.2 秒
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：21 秒
+返回字符数：1890
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v006/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：28 秒
+返回字符数：6915
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v006/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v006/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-31-24.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v006
+total_trades: 37
+profit_total_abs: -5.196993409999999
+profit_total_pct: -0.5196993409999999
+profit_factor: 0.5848383672579933
+max_drawdown_pct: 0.9307146918710812
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v006 | 20260501-20260525 | 37 | -0.52% | -5.1970 | 70.27% | 0.5848 | 0.93% | 7.3210 | -12.5180 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v006/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-31-41.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v006
+total_trades: 35
+profit_total_abs: -1.32046173
+profit_total_pct: -0.132046173
+profit_factor: 0.8347836744252851
+max_drawdown_pct: 0.3720556641609707
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v006 | 20260401-20260430 | 35 | -0.13% | -1.3205 | 80.00% | 0.8348 | 0.37% | 6.6719 | -7.9923 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v006/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-31-59.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v006
+total_trades: 31
+profit_total_abs: -2.90233512
+profit_total_pct: -0.290233512
+profit_factor: 0.7187160968222704
+max_drawdown_pct: 0.6717137483818897
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v006 | 20260301-20260331 | 31 | -0.29% | -2.9023 | 70.97% | 0.7187 | 0.67% | 6.8310 | -10.3182 | 0.5848 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v006/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-32-19.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v006
+total_trades: 28
+profit_total_abs: 4.629430360000001
+profit_total_pct: 0.4629430360000001
+profit_factor: 1.8112305350063411
+max_drawdown_pct: 0.3358370229439739
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v006 | 20260201-20260228 | 28 | 0.46% | 4.6294 | 82.14% | 1.8112 | 0.34% | 10.3361 | -5.7067 | 0.0000 | 0.0000
+8. 第 6 轮完成：无效，原因：final_score<=0
+是否成为新最佳：否
+未成为 best 原因：
+- 训练区间收益低于 MultiCoin_AI_Strategy_20260531_014140_v001：-0.52% < -0.06%
+- 训练区间 PF 低于 MultiCoin_AI_Strategy_20260531_014140_v001：0.5848 < 0.9323
+- 训练区间回撤高于 MultiCoin_AI_Strategy_20260531_014140_v001：0.93% > 0.77%
+- 验证区间表现不稳定：20260201-20260228 盈利，但 20260401-20260430,20260301-20260331 亏损
+- 固定止损亏损吞噬 ROI 收益：训练 ROI +7.3210，固定止损 -12.5180
+- final_score=-9.2496，未通过评分门槛
+
+========== 第 7 轮 / v007 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v007
+上一轮结果：v006，无效，原因 final_score<=0
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter', 'add_entry_filter', 'cooldown_or_protection', 'adjust_stoploss', 'tighten_entry_trigger']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：76.1 秒
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：22 秒
+返回字符数：1934
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v007/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：32 秒
+返回字符数：5357
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v007/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v007/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-33-47.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v007
+total_trades: 34
+profit_total_abs: -4.009722930000001
+profit_total_pct: -0.4009722930000001
+profit_factor: 0.6150862128180431
+max_drawdown_pct: 0.673889412045395
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v007 | 20260501-20260525 | 34 | -0.40% | -4.0097 | 70.59% | 0.6151 | 0.67% | 6.4075 | -10.4172 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v007/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-34-08.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v007
+total_trades: 38
+profit_total_abs: -1.1199156799999994
+profit_total_pct: -0.11199156799999994
+profit_factor: 0.8802052048514839
+max_drawdown_pct: 0.3209639677812353
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v007 | 20260401-20260430 | 38 | -0.11% | -1.1199 | 76.32% | 0.8802 | 0.32% | 8.2287 | -9.3486 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v007/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-34-30.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v007
+total_trades: 38
+profit_total_abs: -0.5059218399999994
+profit_total_pct: -0.050592183999999936
+profit_factor: 0.9515377999154442
+max_drawdown_pct: 0.6290774882660237
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v007 | 20260301-20260331 | 38 | -0.05% | -0.5059 | 73.68% | 0.9515 | 0.63% | 9.3488 | -10.4395 | 0.5848 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v007/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-34-49.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v007
+total_trades: 36
+profit_total_abs: 2.17671819
+profit_total_pct: 0.217671819
+profit_factor: 1.2316844864327596
+max_drawdown_pct: 0.3641624235509879
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v007 | 20260201-20260228 | 36 | 0.22% | 2.1767 | 75.00% | 1.2317 | 0.36% | 11.5719 | -9.3952 | 0.0000 | 0.0000
+8. 第 7 轮完成：无效，原因：final_score<=0
+是否成为新最佳：否
+未成为 best 原因：
+- 训练区间收益低于 MultiCoin_AI_Strategy_20260531_014140_v001：-0.40% < -0.06%
+- 训练区间 PF 低于 MultiCoin_AI_Strategy_20260531_014140_v001：0.6151 < 0.9323
+- 验证区间表现不稳定：20260201-20260228 盈利，但 20260401-20260430,20260301-20260331 亏损
+- 固定止损亏损吞噬 ROI 收益：训练 ROI +6.4075，固定止损 -10.4172
+- final_score=-9.0386，未通过评分门槛
+
+========== 第 8 轮 / v008 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v008
+上一轮结果：v007，无效，原因 final_score<=0
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter', 'add_entry_filter', 'cooldown_or_protection', 'adjust_stoploss', 'tighten_entry_trigger', 'reduce_trade_frequency']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：84.4 秒
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：28 秒
+返回字符数：2308
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v008/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：25 秒
+返回字符数：8332
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v008/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v008/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-36-13.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v008
+total_trades: 39
+profit_total_abs: -1.6237566799999998
+profit_total_pct: -0.16237566799999997
+profit_factor: 0.8800397432919725
+max_drawdown_pct: 0.8622146704705886
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v008 | 20260501-20260525 | 39 | -0.16% | -1.6238 | 66.67% | 0.8800 | 0.86% | 10.9628 | -13.5358 | 0.9493 | 0.0000
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v008/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-36-31.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v008
+total_trades: 44
+profit_total_abs: -4.413128769999999
+profit_total_pct: -0.44131287699999994
+profit_factor: 0.7171247126406176
+max_drawdown_pct: 0.47995400792956155
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v008 | 20260401-20260430 | 44 | -0.44% | -4.4131 | 65.91% | 0.7171 | 0.48% | 11.1878 | -15.6010 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v008/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-36-48.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v008
+total_trades: 37
+profit_total_abs: -4.3306555399999995
+profit_total_pct: -0.43306555399999996
+profit_factor: 0.7235475339335609
+max_drawdown_pct: 0.8300194575107344
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v008 | 20260301-20260331 | 37 | -0.43% | -4.3307 | 59.46% | 0.7235 | 0.83% | 11.3344 | -15.6651 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v008/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-37-05.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v008
+total_trades: 36
+profit_total_abs: 3.3939279100000013
+profit_total_pct: 0.33939279100000014
+profit_factor: 1.3253254585620606
+max_drawdown_pct: 0.3131868604829682
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v008 | 20260201-20260228 | 36 | 0.34% | 3.3939 | 72.22% | 1.3253 | 0.31% | 13.8263 | -10.4324 | 0.0000 | 0.0000
+8. 第 8 轮完成：无效，原因：final_score<=0
+是否成为新最佳：否
+未成为 best 原因：
+- 训练区间收益低于 MultiCoin_AI_Strategy_20260531_014140_v001：-0.16% < -0.06%
+- 训练区间 PF 低于 MultiCoin_AI_Strategy_20260531_014140_v001：0.8800 < 0.9323
+- 训练区间回撤高于 MultiCoin_AI_Strategy_20260531_014140_v001：0.86% > 0.77%
+- 验证区间表现不稳定：20260201-20260228 盈利，但 20260401-20260430,20260301-20260331 亏损
+- 固定止损亏损吞噬 ROI 收益：训练 ROI +10.9628，固定止损 -13.5358
+- final_score=-10.6088，未通过评分门槛
+
+========== 第 9 轮 / v009 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前代码生成模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+========== 本轮迭代上下文 ==========
+当前轮：v009
+上一轮结果：v008，无效，原因 final_score<=0
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260531_064426_v003
+本次 run 已失败 mutation_type：['pair_specific_filter', 'add_entry_filter', 'cooldown_or_protection', 'adjust_stoploss', 'tighten_entry_trigger', 'reduce_trade_frequency', 'adjust_roi']
+本次 run 已成功 mutation_type：['add_entry_filter']
+本轮 advisor prompt 已包含上一轮结果：是
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本次 actual_session_parent：MultiCoin_AI_Strategy_20260531_014140_v001
+actual_session_parent 选择原因：默认使用 historical_best / 当前 champion 作为本次 session_parent。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260531_014140_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：claude-opus-4-7, gpt-5.5, gpt-5.4, glm-5.1, claude-opus-4-6
+当前 provider：apihost_claude_opus47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：76.1 秒
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：apihost_claude_opus47
+实际使用模型：claude-opus-4-7
+用时：26 秒
+返回字符数：2412
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v009/mutation_spec.json
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+准备调用 AI：
+角色：code_generator
+模型池：openai/gpt-5.3-codex, deepseek-v4-pro, glm-5.1, gpt-5.3, claude-opus-4-6
+当前 provider：OPENROUTER_GPT53C
+当前模型：openai/gpt-5.3-codex
+尝试次数：1/5
+距离上次 AI 请求：5.0 秒
+本次请求前等待：5.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：OPENROUTER_GPT53C
+实际使用模型：openai/gpt-5.3-codex
+用时：28 秒
+返回字符数：6684
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v009/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v009/backtests/train_20260501-20260525.zip
+正在读取 json: backtest-result-2026-05-31_15-38-34.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v009
+total_trades: 55
+profit_total_abs: -8.539334629999999
+profit_total_pct: -0.853933463
+profit_factor: 0.5265728582366984
+max_drawdown_pct: 1.2550668007229993
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v009 | 20260501-20260525 | 55 | -0.85% | -8.5393 | 63.64% | 0.5266 | 1.26% | 8.4409 | -17.8417 | 1.0571 | -0.1956
+7. 正在回测验证区间：20260401-20260430
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v009/backtests/validation_20260401-20260430.zip
+正在读取 json: backtest-result-2026-05-31_15-38-54.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v009
+total_trades: 58
+profit_total_abs: -6.38374493
+profit_total_pct: -0.638374493
+profit_factor: 0.6242946465161245
+max_drawdown_pct: 0.7074947979763809
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v009 | 20260401-20260430 | 58 | -0.64% | -6.3837 | 68.97% | 0.6243 | 0.71% | 10.6076 | -16.9914 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260301-20260331
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v009/backtests/validation_20260301-20260331.zip
+正在读取 json: backtest-result-2026-05-31_15-39-13.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v009
+total_trades: 66
+profit_total_abs: -12.24874225
+profit_total_pct: -1.224874225
+profit_factor: 0.4807854315277594
+max_drawdown_pct: 1.2995214472666687
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v009 | 20260301-20260331 | 66 | -1.22% | -12.2487 | 62.12% | 0.4808 | 1.30% | 11.3422 | -23.5909 | 0.0000 | 0.0000
+7. 正在回测验证区间：20260201-20260228
+正在解析回测结果……
+正在解析 zip: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/v009/backtests/validation_20260201-20260228.zip
+正在读取 json: backtest-result-2026-05-31_15-39-31.json
+找到策略: MultiCoin_AI_Strategy_20260531_151825_v009
+total_trades: 53
+profit_total_abs: 3.189644260000001
+profit_total_pct: 0.3189644260000001
+profit_factor: 1.2612482728099164
+max_drawdown_pct: 0.369632052645389
+版本 | 区间 | 交易数 | 收益率 | 收益USDT | 胜率 | PF | 最大回撤 | ROI收益USDT | 固定止损USDT | 移动止盈/止损USDT | 强制退出USDT
+v009 | 20260201-20260228 | 53 | 0.32% | 3.1896 | 75.47% | 1.2612 | 0.37% | 14.5585 | -12.2092 | 0.8404 | 0.0000
+8. 第 9 轮完成：无效，原因：final_score<=0
+是否成为新最佳：否
+未成为 best 原因：
+- 训练区间收益低于 MultiCoin_AI_Strategy_20260531_014140_v001：-0.85% < -0.06%
+- 训练区间 PF 低于 MultiCoin_AI_Strategy_20260531_014140_v001：0.5266 < 0.9323
+- 训练区间回撤高于 MultiCoin_AI_Strategy_20260531_014140_v001：1.26% > 0.77%
+- 验证区间表现不稳定：20260201-20260228 盈利，但 20260401-20260430,20260301-20260331 亏损
+- 最差验证 PF 仅 0.4808
+- 固定止损亏损吞噬 ROI 收益：训练 ROI +8.4409，固定止损 -17.8417
+- 训练区间 PF 低于目标：0.5266 < 0.5600
+- final_score=-29.1616，未通过评分门槛
+已连续 8 轮 final_score<=0，触发 early stopping。
+本次运行提前结束。
+
+===== 本次运行摘要 =====
+运行目录：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825
+生成策略：v001:MultiCoin_AI_Strategy_20260531_151825_v001、v002:MultiCoin_AI_Strategy_20260531_151825_v002、v003:MultiCoin_AI_Strategy_20260531_151825_v003、v004:MultiCoin_AI_Strategy_20260531_151825_v004、v007:MultiCoin_AI_Strategy_20260531_151825_v007、v006:MultiCoin_AI_Strategy_20260531_151825_v006、v008:MultiCoin_AI_Strategy_20260531_151825_v008、v005:MultiCoin_AI_Strategy_20260531_151825_v005、v009:MultiCoin_AI_Strategy_20260531_151825_v009
+有效策略：v001:MultiCoin_AI_Strategy_20260531_151825_v001
+无效策略：v002:MultiCoin_AI_Strategy_20260531_151825_v002(策略与本次 run 已测试策略高度重复)、v003:MultiCoin_AI_Strategy_20260531_151825_v003(策略与本次 run 已测试策略高度重复)、v004:MultiCoin_AI_Strategy_20260531_151825_v004(final_score<=0)、v007:MultiCoin_AI_Strategy_20260531_151825_v007(final_score<=0)、v006:MultiCoin_AI_Strategy_20260531_151825_v006(final_score<=0)、v008:MultiCoin_AI_Strategy_20260531_151825_v008(final_score<=0)、v005:MultiCoin_AI_Strategy_20260531_151825_v005(final_score<=0)、v009:MultiCoin_AI_Strategy_20260531_151825_v009(final_score<=0)
+当前最佳策略是否更新：否
+
+========== strategy_family_leaderboard ==========
+strategy_family_leaderboard.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/strategy_family_leaderboard.json
+- trend_following: 尝试=0 / 有效=0 / near_miss=0 / high_frequency_failure=0 / severe_high_frequency_failure=0 / runtime_failure=0 / zero_trade=0 / low_trade_profitable_near_miss=0 / 平均 final_score=0.0000 / 本 run 禁选=否
+- pullback_reversal: 尝试=0 / 有效=0 / near_miss=0 / high_frequency_failure=0 / severe_high_frequency_failure=0 / runtime_failure=0 / zero_trade=0 / low_trade_profitable_near_miss=0 / 平均 final_score=0.0000 / 本 run 禁选=否
+- breakout_momentum: 尝试=0 / 有效=0 / near_miss=0 / high_frequency_failure=0 / severe_high_frequency_failure=0 / runtime_failure=0 / zero_trade=0 / low_trade_profitable_near_miss=0 / 平均 final_score=0.0000 / 本 run 禁选=否
+- low_volatility_mean_reversion: 尝试=0 / 有效=0 / near_miss=0 / high_frequency_failure=0 / severe_high_frequency_failure=0 / runtime_failure=0 / zero_trade=0 / low_trade_profitable_near_miss=0 / 平均 final_score=0.0000 / 本 run 禁选=否
+- strict_risk_filter: 尝试=0 / 有效=0 / near_miss=0 / high_frequency_failure=0 / severe_high_frequency_failure=0 / runtime_failure=0 / zero_trade=0 / low_trade_profitable_near_miss=0 / 平均 final_score=0.0000 / 本 run 禁选=否
+推荐后续 family：low_volatility_mean_reversion
+  - low_volatility_mean_reversion: 尚未在本轮尝试；仅作为低权重备选，用于 volatility contraction / choppy market 过滤思路
+本次没有找到有效新策略，当前最佳策略保持不变。
+本轮失败策略共同原因：
+- final_score<=0
+- 固定止损吞噬 ROI
+- 最差验证月份拖累整体表现
+- 策略与本次 run 已测试策略高度重复
+- 验证区间表现不稳定
+下一轮建议：
+- 保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。
+- 不要继续宽松高频入场
+- 优先控制止损损失
+
+========== 结束状态 ==========
+当前正式 best：来源=历史 best；策略名=MultiCoin_AI_Strategy_20260531_014140_v001；final_score=22.9549
+本轮 session best：策略名=MultiCoin_AI_Strategy_20260531_151825_v001；final_score=23.7931；未成为正式 best 原因：official best 硬门槛未通过：train_profit_total_pct=-0.0666 < 0；official best 硬门槛未通过：train_profit_factor=0.9296 < 1.0；official best 硬门槛未通过：avg_validation_profit_pct=-0.1011 < 0；official best 硬门槛未通过：avg_validation_profit_factor=0.9037 < 1.0
+========== 本轮最接近目标的失败策略 ==========
+版本：v005
+策略：MultiCoin_AI_Strategy_20260531_151825_v005
+final_score：-10.6813
+失败原因：Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。
+为什么仍未成为 best：未通过有效性约束或综合得分不足。
+========== 冠军-挑战者状态 ==========
+当前最佳策略 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+本轮最接近目标 challenger：MultiCoin_AI_Strategy_20260531_064426_v003
+比 baseline 差异：{'profit_total_pct_delta': -0.009610655000000135, 'profit_factor_delta': -0.011796559306871068}
+下一轮应该怎么改：优先选择未失败过的 mutation_type，继续单点小步调整。
+本轮失败模式总结：高频风险 / 止损吞噬利润 / trailing 结构失败 / 相似失败策略。
+========== 记忆写入状态 ==========
+nearest_candidate.json：已写入
+last_run_summary.json：已写入
+best_strategy.json：未更新
+strategy_memory.json：已追加
+strategy_lessons.json：已更新
+strategy_blacklist.json：已更新
+下一轮 advisor prompt 将加载 last_run_summary：是
+下一轮 advisor prompt 将加载 nearest_candidate：是
+下一轮 advisor prompt 将加载 historical_best：是
+
+========== 本次迭代统计 ==========
+计划迭代轮数：50
+策略顾问成功次数：9
+代码生成成功次数：9
+实际生成策略版本数：7
+训练回测版本数：7
+验证回测版本数：7
+验证区间回测总次数：21
+跳过验证版本数：0
+有效策略数：1
+无效策略数：8
+新 best 更新次数：0
+当前策略迭代版本：v009（仅本次 run 内版本号）
+strategy_memory 当前保留条数：200
+
+========== 全项目累计统计 ==========
+累计 run 总数：123
+累计有效 run 数：98
+累计尝试版本数/v目录数：641
+累计生成 strategy.py 数：531
+累计生成 mutation_spec.json 数：584
+累计训练回测版本数：249
+累计验证回测版本数：189
+累计 summary.json 数：620
+累计有效策略数：121
+累计 new best 次数：41
+strategy_memory 当前保留条数：200
+说明：strategy_memory 保留条数不是累计策略版本数。
+统计文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/iteration_stats.json
+详细状态：
+v001：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=是 / 新best=否 / 原因=通过
+v002：顾问=成功 / 代码=成功 / 语法=未执行 / 静态=未启用 / 训练=跳过 / 验证=跳过 / 有效=否 / 新best=否 / 原因=策略与本次 run 已测试策略高度重复
+v003：顾问=成功 / 代码=成功 / 语法=未执行 / 静态=未启用 / 训练=跳过 / 验证=跳过 / 有效=否 / 新best=否 / 原因=策略与本次 run 已测试策略高度重复
+v004：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=否 / 新best=否 / 原因=final_score<=0
+v005：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=否 / 新best=否 / 原因=final_score<=0
+v006：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=否 / 新best=否 / 原因=final_score<=0
+v007：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=否 / 新best=否 / 原因=final_score<=0
+v008：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=否 / 新best=否 / 原因=final_score<=0
+v009：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=已训练回测 / 验证=已完成 / 有效=否 / 新best=否 / 原因=final_score<=0
+
+========== Prompt 审计文件 ==========
+Prompt 审计文件：已保存到各版本目录，如需查看请执行：find /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825 -maxdepth 3 -type f \( -name "*prompt*" \) -print
+
+========== 当前最佳策略简述 ==========
+来源：历史 best
+策略名：MultiCoin_AI_Strategy_20260531_014140_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+训练区间：20260501-20260525
+交易数：36
+收益USDT：-0.6419
+收益率：-0.06%
+胜率：86.11%
+Profit Factor：0.9323
+最大回撤：0.77%
+验证区间平均收益率：-0.18%
+验证区间平均 PF：0.8733
+验证区间最大回撤：1.06%
+是否疑似过拟合：否
+主要优势：本轮 final_score 最高。
+主要风险：仍需更多区间复验。
+
+========== 本次运行总耗时 ==========
+总耗时：21分15秒（1275.1 秒）
+
+========== 日志保存 ==========
+完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_151825/run.log
+
+全局日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260531_151825.log
+
+最近一次日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/latest.log
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
