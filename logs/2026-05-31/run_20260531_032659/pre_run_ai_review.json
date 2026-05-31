@@ -1,0 +1,72 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮未产生 official_best，session_best (v002) 训练利润为负(-0.085%)、PF<1，未通过硬门槛。nearest_candidate (v008 from 0530) 交易数45超标且全期亏损。",
+    "best_candidate": "v001 (run_20260531_025322) — 训练36笔、PF 0.93、回撤0.77%，验证4月盈利+0.12% PF 1.15；主要拖累来自 ETH/USDT(-0.26%) 和 SOL/USDT 在3月验证(-0.39%)。结构最接近目标，值得作为改进基础。",
+    "main_failure_patterns": [
+      "ETH/USDT 在训练期严重亏损(PF 0.32)，8笔中2笔止损吞噬全部 ROI 利润",
+      "SOL/USDT 在3月验证期 PF 0.48，4笔止损导致-3.92 USDT",
+      "单一 entry_tag (macd_cross_momentum) 无法区分好坏行情，所有交易同质化",
+      "止损(-1.9 USDT/笔)与 ROI 利润(~0.28 USDT/笔)比例悬殊，1笔止损需7笔盈利弥补",
+      "策略重复检测导致部分候选被拒绝，说明 mutation 幅度不够"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续不加过滤地交易 ETH/USDT — 该币对在训练和多数验证期均亏损",
+      "仅改类名/注释的伪 mutation",
+      "扩大 stoploss 绝对值（当前~1.9 USDT 已是上限）",
+      "pair_specific_filter 作为唯一 mutation（上轮已禁止且效果有限）",
+      "大幅收紧导致交易数低于20"
+    ],
+    "promising_directions_to_continue": [
+      "OP/USDT 在 pair_leaderboard 得分最高(34.2)，应纳入 active pairs 替代表现差的 ETH",
+      "XRP/USDT 在训练期6笔全胜 PF=∞，可保留但需验证期过滤",
+      "BTC/USDT 在3月验证7笔全胜 PF=∞，4月验证 PF 0.71 — 需波动率过滤而非移除",
+      "增加趋势强度过滤(如 ADX>20 或 EMA slope)来减少震荡期假信号",
+      "为 SOL/USDT 增加成交量确认条件，减少3月类型的连续止损"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "v001 (run_20260531_025322) — 结构最接近目标，训练36笔可通过轻度过滤降至20-30",
+    "preferred_mutation_types": [
+      "add_entry_filter (趋势强度: ADX 或 EMA slope)",
+      "add_volume_confirmation (成交量突破均值)",
+      "replace_weak_pair (用 OP/USDT 替换 ETH/USDT)",
+      "tighten_entry_trigger (提高 MACD histogram 阈值)"
+    ],
+    "forbidden_mutation_types": [
+      "pair_specific_filter (已禁止)",
+      "widen_stoploss",
+      "cosmetic_only (类名/注释/变量名)",
+      "remove_all_filters (会导致交易数爆炸)"
+    ],
+    "trade_count_target": "20~30",
+    "must_fix": [
+      "ETH/USDT 亏损问题 — 要么移除该币对，要么增加该币对专属强过滤",
+      "止损/ROI 比例失衡 — 通过减少低质量入场来降低止损触发频率",
+      "确保 mutation 产生可检测的行为差异，避免重复检测失败"
+    ],
+    "do_not_do": [
+      "不要生成训练交易数低于20的策略",
+      "不要继续使用与 v001/v004 行为几乎一致的逻辑",
+      "不要只依赖 MACD 交叉作为唯一入场信号而不加任何过滤",
+      "不要在所有币对使用完全相同的参数"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators 中必须新增至少一个实际计算的指标(如 ADX、EMA slope、volume_sma)",
+      "populate_entry_trend 中必须在 MACD 交叉基础上增加至少一个新的布尔过滤条件",
+      "如果替换币对(如用 OP/USDT 替换 ETH/USDT)，pairlist 必须实际修改",
+      "entry_tag 必须能区分不同入场逻辑(如果有多个条件组合)"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改阈值 0.0 为 0.00001 这种无实际影响的变更",
+      "不要添加永远为 True 的条件(如 close > 0)",
+      "不要把已有条件拆成两行但逻辑不变"
+    ],
+    "required_detectable_changes": [
+      "新增指标列必须在 dataframe 中可见",
+      "entry 条件数量或逻辑必须与父策略有可验证差异",
+      "交易数预期从36降至20-30范围(过滤约30-45%的原始信号)"
+    ]
+  }
+}
