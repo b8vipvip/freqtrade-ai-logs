@@ -1,0 +1,74 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。5个版本全部失败，0个valid策略。v001是唯一进入验证的版本但final_score为负；v002交易数不足(15)；v003/v004/v005交易数严重超标(125-170)，且全部大幅亏损。",
+    "best_candidate": "v002（15笔交易，PF=0.65）是最接近目标范围的版本，仅差5笔交易即达标，但PF仍远低于1.0。nearest_candidate仍为上上轮的MultiCoin_AI_Strategy_20260531_064426_v003（50笔，PF=0.618，验证期2月盈利PF=1.47）。",
+    "main_failure_patterns": [
+      "交易数控制两极分化：要么过少(15)要么严重超标(125-170)，未能命中20-60区间",
+      "trailing_stop_loss造成巨额亏损：v001的11笔trailing止损亏损-6.26，远超12笔ROI盈利+1.26",
+      "profit_factor极低(0.13-0.65)，所有版本训练期均亏损",
+      "v003/v004/v005放宽入场条件导致高频交易+大幅亏损，方向完全错误",
+      "SOL/USDT和OP/USDT在v001中表现极差(PF<0.15)，拖累整体"
+    ],
+    "dangerous_directions_to_avoid": [
+      "使用trailing_stop_loss作为主要退出机制（v001中trailing造成-6.26亏损vs ROI仅+1.26）",
+      "过度放宽入场条件试图增加交易数（导致125-170笔垃圾交易）",
+      "仅依赖单一entry_tag（trend_follow_atr_filtered）无差异化",
+      "不加pair级别过滤直接全币种同一逻辑"
+    ],
+    "promising_directions_to_continue": [
+      "nearest_candidate(v003_064426)在2月验证期PF=1.47、winrate=72%，说明其核心逻辑在某些市场环境有效",
+      "v001中BNB/USDT winrate=62.5%相对稳定，可作为pair筛选参考",
+      "nearest_candidate的ROI退出贡献稳定(训练期+12.14)，固定止损是主要拖累(-19.63)",
+      "减少止损触发频率比扩大止损更有效：nearest_candidate 50笔中止损笔数需要控制"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (MultiCoin_AI_Strategy_20260531_064426_v003)",
+    "preferred_mutation_types": [
+      "add_entry_filter_volatility",
+      "pair_specific_entry_threshold",
+      "reduce_stoploss_trigger_frequency",
+      "add_trend_strength_confirmation",
+      "time_based_entry_filter"
+    ],
+    "forbidden_mutation_types": [
+      "widen_entry_conditions",
+      "add_trailing_stop",
+      "remove_entry_filter",
+      "loosen_all_thresholds",
+      "duplicate_previous_logic"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "止损触发过于频繁：nearest_candidate 50笔中止损亏损-19.63占总亏损主体，需通过更严格入场过滤减少低质量交易",
+      "SOL/USDT和OP/USDT入场质量差，需pair级别额外过滤或提高入场门槛",
+      "交易数必须落在20-60区间，不能再出现15或125+的极端情况"
+    ],
+    "do_not_do": [
+      "不要使用trailing_stop_loss作为退出方式",
+      "不要移除现有入场过滤条件来增加交易数",
+      "不要生成与nearest_candidate行为等价的策略（仅改类名/注释）",
+      "不要对所有币种使用完全相同的入场阈值",
+      "不要将stoploss设置得更宽（当前问题是入场质量不是止损宽度）"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "在populate_entry_trend中为不同币种设置差异化的入场阈值或额外条件",
+      "新增至少一个与nearest_candidate不同的技术指标过滤（如ADX强度、volume_ratio、或candle_pattern）",
+      "populate_indicators中必须实际计算新增指标",
+      "入场条件必须比nearest_candidate更严格（目标从50笔降至25-45笔）",
+      "确保custom_stoploss或stoploss逻辑不引入trailing机制"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改变类名、注释、变量名而保持相同逻辑",
+      "不要生成与nearest_candidate相同的EMA/RSI/ATR组合且阈值相同的策略",
+      "不要仅调整minimal_roi表而不改变入场逻辑"
+    ],
+    "required_detectable_changes": [
+      "entry_conditions中必须有至少一个新的布尔条件（非nearest_candidate已有的）",
+      "populate_indicators中必须有至少一个新计算的指标列",
+      "交易数预期应比nearest_candidate的50笔有所减少（目标25-45）"
+    ]
+  }
+}
