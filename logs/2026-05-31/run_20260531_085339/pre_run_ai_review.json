@@ -1,0 +1,79 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮仅生成1个版本，final_score为负(-71.7)，训练期亏损，验证期3月份严重亏损(PF=0.30)，未更新任何best。",
+    "best_candidate": "nearest_candidate: MultiCoin_AI_Strategy_20260531_064426_v003 — 50笔交易，训练PF=0.618亏损，但2月验证盈利(PF=1.47)，说明该策略在某些市场环境有效但止损损失过大。上一轮v001(24笔)过度过滤后交易数偏低且仍亏损。",
+    "main_failure_patterns": [
+      "固定止损亏损吞噬ROI收益：4笔止损=-5.58 vs 19笔ROI=+4.11，单笔止损约-1.4远大于单笔ROI约+0.22",
+      "3月验证期灾难性表现(PF=0.30)：8笔止损=-11.16 vs 17笔ROI=+3.35，止损频率过高",
+      "BNB/USDT在3月验证期表现极差(PF=0.21)，SOL/USDT同样差(PF=0.35)",
+      "add_entry_filter类型mutation过度收紧导致交易数从50降到24但未改善盈亏比",
+      "仅使用macd_cross_trend_confirm单一入场标签，缺乏多样化入场逻辑"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续单纯添加entry filter收紧交易数——已证明无法解决止损吞噬问题",
+      "扩大stoploss幅度——optimization_goal明确禁止",
+      "仅改类名/注释的等价策略",
+      "继续依赖单一MACD交叉作为唯一入场信号",
+      "在3月验证期不做任何适应性处理"
+    ],
+    "promising_directions_to_continue": [
+      "nearest_candidate在2月验证期PF=1.47且50笔交易，说明基础逻辑在趋势明确时有效",
+      "高胜率(83%)说明入场方向正确，核心问题是少数止损单笔亏损过大",
+      "SOL/USDT在4月验证期盈利(PF=1.17)，可作为稳定币对保留",
+      "trailing_stop在2月验证期贡献正收益(+0.68)，可强化动态止损逻辑",
+      "改善ROI/止损比：提高ROI目标或缩短持仓时间让盈利单获利更多"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (MultiCoin_AI_Strategy_20260531_064426_v003)",
+    "preferred_mutation_types": [
+      "improve_exit_logic",
+      "add_trailing_stop_optimization",
+      "adjust_roi_table",
+      "add_volatility_filter",
+      "replace_entry_signal",
+      "add_momentum_confirmation"
+    ],
+    "forbidden_mutation_types": [
+      "add_entry_filter",
+      "只改类名注释变量名",
+      "扩大stoploss",
+      "移除所有止损保护",
+      "生成与v001/v004行为等价的策略"
+    ],
+    "trade_count_target": "20~60，理想25~45",
+    "must_fix": [
+      "止损单笔亏损远大于ROI单笔盈利的不对称问题——需要通过更好的trailing stop或动态止损缩小单笔最大亏损",
+      "3月验证期灾难性表现——需要添加市场环境过滤(如波动率过高时不入场)",
+      "ROI table过于保守(单笔ROI约+0.22)——需要提高盈利目标或允许部分交易持仓更久"
+    ],
+    "do_not_do": [
+      "不要继续单纯收紧ETH/USDT(已在cooldown)",
+      "不要生成与上一轮v001行为几乎一致的策略",
+      "不要将交易数压到20以下",
+      "不要只依赖MACD交叉作为唯一入场条件",
+      "不要忽略3月验证期的适应性"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "动态trailing stop逻辑(如基于ATR的trailing stop)替代或补充固定stoploss",
+      "改进ROI table使盈利交易获利更多(提高早期ROI百分比或延长持仓窗口)",
+      "添加波动率过滤条件(如ATR过高时不入场)防止高波动期频繁止损",
+      "至少两种不同的入场信号标签，不能只有macd_cross_trend_confirm",
+      "populate_indicators中必须实际计算所有新增指标(ATR/Bollinger/RSI等)"
+    ],
+    "avoid_equivalent_code": [
+      "不要生成与nearest_candidate仅类名不同的代码",
+      "不要生成与上一轮v001仅多一个无效filter的代码",
+      "不要用不同变量名实现相同MACD交叉逻辑",
+      "不要添加永远为True的虚假过滤条件"
+    ],
+    "required_detectable_changes": [
+      "custom_stoploss或trailing_stop参数必须与父策略有实质差异",
+      "ROI table数值必须与父策略不同",
+      "populate_entry_trend中必须有新的条件组合或新指标参与判断",
+      "回测结果的交易分布(按pair和entry_tag)必须与父策略可区分"
+    ]
+  }
+}
