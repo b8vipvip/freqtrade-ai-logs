@@ -1,0 +1,68 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260601_003435/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260601_003435.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260601_003435/run.log
+
+========== 启动交互配置 ==========
+交互式设置：进入（--setup y）
+中途人工确认：关闭（--confirm n）
+
+========== 日志仓库启动检查 ==========
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
+日志仓库启动拉取完成：git -C /opt/freqtrade-ai-logs pull --ff-only origin main
+
+===== 自动优化中文设置向导 =====
+交互式设置已进入（--setup y）。
+策略家族名（默认：MultiCoin_AI_Strategy）：配置文件路径（默认：user_data/config.5coins.json）：主周期 timeframe（默认：5m）：训练区间（默认：20260501-20260525）：当前验证区间列表：
+  1. valid_apr_2026 -> 20260401-20260430
+  2. valid_mar_2026 -> 20260301-20260331
+  3. valid_feb_2026 -> 20260201-20260228
+验证区间：回车=使用默认；输入 n=手动输入：数据下载区间（默认：20260101-20260525）：是否自动下载数据（默认：是，输入 y/n）：是否强制重新下载历史数据（默认：否，输入 y/n）：最大迭代轮数（默认：150）：是否全自动不中途确认（默认：否，输入 y/n）：目标最低收益率（默认：0.0）：最大允许回撤(%)（默认：3.0）：最低 Profit factor（默认：0.56）：目标最小交易数（默认：38）：目标最大交易数（默认：110）：是否启用防过拟合（默认：是，输入 y/n）：提示：当前项目历史回测中 exit_signal 曾造成大量亏损，建议保持关闭。
+是否允许 exit_signal（默认：否，输入 y/n）：是否初始化历史最佳策略（默认：否，输入 y/n）：当前基准 baseline：
+  profit_total_abs=-7.43
+  profit_total_pct=-0.74
+  profit_factor=0.63
+  max_drawdown_pct=1.45
+  total_trades=47
+是否手动修改 baseline（默认：否，输入 y/n）：
+========== 本次自动优化设置 ==========
+策略家族：MultiCoin_AI_Strategy
+配置文件：user_data/config.5coins.json
+训练区间：20260501-20260601
+验证区间：
+  - valid_apr_2026 : 20260401-20260430
+  - valid_mar_2026 : 20260301-20260331
+  - valid_feb_2026 : 20260201-20260228
+数据下载区间：20260101-20260601
+自动下载数据：True
+迭代轮数：500
+全自动模式：False
+目标收益率：0.0
+最大回撤：3.0
+最低 Profit factor：0.56
+目标交易数：38~38
+防过拟合：True
+是否允许 exit_signal：False
+当前基准：{'profit_total_abs': -7.43, 'profit_total_pct': -0.74, 'profit_factor': 0.63, 'max_drawdown_pct': 1.45, 'total_trades': 47}
+是否开始自动优化：中途人工确认已关闭，自动选择不确认/跳过（--confirm n）。
+
+========== 异常 traceback ==========
+Traceback (most recent call last):
+  File "/opt/freqtrade-okx/freqtrade-ai/ai_tools/auto_optimize_strategy.py", line 8760, in main
+    runtime_goal = goal if args.no_wizard else run_wizard(goal, args)
+  File "/opt/freqtrade-okx/freqtrade-ai/ai_tools/auto_optimize_strategy.py", line 1851, in run_wizard
+    raise RuntimeError("用户取消执行")
+RuntimeError: 用户取消执行
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
