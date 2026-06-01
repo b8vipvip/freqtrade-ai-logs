@@ -1,0 +1,80 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。20个版本全部无效，0个valid策略，所有final_score为负或0。最佳session_best仅为v003（116笔交易，严重超频），nearest_candidate仍为上上轮的v003（20260531_064426）。",
+    "best_candidate": "v020（final_score=-141.5，worst_validation_profit_factor改善至0.71）是本轮最接近突破的版本；nearest_candidate MultiCoin_AI_Strategy_20260531_064426_v003（训练50笔，验证feb盈利PF=1.47）仍是全局最值得参考的基线。",
+    "main_failure_patterns": [
+      "高频失控：v003/v012/v018交易数116-250，远超60上限，止损亏损吞噬ROI收益（stoploss_to_roi_ratio>1.8）",
+      "过度过滤：v006/v019交易数仅9-12，低于20下限",
+      "全面亏损：所有完成验证的版本训练区间均亏损，profit_factor均<0.7",
+      "止损主导亏损：几乎所有版本stop_loss_profit_abs远大于roi_profit_abs",
+      "行为重复：v002/v011/v017被判定为高度重复策略",
+      "验证期表现不稳定：nearest_candidate在feb盈利但mar/apr均亏损"
+    ],
+    "dangerous_directions_to_avoid": [
+      "宽松入场不加质量过滤（导致100+交易高频亏损）",
+      "过多依赖固定止损作为唯一风控（止损吞噬利润）",
+      "仅改类名/注释的等价变异（被判重复跳过）",
+      "过度收紧入场条件到极端（交易数<15）",
+      "trailing stop作为主要退出机制（nearest_candidate的trailing贡献极小）"
+    ],
+    "promising_directions_to_continue": [
+      "nearest_candidate的结构：trend_following + BB/RSI组合，50笔交易在目标范围内，feb验证PF=1.47证明结构有效",
+      "v020方向：worst_validation_profit_factor改善到0.71，说明其过滤逻辑有改善质量的潜力",
+      "市场regime过滤：choppy market过滤可减少低质量入场",
+      "提高ROI收益而非仅减少止损：nearest_candidate的roi_profit_abs=12.14但stop_loss=-19.63，需要提升入场质量使winrate>0.65",
+      "波动率收缩过滤：在低波动期避免入场可减少假突破止损"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate（MultiCoin_AI_Strategy_20260531_064426_v003）",
+    "preferred_mutation_types": [
+      "在nearest_candidate基础上添加market_regime过滤（ADX阈值或ATR变化率）减少choppy市场入场",
+      "收紧入场质量：增加volume确认或多时间框架趋势一致性",
+      "优化止损策略：缩小固定止损幅度或增加动态止损触发条件（仅在盈利后启用）",
+      "调整ROI梯度：让盈利单持有更久，提升平均盈利",
+      "波动率收缩过滤：BB带宽收窄时不入场"
+    ],
+    "forbidden_mutation_types": [
+      "移除所有过滤条件（导致高频）",
+      "仅改类名/注释/变量名的等价变异",
+      "用trailing stop完全替代fixed stoploss",
+      "极端收紧到<15笔交易的过滤",
+      "引入全新未验证的策略框架（放弃nearest_candidate结构）"
+    ],
+    "trade_count_target": "20~60，理想25~45",
+    "must_fix": [
+      "止损亏损吞噬ROI收益问题：stoploss_to_roi_ratio必须<1.5，理想<1.0",
+      "训练区间必须盈利或至少接近盈亏平衡（profit_total_pct>-0.3）",
+      "交易数必须控制在20-60范围内",
+      "至少1个验证区间profit_factor>1.0"
+    ],
+    "do_not_do": [
+      "不要生成与nearest_candidate行为等价的策略",
+      "不要使用bollinger['middle']或bollinger['mid']",
+      "不要让交易数超过60或低于20",
+      "不要在没有盈利确认的情况下启用trailing stop",
+      "不要同时改变3个以上核心参数（一次只调1-2个维度）"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "基于nearest_candidate结构，添加至少一个新的市场质量过滤器（ADX>20或BB带宽阈值或ATR ratio）",
+      "bb_middle必须用(dataframe['bb_upper'] + dataframe['bb_lower']) / 2计算",
+      "populate_entry_trend中必须实际使用新增的过滤条件",
+      "populate_indicators中必须实际计算所有引用的指标",
+      "固定止损值应在-0.015到-0.025范围内（nearest_candidate的止损过大导致亏损）"
+    ],
+    "avoid_equivalent_code": [
+      "不要输出与MultiCoin_AI_Strategy_20260531_064426_v003行为等价的代码",
+      "不要输出与run_20260601_085701中任何版本行为等价的代码",
+      "新增过滤条件必须在回测中产生可检测的交易数变化（相对nearest_candidate的50笔应在30-50范围）"
+    ],
+    "required_detectable_changes": [
+      "入场条件必须包含至少一个nearest_candidate中不存在的新过滤器",
+      "交易数预期应比nearest_candidate的50笔略少（目标30-45笔，通过质量过滤减少低质量入场）",
+      "止损参数或ROI梯度必须与nearest_candidate有可测量差异"
+    ]
+  }
+}
+```
