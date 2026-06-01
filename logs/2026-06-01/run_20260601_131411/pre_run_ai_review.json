@@ -1,0 +1,80 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。20轮迭代产出14个版本，0个valid策略，6个被判定为duplicate跳过。最佳final_score为v017的-186.09，所有版本均为负分。核心问题是stoploss亏损严重吞噬ROI收益，且codegen多次产出重复策略。",
+    "best_candidate": "v017 (final_score -186.09) 和 nearest_candidate v001 (train 45 trades, validation_feb盈利PF=1.55但其他月份亏损严重)。v017相对最好但仍远未达标。v015的worst_validation_profit_factor改善至0.58是唯一监控指标进步。",
+    "main_failure_patterns": [
+      "stoploss_to_roi_ratio过高(1.76~2.08)：止损亏损金额远超ROI盈利，说明入场质量差或止损位不合理",
+      "duplicate_strategy频繁出现(6/20版本)：codegen未能产生足够差异化的策略代码",
+      "训练区间交易数过低(v003=2, v011=6)：部分版本过滤过严导致交易数不足",
+      "验证区间表现极不稳定：feb盈利但mar/apr大幅亏损，策略缺乏跨期稳健性",
+      "OP/USDT和BTC/USDT在v016中winrate极低(37.5%/28.6%)且profit_factor<0.3，拖累整体",
+      "DOGE/USDT在v016中0笔交易，说明入场条件对该币种完全无效"
+    ],
+    "dangerous_directions_to_avoid": [
+      "仅微调阈值而不改变入场逻辑结构——导致duplicate",
+      "对所有币种使用完全相同的入场阈值——OP和BTC表现极差说明需要差异化",
+      "过度收紧过滤条件——导致交易数跌至个位数",
+      "trailing stop替代fixed stoploss——guidance明确禁止",
+      "不加regime/volatility filter的纯趋势跟踪——在choppy市场中止损频繁触发"
+    ],
+    "promising_directions_to_continue": [
+      "v001在feb验证期PF=1.55、winrate=72.7%，说明基础趋势逻辑在强趋势月份有效，需要加choppy market filter过滤震荡期",
+      "SOL/USDT在v016中winrate=64.7%且PF=0.89接近盈亏平衡，是最有潜力的币种",
+      "BNB/USDT winrate=66.7%但PF=0.68，说明盈利单利润不够大或止损单亏损过大，可尝试缩小止损或加大ROI目标",
+      "recommended_followup_mutation建议add_regime_filter/avoid_choppy_market_filter方向正确",
+      "交易数45(v001)在理想区间内，不需要大幅调整频率，重点是提高入场质量"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (v001 from run_20260601_110758)，因为它交易数45在理想区间、feb验证盈利、结构可优化",
+    "preferred_mutation_types": [
+      "add_choppy_market_filter：用ADX或BB width识别震荡期并禁止入场",
+      "add_volatility_contraction_filter：在波动率收缩后等待突破再入场",
+      "pair_specific_entry_threshold：对OP/BTC使用更严格的入场条件或直接降低仓位权重",
+      "reduce_stoploss_exposure：缩小止损幅度(如从-1%到-0.7%)以降低单笔亏损",
+      "add_momentum_confirmation：要求入场时有额外动量确认(如volume spike或MACD histogram正向)"
+    ],
+    "forbidden_mutation_types": [
+      "仅改变阈值数值而不改变逻辑结构",
+      "trailing_stop替代fixed_stoploss",
+      "移除所有过滤条件以增加交易数",
+      "添加过多过滤条件(>3个新条件)导致交易数骤降",
+      "使用bollinger middle直接引用"
+    ],
+    "trade_count_target": "20~60，理想 25~45。父策略v001已有45笔，加filter后预期降至30~40为佳，不得低于20",
+    "must_fix": [
+      "stoploss_to_roi_ratio必须从1.76降至<1.2：通过减少低质量入场或缩小止损实现",
+      "OP/USDT入场质量极差(PF=0.21)：必须加coin-specific filter或提高该币种入场门槛",
+      "mar/apr验证期大幅亏损：加market regime filter避免在下跌/震荡期频繁入场",
+      "codegen必须产生与v001有实质行为差异的代码，避免再次duplicate"
+    ],
+    "do_not_do": [
+      "不要生成与v001仅有变量名/注释/类名差异的代码",
+      "不要对DOGE/USDT完全禁止交易(应确保每个币种至少有几笔)",
+      "不要将止损放大到>1.5%（当前问题是止损亏损过大不是止损太紧）",
+      "不要同时改变超过3个核心参数，保持可追溯性",
+      "不要使用bollinger['middle']或bollinger['mid']直接引用"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators中必须新增至少一个regime/choppy detection指标(如ADX、BB bandwidth、ATR ratio)",
+      "populate_entry_trend中必须实际使用新增的regime filter作为入场条件之一",
+      "bb_middle必须用 (dataframe['bb_upper'] + dataframe['bb_lower']) / 2 计算",
+      "入场逻辑必须与v001有可检测的结构性差异(新增条件、不同指标组合、或不同的条件逻辑)",
+      "确保5个币种都有合理的入场机会，不能有币种完全0交易"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改RSI阈值从30到28这种微调——必须有新的指标或逻辑分支",
+      "不要把同一个条件拆成两行写来伪装差异",
+      "不要添加永远为True的dummy条件",
+      "不要仅重命名dataframe列名而逻辑不变"
+    ],
+    "required_detectable_changes": [
+      "新增至少1个在populate_indicators中计算的指标列(如adx、bb_width、atr_ratio)",
+      "populate_entry_trend中的布尔条件数量或结构必须与父策略不同",
+      "stoploss值或minimal_roi配置必须有至少一处数值变化",
+      "如果加pair_specific逻辑，必须在代码中有明确的pair判断分支"
+    ]
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "planned_iterations": 5,
+  "advisor_success_count": 5,
+  "codegen_success_count": 8,
+  "generated_versions_count": 4,
+  "train_backtest_count": 4,
+  "validation_backtest_count": 4,
+  "validation_backtest_total_count": 12,
+  "skipped_validation_count": 0,
+  "valid_strategy_count": 0,
+  "invalid_strategy_count": 5,
+  "new_best_update_count": 0,
+  "current_iteration_version": "v005",
+  "strategy_memory_retained_count": 200,
+  "global_stats": {
+    "run_count": 133,
+    "nonempty_run_count": 104,
+    "version_dir_count": 719,
+    "strategy_file_count": 594,
+    "mutation_spec_count": 662,
+    "train_backtested_count": 296,
+    "validation_backtested_count": 228,
+    "summary_count": 697,
+    "valid_strategy_count": 125,
+    "new_best_count": 41,
+    "strategy_memory_retained_count": 200
+  },
+  "random_sample_enabled": false,
+  "random_sample_windows_count": 0,
+  "random_sample_total_backtests": 0,
+  "early_stop_triggered": false,
+  "early_stop_reason": "",
+  "system_failure_stop": false,
+  "early_stop_settings": {
+    "enabled": false,
+    "disabled_by_cli": true,
+    "patience": 50,
+    "patience_source": "optimization_goal.json",
+    "min_iterations_before_stop": 50,
+    "min_iterations_before_stop_source": "optimization_goal.json",
+    "monitor": "multi_metric_progress",
+    "allow_disable_for_long_run": true,
+    "reset_on_nearest_candidate_improvement": true,
+    "reset_on_session_best_improvement": true,
+    "reset_on_stoploss_to_roi_improvement": true,
+    "iterations": 5,
+    "allow_stop": false
+  },
+  "early_stop_monitor_state": {
+    "no_improvement_rounds": 0,
+    "last_improvement_iteration": 5,
+    "last_improvement_version": "v005",
+    "last_improvement_reasons": [
+      "worst_month_loss_reduced: worst month loss 降至 0.562854"
+    ],
+    "last_no_improvement_reasons": [],
+    "best_session_final_score": -231.05776456663511,
+    "best_nearest_score": [
+      0.009407197999999894,
+      0.0,
+      0.0,
+      -0.5695250081183282,
+      -0.0
+    ],
+    "best_valid_final_score": -1e+18,
+    "best_validation_avg_profit_factor": 0.9366437763325296,
+    "best_worst_validation_profit_factor": 0.5530060018806525,
+    "best_stoploss_to_roi_ratio": 1.1171304121705687,
+    "best_worst_month_loss": 0.5628543709999999,
+    "best_valid_candidate_count": 0,
+    "last_improvement_flags": {
+      "official_best_updated": false,
+      "session_best_final_score_improved": false,
+      "nearest_candidate_improved": false,
+      "validation_avg_profit_factor_improved": false,
+      "worst_validation_profit_factor_improved": false,
+      "stoploss_to_roi_ratio_improved": false,
+      "worst_month_loss_reduced": true,
+      "valid_candidate_count_increased": false
+    }
+  },
+  "improvement_monitor": {
+    "no_improvement_rounds": 0,
+    "last_improvement_iteration": 5,
+    "last_improvement_version": "v005",
+    "last_improvement_reasons": [
+      "worst_month_loss_reduced: worst month loss 降至 0.562854"
+    ],
+    "last_no_improvement_reasons": [],
+    "best_session_final_score": -231.05776456663511,
+    "best_nearest_score": [
+      0.009407197999999894,
+      0.0,
+      0.0,
+      -0.5695250081183282,
+      -0.0
+    ],
+    "best_valid_final_score": -1e+18,
+    "best_validation_avg_profit_factor": 0.9366437763325296,
+    "best_worst_validation_profit_factor": 0.5530060018806525,
+    "best_stoploss_to_roi_ratio": 1.1171304121705687,
+    "best_worst_month_loss": 0.5628543709999999,
+    "best_valid_candidate_count": 0,
+    "last_improvement_flags": {
+      "official_best_updated": false,
+      "session_best_final_score_improved": false,
+      "nearest_candidate_improved": false,
+      "validation_avg_profit_factor_improved": false,
+      "worst_validation_profit_factor_improved": false,
+      "stoploss_to_roi_ratio_improved": false,
+      "worst_month_loss_reduced": true,
+      "valid_candidate_count_increased": false
+    }
+  },
+  "early_stop_checked_counters": {
+    "no_new_best": 4,
+    "no_monitored_improvement": 0,
+    "final_score_failures": 4,
+    "duplicate_strategies": 0
+  },
+  "version_statuses": [
+    {
+      "version": "v001",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_131411_v001",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -313.67668465553663,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": true,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": true,
+          "worst_validation_profit_factor_improved": true,
+          "stoploss_to_roi_ratio_improved": true,
+          "worst_month_loss_reduced": true,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "session_best_final_score_improved: session_best final_score 提升至 -313.676685",
+          "validation_avg_profit_factor_improved: validation_avg_profit_factor 提升至 0.936644",
+          "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.553006",
+          "stoploss_to_roi_ratio_improved: stoploss_to_roi_ratio 下降至 1.819598",
+          "worst_month_loss_reduced: worst month loss 降至 0.839261"
+        ],
+        "no_improvement_reasons": [
+          "nearest_candidate 未改善",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v002",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_131411_v002",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "未执行",
+      "static_check_status": "未启用",
+      "train_backtest_status": "跳过",
+      "validation_backtest_status": "跳过",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "duplicate_strategy：策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0
+    },
+    {
+      "version": "v003",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_131411_v003",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数略低于目标下限，验证强度不足",
+      "final_score": -303.7578958638359,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": true,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": true,
+          "worst_month_loss_reduced": true,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "session_best_final_score_improved: session_best final_score 提升至 -303.757896",
+          "stoploss_to_roi_ratio_improved: stoploss_to_roi_ratio 下降至 1.117130",
+          "worst_month_loss_reduced: worst month loss 降至 0.828234"
+        ],
+        "no_improvement_reasons": [
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "nearest_candidate 未改善",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v004",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_131411_v004",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -231.05776456663511,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": true,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "session_best_final_score_improved: session_best final_score 提升至 -231.057765"
+        ],
+        "no_improvement_reasons": [
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v005",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_131411_v005",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -285.36099284970544,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": true,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "worst_month_loss_reduced: worst month loss 降至 0.562854"
+        ],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    }
+  ]
+}
