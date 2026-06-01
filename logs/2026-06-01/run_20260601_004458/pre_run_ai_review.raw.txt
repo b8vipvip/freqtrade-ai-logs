@@ -1,0 +1,81 @@
+```json
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮 session_best (v001) 训练利润为负(-0.07%)、PF=0.93，未通过 official_best 硬门槛。nearest_candidate (v003 from earlier run) 训练亏损-0.75%、PF=0.62，仅 Feb 验证盈利。所有候选均为净亏损策略。",
+    "best_candidate": "MultiCoin_AI_Strategy_20260531_151825_v005 (adjust_stoploss)：训练47笔、PF=0.57、亏损-0.68%；验证 Apr PF=0.90 接近盈亏平衡但仍亏损。SOL/USDT 和 BNB/USDT 在训练期微利，BTC/OP 大幅亏损拖累整体。Feb 验证(v003)曾盈利+0.58%/PF=1.47，说明策略在低波动趋势月有效但在震荡月失效。",
+    "main_failure_patterns": [
+      "固定止损单笔亏损过大(~1.2 USDT/笔)吞噬多笔 ROI 小利(~0.27 USDT/笔)，止损:ROI 比约 4.4:1",
+      "BTC/USDT 和 OP/USDT 在多数月份持续亏损，拖累整体 PF",
+      "单一入场标签 trend_atr_filtered 无法区分趋势/震荡环境，震荡月大量假突破触发止损",
+      "DOGE/USDT 几乎无交易(0-1笔)，未贡献分散化收益",
+      "验证期 Mar 和 Apr 表现远差于 Feb，策略缺乏 regime 适应性",
+      "iteration_stats/leaderboard 缺失，无法确认是否有其他接近通过的候选被遗漏"
+    ],
+    "dangerous_directions_to_avoid": [
+      "单纯调整 stoploss 数值(已证明无效，v005 仍亏损)",
+      "trailing stop 作为主要退出机制(guidance 明确禁止)",
+      "高频入场(>60笔)试图用数量弥补质量",
+      "仅改类名/注释的等价策略(上轮已出现重复失败)",
+      "对 BTC/OP 不加过滤地保持相同入场逻辑"
+    ],
+    "promising_directions_to_continue": [
+      "Feb 验证盈利说明趋势跟踪核心逻辑在顺趋势月有效，需增加 choppy/regime filter 过滤震荡月入场",
+      "SOL/USDT 在训练和 Apr 验证均微利，是最稳定币种，可作为策略调优锚点",
+      "高胜率(72-81%)但低盈亏比结构 → 需提高单笔 ROI 或缩小止损，而非改变胜率",
+      "volatility contraction filter(如 BB 收窄后突破)可减少震荡期假信号",
+      "pair-specific 入场强度阈值：对 BTC/OP 要求更强确认信号"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (MultiCoin_AI_Strategy_20260531_064426_v003)，因其训练交易数50在目标范围且有一个验证月盈利；同时参考 v005 的 Apr 验证接近盈亏平衡的参数",
+    "preferred_mutation_types": [
+      "add_regime_filter (ADX/BB_width/choppiness_index 区分趋势vs震荡)",
+      "add_volatility_contraction_filter (BB squeeze 或 ATR 收缩后扩张)",
+      "pair_specific_entry_threshold (BTC/OP 要求更高 ADX 或更强动量确认)",
+      "improve_risk_reward (缩小止损至0.8-1.0%配合更宽ROI目标，或分级ROI)",
+      "add_entry_quality_score (多条件评分，仅高分入场)"
+    ],
+    "forbidden_mutation_types": [
+      "adjust_stoploss (单独调止损已证明无效)",
+      "adjust_roi (不解决入场质量问题)",
+      "disable_or_adjust_trailing (guidance 禁止)",
+      "reduce_trade_frequency (当前交易数已在目标范围)",
+      "cooldown_or_protection (不解决核心问题)"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "震荡市入场过滤：必须新增至少一个 regime/choppy filter 实际生效于 populate_entry_trend",
+      "止损:ROI 比值过大：单笔止损亏损不应超过 3 笔 ROI 盈利之和",
+      "BTC/OP 亏损控制：对这两个币种增加额外入场确认条件或提高入场门槛",
+      "DOGE/USDT 参与度：确保 DOGE 在训练期至少产生 3-5 笔交易"
+    ],
+    "do_not_do": [
+      "不要生成与 v003/v005 行为等价的策略",
+      "不要用 bollinger['middle'] 直接引用",
+      "不要让过滤条件过严导致交易数<20",
+      "不要引入 trailing stop 作为主要止损机制",
+      "不要对所有币种使用完全相同的入场阈值"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "populate_indicators 中计算 regime indicator (至少一个：choppiness_index / ADX threshold / BB_width percentile)",
+      "populate_entry_trend 中实际使用 regime filter 作为入场必要条件",
+      "bb_middle 必须用 (bb_upper + bb_lower) / 2 计算，禁止直接读取 bollinger['middle']",
+      "对 BTC/USDT 和 OP/USDT 增加额外入场强度条件(如 ADX>25 或 volume_ratio>1.5)",
+      "stoploss 设置在 -0.8% 到 -1.2% 之间，配合 ROI 在 0.3%-0.5% 以改善盈亏比"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改变 ATR 乘数而保持其他逻辑完全相同(与 v003/v005 等价)",
+      "不要添加永远为 True 的虚假过滤条件",
+      "不要用不同变量名包装相同计算逻辑"
+    ],
+    "required_detectable_changes": [
+      "新增至少一个在 v003/v005 中不存在的技术指标列(如 choppiness、adx_strong、bb_squeeze)",
+      "populate_entry_trend 的布尔条件数量必须比父策略多至少 1 个有效过滤",
+      "entry_tag 必须反映新逻辑(如 trend_regime_filtered 而非沿用 trend_atr_filtered)",
+      "至少一个币种的入场条件与其他币种不同(pair-specific logic)"
+    ]
+  }
+}
+```
