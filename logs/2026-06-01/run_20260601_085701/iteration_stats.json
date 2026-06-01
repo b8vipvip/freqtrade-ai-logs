@@ -1,0 +1,992 @@
+{
+  "planned_iterations": 20,
+  "advisor_success_count": 20,
+  "codegen_success_count": 20,
+  "generated_versions_count": 17,
+  "train_backtest_count": 17,
+  "validation_backtest_count": 12,
+  "validation_backtest_total_count": 36,
+  "skipped_validation_count": 5,
+  "valid_strategy_count": 0,
+  "invalid_strategy_count": 20,
+  "new_best_update_count": 0,
+  "current_iteration_version": "v020",
+  "strategy_memory_retained_count": 200,
+  "global_stats": {
+    "run_count": 131,
+    "nonempty_run_count": 102,
+    "version_dir_count": 694,
+    "strategy_file_count": 576,
+    "mutation_spec_count": 637,
+    "train_backtested_count": 278,
+    "validation_backtested_count": 212,
+    "summary_count": 672,
+    "valid_strategy_count": 125,
+    "new_best_count": 41,
+    "strategy_memory_retained_count": 200
+  },
+  "random_sample_enabled": false,
+  "random_sample_windows_count": 0,
+  "random_sample_total_backtests": 0,
+  "early_stop_triggered": false,
+  "early_stop_reason": "",
+  "system_failure_stop": false,
+  "early_stop_settings": {
+    "enabled": false,
+    "disabled_by_cli": true,
+    "patience": 50,
+    "patience_source": "optimization_goal.json",
+    "min_iterations_before_stop": 50,
+    "min_iterations_before_stop_source": "optimization_goal.json",
+    "monitor": "multi_metric_progress",
+    "allow_disable_for_long_run": true,
+    "reset_on_nearest_candidate_improvement": true,
+    "reset_on_session_best_improvement": true,
+    "reset_on_stoploss_to_roi_improvement": true,
+    "iterations": 20,
+    "allow_stop": false
+  },
+  "early_stop_monitor_state": {
+    "no_improvement_rounds": 0,
+    "last_improvement_iteration": 20,
+    "last_improvement_version": "v020",
+    "last_improvement_reasons": [
+      "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.709844"
+    ],
+    "last_no_improvement_reasons": [
+      "session_best final_score 未提升",
+      "validation_avg_profit_factor 未提升",
+      "worst_validation_profit_factor 未改善",
+      "stoploss_to_roi_ratio 未下降",
+      "nearest_candidate 未改善",
+      "worst_month_loss 未下降",
+      "valid_candidate_count 未增加"
+    ],
+    "best_session_final_score": 0.0,
+    "best_nearest_score": [
+      0.009610655000000135,
+      0.0,
+      0.0,
+      -0.6182034406931289,
+      -0.0
+    ],
+    "best_valid_final_score": -1e+18,
+    "best_validation_avg_profit_factor": 1.1215834352498024,
+    "best_worst_validation_profit_factor": 0.7098442860690266,
+    "best_stoploss_to_roi_ratio": 0.9362520022918599,
+    "best_worst_month_loss": 0.0,
+    "best_valid_candidate_count": 0,
+    "last_improvement_flags": {
+      "official_best_updated": false,
+      "session_best_final_score_improved": false,
+      "nearest_candidate_improved": false,
+      "validation_avg_profit_factor_improved": false,
+      "worst_validation_profit_factor_improved": true,
+      "stoploss_to_roi_ratio_improved": false,
+      "worst_month_loss_reduced": false,
+      "valid_candidate_count_increased": false
+    }
+  },
+  "improvement_monitor": {
+    "no_improvement_rounds": 0,
+    "last_improvement_iteration": 20,
+    "last_improvement_version": "v020",
+    "last_improvement_reasons": [
+      "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.709844"
+    ],
+    "last_no_improvement_reasons": [
+      "session_best final_score 未提升",
+      "validation_avg_profit_factor 未提升",
+      "worst_validation_profit_factor 未改善",
+      "stoploss_to_roi_ratio 未下降",
+      "nearest_candidate 未改善",
+      "worst_month_loss 未下降",
+      "valid_candidate_count 未增加"
+    ],
+    "best_session_final_score": 0.0,
+    "best_nearest_score": [
+      0.009610655000000135,
+      0.0,
+      0.0,
+      -0.6182034406931289,
+      -0.0
+    ],
+    "best_valid_final_score": -1e+18,
+    "best_validation_avg_profit_factor": 1.1215834352498024,
+    "best_worst_validation_profit_factor": 0.7098442860690266,
+    "best_stoploss_to_roi_ratio": 0.9362520022918599,
+    "best_worst_month_loss": 0.0,
+    "best_valid_candidate_count": 0,
+    "last_improvement_flags": {
+      "official_best_updated": false,
+      "session_best_final_score_improved": false,
+      "nearest_candidate_improved": false,
+      "validation_avg_profit_factor_improved": false,
+      "worst_validation_profit_factor_improved": true,
+      "stoploss_to_roi_ratio_improved": false,
+      "worst_month_loss_reduced": false,
+      "valid_candidate_count_increased": false
+    }
+  },
+  "early_stop_checked_counters": {
+    "no_new_best": 19,
+    "no_monitored_improvement": 7,
+    "final_score_failures": 19,
+    "duplicate_strategies": 0
+  },
+  "version_statuses": [
+    {
+      "version": "v001",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v001",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -146.62445980120725,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": true,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": true,
+          "worst_validation_profit_factor_improved": true,
+          "stoploss_to_roi_ratio_improved": true,
+          "worst_month_loss_reduced": true,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "session_best_final_score_improved: session_best final_score 提升至 -146.624460",
+          "validation_avg_profit_factor_improved: validation_avg_profit_factor 提升至 0.906357",
+          "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.649192",
+          "stoploss_to_roi_ratio_improved: stoploss_to_roi_ratio 下降至 1.128316",
+          "worst_month_loss_reduced: worst month loss 降至 0.407372"
+        ],
+        "no_improvement_reasons": [
+          "nearest_candidate 未改善",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v002",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v002",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "未执行",
+      "static_check_status": "未启用",
+      "train_backtest_status": "跳过",
+      "validation_backtest_status": "跳过",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0
+    },
+    {
+      "version": "v003",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v003",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "跳过验证",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数严重超过目标上限",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": true,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": true,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "session_best_final_score_improved: session_best final_score 提升至 0.000000",
+          "worst_month_loss_reduced: worst month loss 降至 0.000000"
+        ],
+        "no_improvement_reasons": [
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v004",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v004",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -191.44826946202352,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": true,
+          "worst_validation_profit_factor_improved": true,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "validation_avg_profit_factor_improved: validation_avg_profit_factor 提升至 0.974910",
+          "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.650215"
+        ],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v005",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v005",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -204.71909245179612,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v006",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v006",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "跳过验证",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数低于目标下限",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v007",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v007",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -198.98637642305505,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v008",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v008",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -210.67135108812022,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": true,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": true,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "validation_avg_profit_factor_improved: validation_avg_profit_factor 提升至 1.029915",
+          "stoploss_to_roi_ratio_improved: stoploss_to_roi_ratio 下降至 0.936252"
+        ],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "worst_validation_profit_factor 未改善",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v009",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v009",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -311.3287114205843,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v010",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v010",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数略低于目标下限，仅作为候选参考",
+      "final_score": -134.59209211415995,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": true,
+          "worst_validation_profit_factor_improved": true,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "validation_avg_profit_factor_improved: validation_avg_profit_factor 提升至 1.121583",
+          "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.652549"
+        ],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v011",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v011",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "未执行",
+      "static_check_status": "未启用",
+      "train_backtest_status": "跳过",
+      "validation_backtest_status": "跳过",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0
+    },
+    {
+      "version": "v012",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v012",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "跳过验证",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数严重超过目标上限",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v013",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v013",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -252.42701449459125,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v014",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v014",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -344.7882929375661,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v015",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v015",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -202.7839819843083,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v016",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v016",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -258.9125640532226,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v017",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v017",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "未执行",
+      "static_check_status": "未启用",
+      "train_backtest_status": "跳过",
+      "validation_backtest_status": "跳过",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0
+    },
+    {
+      "version": "v018",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v018",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "跳过验证",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数严重超过目标上限",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v019",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v019",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "跳过验证",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间交易数低于目标下限",
+      "final_score": 0.0,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": false,
+        "full_reset": false,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": false,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "worst_validation_profit_factor 未改善",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    },
+    {
+      "version": "v020",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_085701_v020",
+      "advisor_status": "成功",
+      "codegen_status": "成功",
+      "syntax_check_status": "成功",
+      "static_check_status": "成功",
+      "train_backtest_status": "已训练回测",
+      "validation_backtest_status": "已完成",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "final_score<=0",
+      "final_score": -141.51487847739602,
+      "random_sample_status": "skipped",
+      "random_sample_count": 0,
+      "not_best_reason": "",
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "is_behavior_duplicate": false,
+      "early_stop_monitor_progress": {
+        "improved": true,
+        "full_reset": true,
+        "improvement_flags": {
+          "official_best_updated": false,
+          "session_best_final_score_improved": false,
+          "nearest_candidate_improved": false,
+          "validation_avg_profit_factor_improved": false,
+          "worst_validation_profit_factor_improved": true,
+          "stoploss_to_roi_ratio_improved": false,
+          "worst_month_loss_reduced": false,
+          "valid_candidate_count_increased": false
+        },
+        "improvements": [
+          "worst_validation_profit_factor_improved: worst_validation_profit_factor 改善至 0.709844"
+        ],
+        "no_improvement_reasons": [
+          "session_best final_score 未提升",
+          "validation_avg_profit_factor 未提升",
+          "stoploss_to_roi_ratio 未下降",
+          "nearest_candidate 未改善",
+          "worst_month_loss 未下降",
+          "valid_candidate_count 未增加"
+        ]
+      }
+    }
+  ]
+}
