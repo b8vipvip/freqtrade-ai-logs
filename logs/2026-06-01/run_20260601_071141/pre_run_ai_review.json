@@ -1,0 +1,74 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "无实质突破。上一轮 session_best (v002) 未通过 official_best 硬门槛：验证期平均利润为负(-0.31%)、平均 PF<1、最差验证月 PF=0.47。nearest_candidate (v003 from 0531 run) 训练期亏损(-0.75%)、PF=0.62，仅 Feb 验证盈利。iteration_stats 和 leaderboard 缺失，无法确认全部候选版本细节。",
+    "best_candidate": "v008 (tighten_entry_trigger): 训练期 22 笔交易、PF=1.03、winrate=86%、drawdown=0.38%，是唯一训练期微盈的版本。但验证期全部亏损(Apr PF=0.52, Mar PF=0.61)，说明过滤过紧导致样本不足且不稳健。",
+    "main_failure_patterns": [
+      "止损单吞噬 ROI 利润：每次止损约 1.88 USDT，而 ROI 单均利仅 0.22-0.27 USDT，1 笔止损需 7-8 笔 ROI 才能回本",
+      "DOGE/USDT 在所有版本中零交易，策略入场条件对 DOGE 完全无效",
+      "验证期一致性差：仅 Feb 盈利，Apr/Mar 均亏损，说明策略依赖特定市场状态",
+      "过度收紧入场后交易数降至 22，失去统计意义且验证更差",
+      "SOL/USDT 和 OP/USDT 在验证期持续亏损，止损比例偏高"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续收紧同一 MACD+Chop 入场条件——已证明 22 笔时验证崩溃",
+      "仅改类名/注释的等价变异",
+      "用 trailing stop 替代 fixed stoploss 作为主要退出",
+      "盲目增加 pair_specific_filter——DOGE 零交易问题不是过滤能解决的",
+      "ROI 表过于激进(如 0 分钟 1%)导致过早止盈压缩利润空间"
+    ],
+    "promising_directions_to_continue": [
+      "v008 的 MACD+Chop regime 框架本身 winrate 高(86%)，核心问题是止损/盈亏比，而非入场方向",
+      "BNB/USDT 和 BTC/USDT 在训练期表现稳定(100% winrate)，可作为锚定币种",
+      "Feb 验证期盈利(PF=1.47)表明趋势明确时策略有效，需增加 regime/volatility 过滤避免震荡期入场",
+      "减小止损绝对值或增加 ROI 利润空间来改善盈亏比"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate (MultiCoin_AI_Strategy_20260531_064426_v003)，因为它有 50 笔交易的统计基础且 Feb 验证盈利；同时参考 v008 的 regime filter 思路",
+    "preferred_mutation_types": [
+      "adjust_stoploss_ratio (缩小止损绝对值，如从 -1.9% 调至 -1.2~1.5%，或增加 ROI 目标)",
+      "add_volatility_contraction_filter (ATR 收缩/BB squeeze 作为入场前置条件，避免高波动期入场被扫止损)",
+      "add_market_regime_filter (ADX/趋势强度过滤，仅在趋势明确时入场)",
+      "relax_entry_for_doge (为 DOGE 适配入场条件，如降低 MACD 阈值或增加 momentum 入场)",
+      "improve_risk_reward (提高 ROI 目标或分层 ROI，让盈利单利润覆盖止损)"
+    ],
+    "forbidden_mutation_types": [
+      "tighten_entry_trigger (已证明压到 22 笔后验证崩溃)",
+      "add_trailing_stop_as_primary_exit",
+      "pair_specific_filter (当前问题不是某币种需要排除，而是入场质量和盈亏比)",
+      "equivalent_code_only_changes"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "盈亏比：单笔止损损失必须 <= 3倍单笔 ROI 利润(当前约 7-8 倍)",
+      "DOGE/USDT 零交易：入场条件需兼容 DOGE 的价格特征",
+      "验证期一致性：至少 2/3 验证期 PF > 0.7"
+    ],
+    "do_not_do": [
+      "不要把交易数压到 20 以下",
+      "不要用 bollinger['middle'] 或 bollinger['mid']",
+      "不要生成与 v003 或 v008 行为等价的代码",
+      "不要在没有 regime filter 的情况下放宽入场(会重蹈 v003 的 50 笔全亏覆辙)"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "bb_middle 必须用 (bb_upper + bb_lower) / 2 计算",
+      "至少一个 market regime 或 volatility contraction 过滤器(如 ADX>20、ATR 收缩、BB bandwidth 收窄)",
+      "止损值调整：stoploss 应在 -0.012 ~ -0.015 范围，或配合更高 ROI 目标",
+      "DOGE 兼容：入场条件中至少有一条路径能被 DOGE 的价格行为触发",
+      "entry_tag 必须标注实际入场逻辑名称"
+    ],
+    "avoid_equivalent_code": [
+      "不要只改 class name、注释、变量名而保持相同逻辑",
+      "不要复制 v003/v008 的 populate_entry_trend 而仅改阈值 ±0.001",
+      "不要添加永远为 True 的虚假过滤条件"
+    ],
+    "required_detectable_changes": [
+      "populate_indicators 中必须有新增指标计算(如 ADX、ATR ratio、BB bandwidth)",
+      "populate_entry_trend 中必须有可验证的新过滤条件引用这些新指标",
+      "stoploss 或 minimal_roi 的数值必须与父策略有可测量差异",
+      "至少一个入场条件的逻辑结构与父策略不同(不仅是阈值微调)"
+    ]
+  }
+}

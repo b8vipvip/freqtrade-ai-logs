@@ -1,0 +1,561 @@
+{
+  "items": [
+    {
+      "version": "v006",
+      "run_id": "20260601_071141",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v006",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260601_071141_v006.py",
+      "strategy_fingerprint": {
+        "hash": "c2462954640983ed6221",
+        "payload": {
+          "indicators": [
+            "adx",
+            "atr",
+            "bollinger",
+            "ema",
+            "macd",
+            "rsi",
+            "volume"
+          ],
+          "entry_conditions": [],
+          "entry_tags": [],
+          "minimal_roi": "{\n        \"0\": 0.025,\n        \"15\": 0.018,\n        \"35\": 0.012,\n        \"60\": 0.007,\n        \"120\": 0.004,\n    }",
+          "stoploss": "-0.035",
+          "trailing_stop": "False",
+          "use_exit_signal": "False",
+          "timeframe": "5m",
+          "pair_filters": [
+            "pair == \"btc/usdt\"",
+            "pair == \"doge/usdt\"",
+            "pair == \"eth/usdt\"",
+            "pair == \"sol/usdt\"",
+            "pair == \"xrp/usdt\""
+          ],
+          "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+          "cooldown_tokens": [
+            "cooldownperiod",
+            "maxdrawdown",
+            "protections",
+            "stoplossguard"
+          ]
+        }
+      },
+      "duplicate_report": {
+        "is_duplicate": true,
+        "strategy_fingerprint": {
+          "hash": "c2462954640983ed6221",
+          "payload": {
+            "indicators": [
+              "adx",
+              "atr",
+              "bollinger",
+              "ema",
+              "macd",
+              "rsi",
+              "volume"
+            ],
+            "entry_conditions": [],
+            "entry_tags": [],
+            "minimal_roi": "{\n        \"0\": 0.025,\n        \"15\": 0.018,\n        \"35\": 0.012,\n        \"60\": 0.007,\n        \"120\": 0.004,\n    }",
+            "stoploss": "-0.035",
+            "trailing_stop": "False",
+            "use_exit_signal": "False",
+            "timeframe": "5m",
+            "pair_filters": [
+              "pair == \"btc/usdt\"",
+              "pair == \"doge/usdt\"",
+              "pair == \"eth/usdt\"",
+              "pair == \"sol/usdt\"",
+              "pair == \"xrp/usdt\""
+            ],
+            "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+            "cooldown_tokens": [
+              "cooldownperiod",
+              "maxdrawdown",
+              "protections",
+              "stoplossguard"
+            ]
+          }
+        },
+        "matched_hash": "c2462954640983ed6221",
+        "matched_version": "v005",
+        "matched_strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v005",
+        "similarity_score": 1.0,
+        "reasons": [
+          "strategy_fingerprint 完全相同"
+        ],
+        "decision": "skip_backtest",
+        "repeated_fingerprint_fields": [
+          "indicators",
+          "minimal_roi",
+          "stoploss",
+          "trailing_stop",
+          "use_exit_signal",
+          "timeframe",
+          "pair_filters",
+          "protection_cooldown",
+          "cooldown_tokens"
+        ],
+        "mutation_type": "widen_entry_controlled",
+        "expected_changes": [
+          "至少改变一个可检测策略结构: entry_conditions, pair_filters, indicators, minimal_roi, stoploss, protection_cooldown"
+        ],
+        "detected_changes": [],
+        "why_rejected": "当前策略 fingerprint 与本次 run 已测试策略完全相同或相似度达到重复阈值，跳过正式 strategy.py 保存与回测。"
+      },
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "advisor_model_used": "claude-opus-4-7",
+      "codegen_model_used": "openai/gpt-5.3-codex",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 1,
+      "strategy_family": "",
+      "family_score": 0.0,
+      "family_failure_reason": "策略与本次 run 已测试策略高度重复",
+      "high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "trailing_failure": false
+    },
+    {
+      "version": "v012",
+      "run_id": "20260601_071141",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v012",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260601_071141_v012.py",
+      "strategy_fingerprint": {
+        "hash": "88eb506275b12504ff3d",
+        "payload": {
+          "indicators": [
+            "adx",
+            "atr",
+            "bollinger",
+            "ema",
+            "macd",
+            "rsi",
+            "volume"
+          ],
+          "entry_conditions": [],
+          "entry_tags": [],
+          "minimal_roi": "{\n        \"0\": 0.028,\n        \"30\": 0.018,\n        \"60\": 0.012,\n        \"120\": 0.006,\n        \"180\": 0.003,\n    }",
+          "stoploss": "-0.018",
+          "trailing_stop": "False",
+          "use_exit_signal": "False",
+          "timeframe": "5m",
+          "pair_filters": [],
+          "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+          "cooldown_tokens": [
+            "cooldownperiod",
+            "maxdrawdown",
+            "protections",
+            "stoplossguard"
+          ]
+        }
+      },
+      "duplicate_report": {
+        "is_duplicate": true,
+        "strategy_fingerprint": {
+          "hash": "88eb506275b12504ff3d",
+          "payload": {
+            "indicators": [
+              "adx",
+              "atr",
+              "bollinger",
+              "ema",
+              "macd",
+              "rsi",
+              "volume"
+            ],
+            "entry_conditions": [],
+            "entry_tags": [],
+            "minimal_roi": "{\n        \"0\": 0.028,\n        \"30\": 0.018,\n        \"60\": 0.012,\n        \"120\": 0.006,\n        \"180\": 0.003,\n    }",
+            "stoploss": "-0.018",
+            "trailing_stop": "False",
+            "use_exit_signal": "False",
+            "timeframe": "5m",
+            "pair_filters": [],
+            "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+            "cooldown_tokens": [
+              "cooldownperiod",
+              "maxdrawdown",
+              "protections",
+              "stoplossguard"
+            ]
+          }
+        },
+        "matched_hash": "88eb506275b12504ff3d",
+        "matched_version": "v010",
+        "matched_strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v010",
+        "similarity_score": 1.0,
+        "reasons": [
+          "strategy_fingerprint 完全相同"
+        ],
+        "decision": "skip_backtest",
+        "repeated_fingerprint_fields": [
+          "indicators",
+          "minimal_roi",
+          "stoploss",
+          "trailing_stop",
+          "use_exit_signal",
+          "timeframe",
+          "protection_cooldown",
+          "cooldown_tokens"
+        ],
+        "mutation_type": "widen_entry_controlled",
+        "expected_changes": [
+          "populate_indicators 必须计算指标: adx",
+          "至少改变一个可检测策略结构: entry_conditions, pair_filters, indicators, minimal_roi, stoploss, protection_cooldown"
+        ],
+        "detected_changes": [],
+        "why_rejected": "当前策略 fingerprint 与本次 run 已测试策略完全相同或相似度达到重复阈值，跳过正式 strategy.py 保存与回测。"
+      },
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "advisor_model_used": "claude-opus-4-7",
+      "codegen_model_used": "openai/gpt-5.3-codex",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 1,
+      "strategy_family": "",
+      "family_score": 0.0,
+      "family_failure_reason": "策略与本次 run 已测试策略高度重复",
+      "high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "trailing_failure": false
+    },
+    {
+      "version": "v013",
+      "run_id": "20260601_071141",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v013",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260601_071141_v013.py",
+      "strategy_fingerprint": {
+        "hash": "88eb506275b12504ff3d",
+        "payload": {
+          "indicators": [
+            "adx",
+            "atr",
+            "bollinger",
+            "ema",
+            "macd",
+            "rsi",
+            "volume"
+          ],
+          "entry_conditions": [],
+          "entry_tags": [],
+          "minimal_roi": "{\n        \"0\": 0.028,\n        \"30\": 0.018,\n        \"60\": 0.012,\n        \"120\": 0.006,\n        \"180\": 0.003,\n    }",
+          "stoploss": "-0.018",
+          "trailing_stop": "False",
+          "use_exit_signal": "False",
+          "timeframe": "5m",
+          "pair_filters": [],
+          "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+          "cooldown_tokens": [
+            "cooldownperiod",
+            "maxdrawdown",
+            "protections",
+            "stoplossguard"
+          ]
+        }
+      },
+      "duplicate_report": {
+        "is_duplicate": true,
+        "strategy_fingerprint": {
+          "hash": "88eb506275b12504ff3d",
+          "payload": {
+            "indicators": [
+              "adx",
+              "atr",
+              "bollinger",
+              "ema",
+              "macd",
+              "rsi",
+              "volume"
+            ],
+            "entry_conditions": [],
+            "entry_tags": [],
+            "minimal_roi": "{\n        \"0\": 0.028,\n        \"30\": 0.018,\n        \"60\": 0.012,\n        \"120\": 0.006,\n        \"180\": 0.003,\n    }",
+            "stoploss": "-0.018",
+            "trailing_stop": "False",
+            "use_exit_signal": "False",
+            "timeframe": "5m",
+            "pair_filters": [],
+            "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+            "cooldown_tokens": [
+              "cooldownperiod",
+              "maxdrawdown",
+              "protections",
+              "stoplossguard"
+            ]
+          }
+        },
+        "matched_hash": "88eb506275b12504ff3d",
+        "matched_version": "v010",
+        "matched_strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v010",
+        "similarity_score": 1.0,
+        "reasons": [
+          "strategy_fingerprint 完全相同"
+        ],
+        "decision": "skip_backtest",
+        "repeated_fingerprint_fields": [
+          "indicators",
+          "minimal_roi",
+          "stoploss",
+          "trailing_stop",
+          "use_exit_signal",
+          "timeframe",
+          "protection_cooldown",
+          "cooldown_tokens"
+        ],
+        "mutation_type": "widen_entry_controlled",
+        "expected_changes": [
+          "populate_indicators 必须计算指标: adx",
+          "至少改变一个可检测策略结构: entry_conditions, pair_filters, indicators, minimal_roi, stoploss, protection_cooldown"
+        ],
+        "detected_changes": [],
+        "why_rejected": "当前策略 fingerprint 与本次 run 已测试策略完全相同或相似度达到重复阈值，跳过正式 strategy.py 保存与回测。"
+      },
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "advisor_model_used": "claude-opus-4-7",
+      "codegen_model_used": "deepseek-v4-pro",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 1,
+      "strategy_family": "",
+      "family_score": 0.0,
+      "family_failure_reason": "策略与本次 run 已测试策略高度重复",
+      "high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "trailing_failure": false
+    },
+    {
+      "version": "v015",
+      "run_id": "20260601_071141",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v015",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260601_071141_v015.py",
+      "strategy_fingerprint": {
+        "hash": "165a6d541408a5580e5c",
+        "payload": {
+          "indicators": [
+            "adx",
+            "atr",
+            "bollinger",
+            "ema",
+            "macd",
+            "rsi",
+            "volume"
+          ],
+          "entry_conditions": [],
+          "entry_tags": [],
+          "minimal_roi": "{\n        \"0\": 0.025,\n        \"25\": 0.016,\n        \"50\": 0.01,\n        \"90\": 0.005,\n        \"150\": 0.002,\n    }",
+          "stoploss": "-0.016",
+          "trailing_stop": "False",
+          "use_exit_signal": "False",
+          "timeframe": "5m",
+          "pair_filters": [],
+          "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+          "cooldown_tokens": [
+            "cooldownperiod",
+            "maxdrawdown",
+            "protections",
+            "stoplossguard"
+          ]
+        }
+      },
+      "duplicate_report": {
+        "is_duplicate": true,
+        "strategy_fingerprint": {
+          "hash": "165a6d541408a5580e5c",
+          "payload": {
+            "indicators": [
+              "adx",
+              "atr",
+              "bollinger",
+              "ema",
+              "macd",
+              "rsi",
+              "volume"
+            ],
+            "entry_conditions": [],
+            "entry_tags": [],
+            "minimal_roi": "{\n        \"0\": 0.025,\n        \"25\": 0.016,\n        \"50\": 0.01,\n        \"90\": 0.005,\n        \"150\": 0.002,\n    }",
+            "stoploss": "-0.016",
+            "trailing_stop": "False",
+            "use_exit_signal": "False",
+            "timeframe": "5m",
+            "pair_filters": [],
+            "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+            "cooldown_tokens": [
+              "cooldownperiod",
+              "maxdrawdown",
+              "protections",
+              "stoplossguard"
+            ]
+          }
+        },
+        "matched_hash": "165a6d541408a5580e5c",
+        "matched_version": "v014",
+        "matched_strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v014",
+        "similarity_score": 1.0,
+        "reasons": [
+          "strategy_fingerprint 完全相同"
+        ],
+        "decision": "skip_backtest",
+        "repeated_fingerprint_fields": [
+          "indicators",
+          "minimal_roi",
+          "stoploss",
+          "trailing_stop",
+          "use_exit_signal",
+          "timeframe",
+          "protection_cooldown",
+          "cooldown_tokens"
+        ],
+        "mutation_type": "widen_entry_controlled",
+        "expected_changes": [
+          "populate_indicators 必须计算指标: adx",
+          "至少改变一个可检测策略结构: entry_conditions, pair_filters, indicators, minimal_roi, stoploss, protection_cooldown"
+        ],
+        "detected_changes": [],
+        "why_rejected": "当前策略 fingerprint 与本次 run 已测试策略完全相同或相似度达到重复阈值，跳过正式 strategy.py 保存与回测。"
+      },
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "advisor_model_used": "claude-opus-4-7",
+      "codegen_model_used": "openai/gpt-5.3-codex",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 1,
+      "strategy_family": "",
+      "family_score": 0.0,
+      "family_failure_reason": "策略与本次 run 已测试策略高度重复",
+      "high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "trailing_failure": false
+    },
+    {
+      "version": "v017",
+      "run_id": "20260601_071141",
+      "strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v017",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260601_071141_v017.py",
+      "strategy_fingerprint": {
+        "hash": "2b2236fc53bb448bf613",
+        "payload": {
+          "indicators": [
+            "adx",
+            "atr",
+            "bollinger",
+            "ema",
+            "macd",
+            "rsi",
+            "volume"
+          ],
+          "entry_conditions": [],
+          "entry_tags": [],
+          "minimal_roi": "{\n        \"0\": 0.022,\n        \"30\": 0.014,\n        \"60\": 0.009,\n        \"120\": 0.005,\n        \"180\": 0.002,\n    }",
+          "stoploss": "-0.015",
+          "trailing_stop": "False",
+          "use_exit_signal": "False",
+          "timeframe": "5m",
+          "pair_filters": [
+            "pair == \"doge/usdt\""
+          ],
+          "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+          "cooldown_tokens": [
+            "cooldownperiod",
+            "maxdrawdown",
+            "protections",
+            "stoplossguard"
+          ]
+        }
+      },
+      "duplicate_report": {
+        "is_duplicate": true,
+        "strategy_fingerprint": {
+          "hash": "2b2236fc53bb448bf613",
+          "payload": {
+            "indicators": [
+              "adx",
+              "atr",
+              "bollinger",
+              "ema",
+              "macd",
+              "rsi",
+              "volume"
+            ],
+            "entry_conditions": [],
+            "entry_tags": [],
+            "minimal_roi": "{\n        \"0\": 0.022,\n        \"30\": 0.014,\n        \"60\": 0.009,\n        \"120\": 0.005,\n        \"180\": 0.002,\n    }",
+            "stoploss": "-0.015",
+            "trailing_stop": "False",
+            "use_exit_signal": "False",
+            "timeframe": "5m",
+            "pair_filters": [
+              "pair == \"doge/usdt\""
+            ],
+            "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+            "cooldown_tokens": [
+              "cooldownperiod",
+              "maxdrawdown",
+              "protections",
+              "stoplossguard"
+            ]
+          }
+        },
+        "matched_hash": "2b2236fc53bb448bf613",
+        "matched_version": "v016",
+        "matched_strategy_class": "MultiCoin_AI_Strategy_20260601_071141_v016",
+        "similarity_score": 1.0,
+        "reasons": [
+          "strategy_fingerprint 完全相同"
+        ],
+        "decision": "skip_backtest",
+        "repeated_fingerprint_fields": [
+          "indicators",
+          "minimal_roi",
+          "stoploss",
+          "trailing_stop",
+          "use_exit_signal",
+          "timeframe",
+          "pair_filters",
+          "protection_cooldown",
+          "cooldown_tokens"
+        ],
+        "mutation_type": "widen_entry_controlled",
+        "expected_changes": [
+          "populate_indicators 必须计算指标: ema50, adx",
+          "至少改变一个可检测策略结构: entry_conditions, pair_filters, indicators, minimal_roi, stoploss, protection_cooldown"
+        ],
+        "detected_changes": [],
+        "why_rejected": "当前策略 fingerprint 与本次 run 已测试策略完全相同或相似度达到重复阈值，跳过正式 strategy.py 保存与回测。"
+      },
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "策略与本次 run 已测试策略高度重复",
+      "final_score": 0.0,
+      "advisor_model_used": "claude-opus-4-7",
+      "codegen_model_used": "openai/gpt-5.3-codex",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 1,
+      "strategy_family": "",
+      "family_score": 0.0,
+      "family_failure_reason": "策略与本次 run 已测试策略高度重复",
+      "high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "trailing_failure": false
+    }
+  ]
+}
