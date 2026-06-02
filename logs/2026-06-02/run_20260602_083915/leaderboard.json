@@ -1,0 +1,207 @@
+{
+  "items": [
+    {
+      "version": "v001",
+      "run_id": "20260602_083915",
+      "strategy_class": "MultiCoin_AI_Strategy_20260602_083915_v001",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260602_083915_v001.py",
+      "code_hash": "8f639b3351adb344675dfc9063b53624a7a5e58edd7d115eb3d11207fb450f85",
+      "created_at": "2026-06-02T08:42:34.351954",
+      "final_score": 0,
+      "strategy_family": "",
+      "family_score": -0.01346974695,
+      "family_failure_reason": "Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+      "train_profit_pct": -0.089798313,
+      "train_profit_abs": -0.89798313,
+      "avg_validation_profit_pct": 0.0,
+      "validation_avg_profit_pct": 0.0,
+      "validation_worst_profit_pct": 0.0,
+      "validation_worst_profit_factor": 0.0,
+      "validation_worst_month": "",
+      "validation_max_trades": 0,
+      "validation_trade_count_ratio_to_train": 0.0,
+      "stoploss_to_roi_ratio": 999.0,
+      "avg_validation_profit_factor": 0.0,
+      "max_validation_drawdown_pct": 0.0,
+      "validation_metrics": [],
+      "trade_under_min": false,
+      "cannot_be_official_best_unless_validation_strong": false,
+      "validation_strong": false,
+      "trade_count_warning": "",
+      "high_frequency_failure": false,
+      "severe_high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "zero_trade_failure": false,
+      "low_trade_failure": false,
+      "runtime_error_failure": false,
+      "stoploss_to_roi_failure": true,
+      "trailing_failure": false,
+      "profit_factor": 0.0,
+      "max_drawdown_pct": 0.08979831299999431,
+      "total_trades": 1,
+      "is_overfit": true,
+      "is_best": false,
+      "is_valid": false,
+      "invalid_reason": "训练区间交易数低于目标下限",
+      "overfit_result": {
+        "is_overfit": true
+      },
+      "features": {
+        "minimal_roi": "{\n        \"0\": 0.035,\n        \"20\": 0.025,\n        \"45\": 0.018,\n        \"80\": 0.012,\n        \"150\": 0.006,\n    }",
+        "stoploss": "-0.015",
+        "trailing_stop": "True",
+        "use_exit_signal": "False",
+        "timeframe": "5m",
+        "indicators": [
+          "adx",
+          "atr",
+          "bollinger",
+          "ema",
+          "macd",
+          "rsi",
+          "volume"
+        ],
+        "entry_conditions": [],
+        "entry_tags": [],
+        "pair_filters": [
+          "pair == \"btc/usdt\"",
+          "pair == \"doge/usdt\"",
+          "pair == \"eth/usdt\"",
+          "pair == \"op/usdt\"",
+          "pair == \"sol/usdt\"",
+          "pair == \"xrp/usdt\""
+        ],
+        "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+        "cooldown_tokens": [
+          "cooldownperiod",
+          "maxdrawdown",
+          "protections",
+          "stoplossguard"
+        ]
+      },
+      "strategy_fingerprint": {
+        "hash": "64e1e59cb97fda436ee2",
+        "payload": {
+          "indicators": [
+            "adx",
+            "atr",
+            "bollinger",
+            "ema",
+            "macd",
+            "rsi",
+            "volume"
+          ],
+          "entry_conditions": [],
+          "entry_tags": [],
+          "minimal_roi": "{\n        \"0\": 0.035,\n        \"20\": 0.025,\n        \"45\": 0.018,\n        \"80\": 0.012,\n        \"150\": 0.006,\n    }",
+          "stoploss": "-0.015",
+          "trailing_stop": "True",
+          "use_exit_signal": "False",
+          "timeframe": "5m",
+          "pair_filters": [
+            "pair == \"btc/usdt\"",
+            "pair == \"doge/usdt\"",
+            "pair == \"eth/usdt\"",
+            "pair == \"op/usdt\"",
+            "pair == \"sol/usdt\"",
+            "pair == \"xrp/usdt\""
+          ],
+          "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+          "cooldown_tokens": [
+            "cooldownperiod",
+            "maxdrawdown",
+            "protections",
+            "stoplossguard"
+          ]
+        }
+      },
+      "duplicate_report": {
+        "is_duplicate": false,
+        "strategy_fingerprint": {
+          "hash": "64e1e59cb97fda436ee2",
+          "payload": {
+            "indicators": [
+              "adx",
+              "atr",
+              "bollinger",
+              "ema",
+              "macd",
+              "rsi",
+              "volume"
+            ],
+            "entry_conditions": [],
+            "entry_tags": [],
+            "minimal_roi": "{\n        \"0\": 0.035,\n        \"20\": 0.025,\n        \"45\": 0.018,\n        \"80\": 0.012,\n        \"150\": 0.006,\n    }",
+            "stoploss": "-0.015",
+            "trailing_stop": "True",
+            "use_exit_signal": "False",
+            "timeframe": "5m",
+            "pair_filters": [
+              "pair == \"btc/usdt\"",
+              "pair == \"doge/usdt\"",
+              "pair == \"eth/usdt\"",
+              "pair == \"op/usdt\"",
+              "pair == \"sol/usdt\"",
+              "pair == \"xrp/usdt\""
+            ],
+            "protection_cooldown": "return [\n{\n\"method\": \"CooldownPeriod\",\n\"stop_duration_candles\": 4,\n},\n{\n\"method\": \"MaxDrawdown\",\n\"lookback_period_candles\": 72,\n\"trade_limit\": 6,\n\"stop_duration_candles\": 12,\n\"max_allowed_drawdown\": 0.01,\n},\n{\n\"method\": \"StoplossGuard\",\n\"lookback_period_candles\": 48,\n\"trade_limit\": 1,\n\"stop_duration_candles\": 24,\n\"only_per_pair\": True,\n},\n]",
+            "cooldown_tokens": [
+              "cooldownperiod",
+              "maxdrawdown",
+              "protections",
+              "stoplossguard"
+            ]
+          }
+        },
+        "matched_hash": "",
+        "matched_version": "",
+        "matched_strategy_class": "",
+        "similarity_score": 0.0,
+        "reasons": [],
+        "decision": "continue",
+        "repeated_fingerprint_fields": [],
+        "mutation_type": "add_entry_filter",
+        "expected_changes": [
+          "populate_entry_trend 中必须新增/收紧可检测 entry 条件",
+          "populate_indicators 必须计算指标: adx",
+          "至少改变一个可检测策略结构: entry_conditions, pair_filters, indicators, minimal_roi, stoploss, protection_cooldown"
+        ],
+        "detected_changes": [],
+        "why_rejected": ""
+      },
+      "behavior_duplicate": {
+        "is_duplicate": false,
+        "duplicate_with": "MultiCoin_AI_Strategy_20260531_014140_v001",
+        "reason": ""
+      },
+      "duplicate_strategy_failure": false,
+      "backtest_result_missing_failure": false,
+      "zip_mismatch_failure": false,
+      "not_best_reason": "",
+      "official_best_hard_gate_reasons": [
+        "official best 硬门槛未通过：train_profit_total_pct=-0.0898 < 0",
+        "official best 硬门槛未通过：train_profit_factor=0.0000 < 1.0",
+        "official best 硬门槛未通过：avg_validation_profit_factor=0.0000 < 1.0",
+        "official best 硬门槛未通过：worst_validation_profit_factor=0.0000 < 0.7"
+      ],
+      "spec_hash": "2df553de3c0a056c44a8adb60fd9e6c401cf75c791ea0fb6829c7c4c84b84b13",
+      "failure_reason": "Profit factor 低于 baseline；固定止损亏损吞噬 ROI 收益。",
+      "reason_detail": [
+        "训练区间 PF 低于 MultiCoin_AI_Strategy_20260601_110758_v001：0.0000 < 0.5695",
+        "训练区间 PF 低于目标：0.0000 < 0.5600",
+        "final_score=0.0000，未通过评分门槛"
+      ],
+      "avoid_next": "降低高频宽松入场，控制回撤与止损亏损。",
+      "roi_profit_abs": 0.0,
+      "stop_loss_profit_abs": -0.89798313,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0,
+      "advisor_model_used": "gpt-5.5",
+      "codegen_model_used": "gpt-5.4",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 1
+    }
+  ]
+}
