@@ -1,0 +1,92 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "上一轮没有产生实质突破：valid_strategy_count=0，new_best_update_count=0，所有完成回测版本均 final_score<=0 或因交易数低于下限/重复策略失效。leaderboard.json 缺失且 pair_leaderboard 内容为空值，因此无法从排行榜确认更细的全局排序，只能依据 iteration_stats 与 last_run_summary 复盘。",
+    "best_candidate": "上一轮可参考 v002/v003 的验证侧改善信号，但不能视为 best：v002 提升了 validation_avg_profit_factor 至约 0.835、worst_validation_profit_factor 至约 0.530，并降低 worst month loss；v003 validation_avg_profit_factor 约 0.902 但最差验证未改善。真正更适合作为父级参考的仍是 nearest_candidate MultiCoin_AI_Strategy_20260601_110758_v001：训练交易数 45，验证交易数 44~55，交易数处于理想区间，但固定止损吞噬 ROI、valid_mar_2026 拖累明显。",
+    "main_failure_patterns": [
+      "没有任何候选通过 final_score，说明当前结构仍无法同时满足训练盈利、验证稳定性和风险约束。",
+      "固定止损亏损持续吞噬 ROI 收益，nearest_candidate 训练 stoploss_to_roi_ratio 约 1.76，上一轮 v001 约 1.82。",
+      "BTC/USDT 与 OP/USDT 在上一轮 v001 中亏损最重，且 stoploss_to_roi_ratio 分别约 3.74 和 4.78，是主要风险来源。",
+      "SOL/USDT 交易数较多但仍负收益，说明单纯增加或保留中性动量信号不能解决低质量入场。",
+      "v004/v005 因 duplicate_strategy 被跳过，说明 mutation/codegen 存在等价实现风险。",
+      "v006 训练交易数低于目标下限，说明过度过滤会直接失效。",
+      "验证月份表现不稳定，valid_mar_2026 是 nearest_candidate 的最差验证月。"
+    ],
+    "dangerous_directions_to_avoid": [
+      "不要把全局入场条件大幅收紧到交易数低于 20；目标必须保持 20~60，理想 25~45。",
+      "不要生成与上一轮 v004/v005 类似的等价代码或只改类名、注释、变量名。",
+      "不要简单用 trailing stop 替代 fixed stoploss；当前问题是低质量入场和止损单过多，不是让 trailing 成为主要亏损来源。",
+      "不要盲目提高频率，训练交易数超过 60 没有意义。",
+      "不要继续复制上一轮 avoid_choppy_market_filter 的等价实现；如果使用 regime/choppy/volatility filter，必须改变指标、阈值或应用位置。",
+      "不要对所有交易对一刀切强过滤，容易把 DOGE/BNB/SOL 的可用交易一起压掉。"
+    ],
+    "promising_directions_to_continue": [
+      "以 nearest_candidate 的 45 笔训练交易结构为基础，优先减少 BTC/OP 的止损型入场，而不是重写完整策略。",
+      "继续 trend_following + market regime/choppy/volatility contraction filter，但必须采用与上一轮不同的可检测实现。",
+      "使用 pair-specific thresholds：对 BTC/USDT、OP/USDT 更严格，对 BNB/SOL 保持适度，对 DOGE 避免因样本过少做过度结论。",
+      "增加入场质量过滤而非增加退出复杂度，例如 EMA 斜率、ADX/DI、ATR 压缩后突破、成交量确认、布林带宽过滤。",
+      "重点降低 stoploss_to_roi_ratio，并把训练交易数维持在 25~45 或至少 20~60。"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate",
+    "preferred_mutation_types": [
+      "add_regime_filter_with_new_detectable_logic",
+      "volatility_contraction_breakout_filter",
+      "pair_specific_entry_threshold_for_BTC_OP",
+      "tighten_bad_pair_entry_only",
+      "trend_following_entry_quality_filter",
+      "reduce_stoploss_prone_entries"
+    ],
+    "forbidden_mutation_types": [
+      "duplicate_or_equivalent_strategy",
+      "class_name_only_change",
+      "comment_only_change",
+      "variable_rename_only_change",
+      "global_overfilter_below_20_trades",
+      "high_frequency_entry_relaxation_above_60_trades",
+      "trailing_stop_as_main_risk_control",
+      "blind_full_strategy_rewrite_without_parent_signal"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "必须降低固定止损吞噬 ROI 的问题，尤其关注 BTC/USDT、OP/USDT 的止损型入场。",
+      "必须保持训练交易数不低于 20，优先落在 25~45。",
+      "必须让新增过滤条件真实进入 populate_entry_trend 的入场条件。",
+      "必须让新增指标真实在 populate_indicators 中计算。",
+      "必须避免与上一轮 v004/v005 重复。",
+      "必须针对 valid_mar_2026 的弱表现做更稳健的入场过滤，而不是只优化 2026-05 训练期。"
+    ],
+    "do_not_do": [
+      "不要覆盖 official_best、historical_best、best_strategy.json、nearest_candidate.json；所有 best 判断仍以真实回测指标为准。",
+      "不要根据本复盘臆造 leaderboard 排名，因为上一轮 leaderboard.json 缺失。",
+      "不要把交易数压到 20 以下。",
+      "不要把交易数推高到 60 以上。",
+      "不要直接读取 bollinger['middle'] 或 bollinger['mid']。",
+      "不要使用与上一轮 choppy filter 等价的条件组合。"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "以 nearest_candidate 的核心结构为父级参考，保留其大致交易频率框架。",
+      "实现一个可检测的新 market regime 或 volatility contraction filter，例如基于 ADX/DI、EMA slope、ATR ratio、BB width 或 volume confirmation 的组合。",
+      "对 BTC/USDT、OP/USDT 添加更严格的 pair-specific 入场门槛，用于减少高 stoploss_to_roi_ratio 的入场。",
+      "保留 BNB/SOL 的适度交易机会，避免全局过滤导致交易数低于 20。",
+      "如果使用 Bollinger Bands，bb_middle 必须由 bb_upper 与 bb_lower 计算：bb_middle = (bb_upper + bb_lower) / 2。",
+      "在 entry tag 或条件结构上体现本轮 mutation 的真实差异，便于行为检测。"
+    ],
+    "avoid_equivalent_code": [
+      "不得只新增未参与入场判断的指标列。",
+      "不得只改变 class name、注释、变量名或参数名。",
+      "不得把上一轮过滤条件换一种写法但逻辑等价。",
+      "不得新增始终为 True 或几乎不生效的过滤条件。",
+      "不得新增导致所有交易对同时大幅减少交易的硬阈值。"
+    ],
+    "required_detectable_changes": [
+      "populate_indicators 中必须出现新增或修改后的 regime/volatility/trend quality 指标计算。",
+      "populate_entry_trend 中必须实际引用新增指标，并改变 entry_conditions。",
+      "必须出现 pair-specific 条件分支或基于 pair 的阈值映射，重点处理 BTC/USDT 与 OP/USDT。",
+      "必须能从代码中看出目标是减少止损型入场，而不是提高交易频率。",
+      "回测后应检查训练交易数是否保持 20~60、理想 25~45，并重点观察 stoploss_to_roi_ratio、worst_validation_profit_factor 和 valid_mar_2026。"
+    ]
+  }
+}
