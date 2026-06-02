@@ -1,0 +1,91 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "上一轮没有实质突破。唯一版本 v001 训练仅 1 笔交易，低于目标下限 20，验证被跳过，final_score=0，不能作为 best 判断依据。其失败主要来自过度过滤导致交易数塌缩，同时唯一交易为 SOL/USDT 止损亏损，未能验证对长期 nearest_candidate 的改进。",
+    "best_candidate": "最值得参考的仍是 last_run_summary 中的 nearest_candidate：MultiCoin_AI_Strategy_20260601_110758_v001。它训练交易数 45，处于理想区间，训练 PF=0.5695 接近当前最低目标 0.56，最大回撤约 0.98%，验证 2 月盈利且 PF=1.551，但训练和 3/4 月仍亏损，主要问题是 fixed stoploss 吞噬 ROI，stoploss_to_roi_ratio=1.7558。上一轮 v001 只适合作为反例：add_entry_filter 过度收紧后交易数从可用区间压到 1。",
+    "main_failure_patterns": [
+      "过度 add_entry_filter 或过强 regime/ADX/volatility 条件会把交易数压到 20 以下，上一轮仅 1 笔导致验证跳过。",
+      "固定止损亏损继续吞噬 ROI 收益：上一轮单笔交易 roi_profit_abs=0、stop_loss_profit_abs=-0.897983；nearest_candidate 也有 roi_profit_abs=9.6659、stop_loss_profit_abs=-16.9718。",
+      "PF 低且盈利为负，训练未通过 official best 硬门槛。",
+      "上一轮 pair_leaderboard 内容为空值，无法据此判断各交易对长期强弱；只能参考 round_history 中 SOL 单笔亏损和 nearest_candidate 的聚合指标，存在币种归因不确定性。",
+      "上一轮 strategy_fingerprint 检测到 entry_conditions/entry_tags 为空，说明可检测落地可能不足或实际入场结构未被 fingerprint 捕捉，后续必须确保 entry 条件可检测。"
+    ],
+    "dangerous_directions_to_avoid": [
+      "继续简单叠加 add_entry_filter，尤其是多个强过滤同时使用，容易再次把交易数压到 20 以下。",
+      "用 trailing_stop 直接替代 fixed stoploss 或让 trailing 成为主要亏损来源；当前问题是低质量入场和止损吞噬 ROI，不是单纯缺少 trailing。",
+      "进一步提高 ROI 门槛或大幅缩短/收紧止损，可能使本来 PF 接近门槛的 near miss 更难盈利或交易更少。",
+      "引入明显高频逻辑或过度放宽到训练交易数超过 60，不符合本轮目标。",
+      "只改类名、注释、变量名、tag 文本、provider 风格，或生成与父策略行为等价的代码。",
+      "继续使用上一轮导致交易数塌缩的同类强 add_entry_filter 组合。"
+    ],
+    "promising_directions_to_continue": [
+      "以 nearest_candidate 为主参考，在保留 45 笔左右交易骨架的前提下做轻量风险过滤，而不是重写完整结构。",
+      "围绕 trend_following + market regime/choppy/volatility contraction filter 做温和改动，目标是减少震荡区假突破和止损单。",
+      "优先针对 worst month valid_mar_2026 的 choppy 行情风险做过滤，但过滤强度必须控制，预期训练交易数保持 25~45。",
+      "使用 pair_specific_entry_threshold 或 tag_specific_filter 对明显低质量场景做小幅阈值差异化，而不是全局强过滤。",
+      "优化入场质量以降低 stoploss_to_roi_ratio，目标是让止损亏损不再超过 ROI 收益，同时保留足够交易数。"
+    ]
+  },
+  "next_run_guidance": {
+    "preferred_parent": "nearest_candidate",
+    "preferred_mutation_types": [
+      "light_regime_filter",
+      "avoid_choppy_market_filter",
+      "volatility_contraction_filter",
+      "pair_specific_entry_threshold",
+      "tag_specific_filter",
+      "mild_entry_trigger_rebalance",
+      "risk_control_near_miss_refinement"
+    ],
+    "forbidden_mutation_types": [
+      "strong_add_entry_filter",
+      "stack_multiple_filters",
+      "full_strategy_rewrite",
+      "high_frequency_entry_expansion",
+      "trailing_replaces_fixed_stoploss",
+      "roi_only_tightening",
+      "class_name_only_change",
+      "comment_or_variable_rename_only",
+      "behavior_equivalent_mutation"
+    ],
+    "trade_count_target": "20~60，理想 25~45",
+    "must_fix": [
+      "必须避免上一轮交易数塌缩问题，预计训练交易数应从 nearest_candidate 的 45 笔轻微下降或持平，不能低于 20，最好保持 25~45。",
+      "必须降低 fixed stoploss 吞噬 ROI 的程度，重点减少低质量入场导致的止损单，而不是盲目提高交易频率。",
+      "必须让新增 regime/choppy/volatility 指标和 entry 条件真实参与 populate_entry_trend，并可被检测到。",
+      "必须保留五个固定交易对 BTC/USDT、OP/USDT、SOL/USDT、BNB/USDT、DOGE/USDT，不要依据空 pair_leaderboard 做未经验证的剔除。",
+      "必须基于真实回测指标判断 best，本复盘不得覆盖 official_best、historical_best、best_strategy.json、nearest_candidate.json。"
+    ],
+    "do_not_do": [
+      "不要因为上一轮失败而继续更强地过滤入场；上一轮已经证明强过滤会导致 1 笔交易和验证跳过。",
+      "不要把目标交易数降到 20 以下，也不要放宽到超过 60；若预计 20~24，代码实现必须避免额外隐性过滤。",
+      "不要根据上一轮单笔 SOL 亏损就彻底禁用 SOL，样本太少且 pair_leaderboard 无有效数据。",
+      "不要把 validation 跳过产生的 0 指标误判为改善。",
+      "不要简单调大 trailing 或开启更激进 trailing 作为主修复方案。"
+    ]
+  },
+  "codegen_guidance": {
+    "must_implement": [
+      "从 nearest_candidate 的行为结构出发做小幅、可检测改动，优先实现温和 market regime/choppy/volatility contraction 过滤。",
+      "populate_indicators 必须真实计算所需指标，例如 ADX 或 DI、ATR/ATR ratio、EMA trend、Bollinger bandwidth 或 rolling volatility，并在 populate_entry_trend 中实际引用。",
+      "新增过滤条件必须是轻量门槛，避免同时要求过多强条件；目标是减少震荡假突破，不是把信号压到极少。",
+      "如使用 Bollinger，禁止直接读取 bollinger['middle'] 或 bollinger['mid']；只能读取 upper/lower，并用 bb_middle = (bb_upper + bb_lower) / 2 计算。",
+      "保留固定止损为主要风险边界，不要用 trailing_stop 作为替代 fixed stoploss 的核心改动。",
+      "确保 entry_conditions、indicators、pair_filters、minimal_roi、stoploss 或 protections 至少有一类产生真实可检测变化，且不是只改名称。"
+    ],
+    "avoid_equivalent_code": [
+      "不要只新增未使用的指标列。",
+      "不要只改 enter_tag 名称而不改变入场布尔条件。",
+      "不要只调整注释、空格、变量名、class name。",
+      "不要写入永远为 true 或与父策略等价的过滤条件。",
+      "不要新增被短路逻辑覆盖、实际不影响 enter_long 的条件。",
+      "不要重复上一轮导致极低交易数的强过滤实现。"
+    ],
+    "required_detectable_changes": [
+      "populate_indicators 中必须新增或调整至少一个 regime/choppy/volatility 相关指标计算。",
+      "populate_entry_trend 中必须出现至少一个新增或修改后的真实条件，并直接影响 enter_long。",
+      "必须能在 fingerprint 中体现 entry_conditions 或 indicators 的变化。",
+      "若做 pair_specific_entry_threshold，必须在不同 pair 上有明确不同阈值或条件，且实际参与入场逻辑。",
+      "必须能从代码结构上看出交易数控制意图：避免强过滤叠加，预期保持 20~60，理想 25~45。"
+    ]
+  }
+}
