@@ -1,0 +1,92 @@
+{
+  "strategy_class": "MultiCoin_AI_Strategy_20260601_110758_v001",
+  "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260601_110758_v001.py",
+  "strategy_family": "",
+  "family_score": -199.1020537263876,
+  "why_nearest": [
+    "训练交易数在目标范围内",
+    "有一个验证区间盈利且 PF > 1",
+    "但训练区间和其他验证区间不如 historical_best",
+    "仅作为后续优化参考，不覆盖正式 best"
+  ],
+  "train_metrics": {
+    "profit_total_abs": -7.3059280200000005,
+    "profit_total_pct": -0.7305928020000001,
+    "profit_factor": 0.5695250081183282,
+    "max_drawdown_pct": 0.9761159166146239,
+    "total_trades": 45,
+    "roi_profit_abs": 9.66585468,
+    "stop_loss_profit_abs": -16.9717827
+  },
+  "validation_metrics": [
+    {
+      "label": "valid_apr_2026",
+      "timerange": "20260401-20260430",
+      "total_trades": 55,
+      "profit_total_abs": -4.572011689999999,
+      "profit_total_pct": -0.4572011689999999,
+      "profit_factor": 0.7437729484377518,
+      "max_drawdown_pct": 0.6203922569109723,
+      "winrate": 0.6363636363636364,
+      "roi_profit_abs": 13.271583129999998,
+      "stop_loss_profit_abs": -17.843594820000003,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0
+    },
+    {
+      "label": "valid_mar_2026",
+      "timerange": "20260301-20260331",
+      "total_trades": 47,
+      "profit_total_abs": -10.18244233,
+      "profit_total_pct": -1.018244233,
+      "profit_factor": 0.5048772849233716,
+      "max_drawdown_pct": 1.1396017802228975,
+      "winrate": 0.5106382978723404,
+      "roi_profit_abs": 10.383049860000002,
+      "stop_loss_profit_abs": -20.565492189999997,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0
+    },
+    {
+      "label": "valid_feb_2026",
+      "timerange": "20260201-20260228",
+      "total_trades": 44,
+      "profit_total_abs": 5.918971270000001,
+      "profit_total_pct": 0.5918971270000001,
+      "profit_factor": 1.5510069410278182,
+      "max_drawdown_pct": 0.41352133079040004,
+      "winrate": 0.7272727272727273,
+      "roi_profit_abs": 16.66107056,
+      "stop_loss_profit_abs": -10.74209929,
+      "trailing_stop_loss_profit_abs": 0.0,
+      "force_exit_profit_abs": 0.0
+    }
+  ],
+  "trade_under_min": false,
+  "validation_strong": false,
+  "trade_count_warning": "",
+  "improvement_vs_baseline": {
+    "profit_total_pct_delta": 0.009407197999999894,
+    "profit_factor_delta": -0.060474991881671825
+  },
+  "source_run_id": "20260601_110758",
+  "source_version": "v001",
+  "near_miss_type": "risk_control_near_miss",
+  "failed_due_to": [
+    "fixed stoploss 吞噬 ROI",
+    "stoploss_to_roi_ratio=1.7558"
+  ],
+  "recommended_followup_mutation": "add_regime_filter / avoid_choppy_market_filter / pair_specific_entry_threshold",
+  "key_metrics": {
+    "train_total_trades": 45,
+    "train_profit_pct": -0.7305928020000001,
+    "train_profit_factor": 0.5695250081183282,
+    "validation_avg_profit_pct": -0.29451609166666665,
+    "validation_worst_profit_pct": -1.018244233,
+    "validation_worst_profit_factor": 0.5048772849233716,
+    "validation_worst_month": "valid_mar_2026",
+    "roi_profit_abs": 9.66585468,
+    "stop_loss_profit_abs": -16.9717827,
+    "stoploss_to_roi_ratio": 1.7558491475272209
+  }
+}
