@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "version": "v001",
+      "run_id": "20260602_113120",
+      "strategy_class": "MultiCoin_AI_Strategy_20260602_113120_v001",
+      "is_valid": false,
+      "invalid_reason": "codegen_reviewer_all_rejected",
+      "advisor_model_used": "gpt-5.5",
+      "codegen_model_used": "",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 0,
+      "is_best": false
+    }
+  ]
+}
