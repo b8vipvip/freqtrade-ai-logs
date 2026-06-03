@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "version": "v001",
+      "run_id": "20260603_041109",
+      "strategy_class": "MultiCoin_AI_Strategy_20260603_041109_v001",
+      "is_valid": false,
+      "invalid_reason": "策略顾问模型调用失败：策略顾问模型池全部失败：403 Error code: 403 - {'code': 'DAILY_LIMIT_EXCEEDED', 'message': '您当前每日订阅额度不足，请手动重置额度。'}",
+      "advisor_model_used": "",
+      "codegen_model_used": "",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 0,
+      "is_best": false
+    }
+  ]
+}

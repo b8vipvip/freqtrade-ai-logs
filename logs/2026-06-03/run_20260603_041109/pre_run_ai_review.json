@@ -1,0 +1,24 @@
+{
+  "last_run_diagnosis": {
+    "overall_result": "pre_run_ai_review 调用失败，无法生成复盘。",
+    "best_candidate": "",
+    "main_failure_patterns": [],
+    "dangerous_directions_to_avoid": [],
+    "promising_directions_to_continue": []
+  },
+  "next_run_guidance": {
+    "preferred_parent": "",
+    "preferred_mutation_types": [],
+    "forbidden_mutation_types": [],
+    "trade_count_target": "保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。",
+    "must_fix": [
+      "pre_run_ai_review 失败，继续使用 last_run_summary、best_strategy、nearest_candidate 和 prompt_guidance。"
+    ],
+    "do_not_do": []
+  },
+  "codegen_guidance": {
+    "must_implement": [],
+    "avoid_equivalent_code": [],
+    "required_detectable_changes": []
+  }
+}
