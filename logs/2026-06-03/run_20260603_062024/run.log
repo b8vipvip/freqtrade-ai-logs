@@ -1,0 +1,1104 @@
+
+========== 日志文件 ==========
+本次完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/run.log
+
+全局日志副本：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260603_062024.log
+
+查看实时日志：
+tail -f /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/run.log
+
+========== 启动交互配置 ==========
+交互式设置：跳过（--setup n）
+中途人工确认：关闭（--confirm n）
+向导最终启动确认：向导末尾手动输入（默认）
+
+========== 日志仓库启动检查 ==========
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD
+日志仓库启动拉取完成：git -C /opt/freqtrade-ai-logs pull --ff-only origin main
+
+===== 自动优化中文设置向导 =====
+交互式设置已跳过（--setup n）。
+
+========== 配置兼容性检查 ==========
+api_server.jwt_secret_key: 已自动修复
+api_server.ws_token: [REDACTED]
+api_server.CORS_origins: 无需修复
+config.active_pairs.json: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/config.active_pairs.json
+
+========== 交易对选择状态 ==========
+recommended_pairs 默认文件：/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/recommended_pairs.json
+是否存在：是
+本次是否使用 recommended_pairs：是
+使用来源：默认自动读取
+active_pairs 数量：5
+active_pair_count_actual：5
+active_pairs：BTC/USDT, OP/USDT, SOL/USDT, BNB/USDT, DOGE/USDT
+临时 config 路径：user_data/backtest_results/ai_optimization_runs/run_20260603_062024/config.active_pairs.json
+========== 自动交易数目标 ==========
+是否启用：是
+交易对数量 pair_count：5
+交易对来源：recommended_pairs
+min_trades_per_pair：4
+ideal_min_trades_per_pair：5
+ideal_max_trades_per_pair：9
+max_trades_per_pair：12
+自动计算结果：
+min_trades: 20
+ideal_min_trades: 25
+ideal_max_trades: 45
+max_trades: 60
+上限：
+ideal_max_trades_cap: 75
+max_trades_cap: 90
+策略结构探索交易数硬约束：min_trades=20，ideal_min_trades=25，ideal_max_trades=45，max_trades=60
+
+========== Prompt 额外规则 ==========
+策略顾问规则数量：7
+  1. 来源=optimization_goal.json：当前固定使用 BTC/USDT、OP/USDT、SOL/USDT、BNB/USDT、DOGE/USDT 五个交易对。
+  2. 来源=optimization_goal.json：本次交易数目标由 auto_trade_count_target 自动计算，当前为 20~60，理想区间 25~45。
+  3. 来源=optimization_goal.json：不要生成明显高频策略，训练交易数超过 60 的策略没有意义。
+  4. 来源=optimization_goal.json：如果某个策略盈利但交易数低于 20，应优先轻微放宽入场，把交易数提升到 20~25，而不是换完全不同结构。
+  5. 来源=optimization_goal.json：不要简单用 trailing 替代 fixed stoploss。trailing 只能在已有盈利后启用，不能让移动止损成为主要亏损来源。
+  6. 来源=optimization_goal.json：当前核心目标是减少低质量入场和亏损单数量，不是盲目提高交易频率。
+  7. 来源=optimization_goal.json：如果某个 family 连续产生高频亏损，应降低该 family 权重。
+代码生成规则数量：11
+  1. 来源=optimization_goal.json：必须真实落地 mutation_spec。
+  2. 来源=optimization_goal.json：禁止只改 class name、注释、变量名。
+  3. 来源=optimization_goal.json：如果新增过滤条件，populate_entry_trend 必须实际出现对应条件。
+  4. 来源=optimization_goal.json：如果新增指标，populate_indicators 必须实际计算。
+  5. 来源=optimization_goal.json：如果生成的策略与父策略行为等价，应主动报错，不要输出等价代码。
+  6. 来源=optimization_goal.json：上一轮如果因为策略重复失败，本轮禁止继续使用同一个 codegen provider，且必须改变 entry_conditions 或 indicators，不允许只改变类名、注释、变量名。
+  7. 来源=optimization_goal.json：如果 mutation_spec 预计交易数 20~24，代码实现不得因为过度过滤把交易数压到 20 以下。
+  8. 来源=runtime patch：保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。
+  9. 来源=内置规则：Bollinger 安全规则：禁止直接使用 bollinger['middle']/bollinger['mid']；qtpylib.bollinger_bands 只允许读取 upper/lower；bb_middle 用 upper/lower 计算。
+  10. 来源=内置规则：bb_middle 必须用 dataframe['bb_middle'] = (dataframe['bb_upper'] + dataframe['bb_lower']) / 2 计算。
+  11. 来源=内置规则：下一轮实现应以 trend_following + market regime/choppy/volatility contraction filter 为主，不要用 trailing 直接替代 fixed stoploss。
+本次实际迭代轮数：1
+运行时配置已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/goal.runtime.json
+本地历史数据已存在，覆盖目标区间，跳过下载。
+
+========== AI 模型池配置 ==========
+策略顾问 provider/模型池：
+1. GS88_GPT55 / gpt-5.5 @ https://ai.gs88.shop/v1
+2. GS88_GPT54 / gpt-5.4 @ https://ai.gs88.shop/v1
+3. TOSKAXY_CLAUDE_OPUS48 / claude-opus-4-8 @ https://api.toskaxy.xyz/v1
+4. TOSKAXY_CLAUDE_OPUS46 / claude-opus-4-6 @ https://api.toskaxy.xyz/v1
+5. TOSKAXY_CLAUDE_OPUS47 / claude-opus-4-7 @ https://api.toskaxy.xyz/v1
+6. GS88_GPT54_20260305 / gpt-5.4-2026-03-05 @ https://ai.gs88.shop/v1
+7. GS88_GPT54_MINI / gpt-5.4-mini @ https://ai.gs88.shop/v1
+8. glm_official / glm-5.1 @ https://open.bigmodel.cn/api/paas/v4/
+
+代码生成 provider/模型池：
+1. GS88_GPT54 / gpt-5.4 @ https://ai.gs88.shop/v1
+2. GS88_GPT55 / gpt-5.5 @ https://ai.gs88.shop/v1
+3. GS88_CODEX_AUTO_REVIEW / codex-auto-review @ https://ai.gs88.shop/v1
+4. TOSKAXY_CLAUDE_OPUS48 / claude-opus-4-8 @ https://api.toskaxy.xyz/v1
+5. TOSKAXY_CLAUDE_OPUS46 / claude-opus-4-6 @ https://api.toskaxy.xyz/v1
+6. TOSKAXY_CLAUDE_OPUS47 / claude-opus-4-7 @ https://api.toskaxy.xyz/v1
+7. GS88_GPT54_20260305 / gpt-5.4-2026-03-05 @ https://ai.gs88.shop/v1
+8. deepseek_official / deepseek-v4-pro @ https://api.deepseek.com
+9. glm_official / glm-5.1 @ https://open.bigmodel.cn/api/paas/v4/
+
+模型失败自动轮换：开启
+单次 AI 调用最大尝试次数：5
+AI 请求超时：180 秒
+AI 请求冷却：10 秒
+
+========== 本次实际测试交易对 ==========
+交易对来源：recommended_pairs.json
+交易对数量：5
+交易对列表：
+1. BTC/USDT
+2. OP/USDT
+3. SOL/USDT
+4. BNB/USDT
+5. DOGE/USDT
+
+本次临时 config：
+user_data/backtest_results/ai_optimization_runs/run_20260603_062024/config.active_pairs.json
+
+========== 优质交易对筛选来源 ==========
+recommended_pairs 文件：/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/recommended_pairs.json
+source_strategy：manual_selected_pairs
+created_at：2026-05-31T08:52:54.001728
+scan_periods：
+active_pairs 数量：5
+active_pair_count_actual：5
+watch_pairs 数量：0
+cooldown_pairs 数量：0
+
+========== 优质交易对 active_pairs ==========
+1. BTC/USDT | score=None | reason=用户指定的固定测试币种
+2. OP/USDT | score=None | reason=用户指定的固定测试币种
+3. SOL/USDT | score=None | reason=用户指定的固定测试币种
+4. BNB/USDT | score=None | reason=用户指定的固定测试币种
+5. DOGE/USDT | score=None | reason=用户指定的固定测试币种
+
+========== 观察交易对 watch_pairs ==========
+无
+
+========== 暂时冷却交易对 cooldown_pairs ==========
+无
+说明：cooldown_pairs 只是当前区间暂时不参与优化，不是永久剔除。
+当前 champion 来源：historical_best
+当前 champion 策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+
+========== 当前历史最佳策略简述 ==========
+来源：historical_best
+策略名：MultiCoin_AI_Strategy_20260531_014140_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+训练区间：20260501-20260525
+交易数：36
+收益USDT：-0.6419
+收益率：-0.06%
+胜率：86.11%
+Profit Factor：0.9323
+最大回撤：0.77%
+验证区间平均收益率：-0.18%
+验证区间平均 PF：0.8733
+验证区间最大回撤：1.06%
+是否疑似过拟合：否
+主要优势：本轮 final_score 最高。
+主要风险：仍需在更多验证区间复验稳健性。
+========== 记忆加载状态 ==========
+historical_best：存在
+historical_best 策略文件：有效
+nearest_candidate：存在
+nearest_candidate 策略文件：有效
+last_run_summary：存在
+strategy_memory：存在
+strategy_lessons：存在
+strategy_blacklist：存在
+market_intelligence：开启
+ai_committee：开启
+prompt_similarity_filter：开启
+codegen_committee：开启
+策略结构探索模式：已启用。将按 near-miss 与 family 降权动态选择，不再默认强制尝试所有 family。
+explore_strategy_family 调度参数：{"force_all_families_once": true, "max_families_per_run": 5, "prefer_near_miss_followup": true, "disable_family_after_high_frequency_failure": true}
+explore_strategy_family: enabled
+strategy_family_count: 5
+current_family: pending
+family_exploration_plan: {"families": ["trend_following", "pullback_reversal", "breakout_momentum", "low_volatility_mean_reversion", "strict_risk_filter"], "max_families_per_run": 5, "force_all_families_once": true, "prefer_near_miss_followup": true}
+额外随机采样：未启用
+
+========== 运行前 AI 复盘 ==========
+是否启用：是
+使用 provider：待调用
+使用模型：待调用
+复盘文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/pre_run_ai_review.json
+recommended_pairs active_pair_count_actual：5
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：首次调用
+本次请求前等待：0.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：43 秒
+返回字符数：4968
+使用 provider：GS88_GPT55
+使用模型：gpt-5.5
+主要结论：
+- overall_result: 上一轮没有实质突破；v001 在 strategy_advisor 阶段因模型额度 403 DAILY_LIMIT_EXCEEDED 失败，未生成 mutation_spec，未执行 codegen、语法检查、训练或验证回测，因此没有任何可用于 best 判断的新真实指标。
+- best_candidate: 上一轮无有效新候选；最值得参考的是 last_run_summary 中的 nearest_candidate：MultiCoin_AI_Strategy_20260601_110758_v001。它训练交易数 45，处于理想区间；训练 PF 0.5695 刚过最低门槛 0.56，但训练收益 -0.7306%，验证平均收益 -0.2945%，最差验证月 valid_mar_2026 收益 -1.0182%、PF 0.5049。主要问题是 fixed stoploss 吞噬 ROI，训练 stoploss_to_roi_ratio 1.7558。另可参考 best_strategy_snapshot 中 official_best 的结构特征，但其中部分 pair 指标来自旧币种集合，当前固定币种已变为 BTC/OP/SOL/BNB/DOGE，因此不能直接照搬 pair 结论。
+- 上一轮核心失败不是策略逻辑，而是 advisor 模型调用失败，导致没有回测数据和没有候选版本。
+- 长期近邻候选的主要失败模式是 ROI 盈利被 fixed stoploss 亏损吞噬，stop_loss_profit_abs 明显大于 roi_profit_abs。
+- nearest_candidate 虽然交易数 45 合理，但训练和多数验证区间仍为负收益，说明入场质量仍不足。
+下一轮建议：
+- preferred_parent: nearest_candidate
+- add_regime_filter
+- avoid_choppy_market_filter
+- add_volatility_contraction_filter
+- add_entry_filter
+
+========== 本次实际父策略选择 ==========
+pre_run 建议父策略：nearest_candidate
+实际父策略：MultiCoin_AI_Strategy_20260601_110758_v001
+选择原因：next_run_guidance.preferred_parent=nearest_candidate，且 nearest_candidate 策略文件有效；仅覆盖本次 run 的 session_parent，不覆盖 official best。
+是否覆盖 historical_best 作为本次 session_parent：是
+
+========== Early Stopping 设置 ==========
+是否启用：否
+patience：50（来源：optimization_goal.json）
+min_iterations_before_stop：50（来源：optimization_goal.json）
+monitor：multi_metric_progress
+本次 iterations：1
+是否允许提前停止：否
+explore_strategy_family: enabled
+strategy_family_count: 5
+current_family: trend_following
+family_exploration_plan: {"families": ["trend_following", "pullback_reversal", "breakout_momentum", "low_volatility_mean_reversion", "strict_risk_filter"], "max_families_per_run": 5, "force_all_families_once": true, "prefer_near_miss_followup": true}
+
+========== 第 1 轮 / v001 ==========
+1. 正在生成 mutation_spec（冠军-挑战者小步改动）……
+当前策略顾问模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, gpt-5.4-mini, glm-5.1
+当前代码生成模型池：gpt-5.4, gpt-5.5, codex-auto-review, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, deepseek-v4-pro, glm-5.1
+market_intelligence cache_hit scope=disk key=00f381c7d8408a6cfc17ff799b7fd7fb8e1f2d0f280ba5e1f1d41f26a4648551 path=/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/market_intel_cache/00f381c7d8408a6cfc17ff799b7fd7fb8e1f2d0f280ba5e1f1d41f26a4648551.json
+market_intelligence cache_path=/opt/freqtrade-okx/freqtrade-ai/user_data/ai_memory/market_intel_cache/00f381c7d8408a6cfc17ff799b7fd7fb8e1f2d0f280ba5e1f1d41f26a4648551.json
+market_intelligence skip_live_search=true
+========== Market Intel 防未来函数检查 ==========
+train_intel_used_for_prompt: yes
+validation_intel_used_for_prompt: no
+holdout_intel_used_for_prompt: no
+AI 投资委员会并发模式：开启
+AI 投资委员会角色数量：6
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：0.1 秒
+本次请求前等待：9.9 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54
+当前模型：gpt-5.4
+尝试次数：1/5
+距离上次 AI 请求：0.2 秒
+本次请求前等待：9.8 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS48
+当前模型：claude-opus-4-8
+尝试次数：1/5
+距离上次 AI 请求：0.2 秒
+本次请求前等待：9.8 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS46
+当前模型：claude-opus-4-6
+尝试次数：1/5
+距离上次 AI 请求：0.2 秒
+本次请求前等待：9.8 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：0.3 秒
+本次请求前等待：9.7 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54_MINI
+当前模型：gpt-5.4-mini
+尝试次数：1/5
+距离上次 AI 请求：0.3 秒
+本次请求前等待：9.7 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54_MINI
+实际使用模型：gpt-5.4-mini
+用时：16 秒
+返回字符数：3405
+committee role quantitative_stat_arb_reviewer: provider=GS88_GPT54_MINI, model=gpt-5.4-mini, elapsed=26.036s parse_retry=0
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54
+实际使用模型：gpt-5.4
+用时：30 秒
+返回字符数：3730
+committee role optimistic_trend_analyst: provider=GS88_GPT54, model=gpt-5.4, elapsed=40.68s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：39 秒
+返回字符数：5116
+committee role pessimistic_risk_officer: provider=GS88_GPT55, model=gpt-5.5, elapsed=49.132s parse_retry=0
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：TOSKAXY_CLAUDE_OPUS46
+实际使用模型：claude-opus-4-6
+用时：43 秒
+返回字符数：3460
+committee role conservative_risk_validator: provider=TOSKAXY_CLAUDE_OPUS46, model=claude-opus-4-6, elapsed=53.739s parse_retry=0
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：TOSKAXY_CLAUDE_OPUS48
+实际使用模型：claude-opus-4-8
+用时：57 秒
+返回字符数：4861
+committee role aggressive_momentum_trader: provider=TOSKAXY_CLAUDE_OPUS48, model=claude-opus-4-8, elapsed=67.607s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：TOSKAXY_CLAUDE_OPUS47
+实际使用模型：claude-opus-4-7
+用时：59 秒
+返回字符数：5108
+committee role macro_liquidity_analyst: provider=TOSKAXY_CLAUDE_OPUS47, model=claude-opus-4-7, elapsed=69.645s parse_retry=0
+AI 投资委员会成功角色数量：6
+AI 投资委员会失败角色数量：0
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 正在生成策略中，已等待 80 秒……
+AI 正在生成策略中，已等待 90 秒……
+AI 正在生成策略中，已等待 100 秒……
+AI 正在生成策略中，已等待 110 秒……
+AI 正在生成策略中，已等待 120 秒……
+AI 正在生成策略中，已等待 130 秒……
+AI 正在生成策略中，已等待 140 秒……
+AI 正在生成策略中，已等待 150 秒……
+AI 正在生成策略中，已等待 160 秒……
+AI 正在生成策略中，已等待 170 秒……
+AI 正在生成策略中，已等待 180 秒……
+AI provider 超时，已切换：
+角色：strategy_advisor
+provider：GS88_GPT55
+模型：gpt-5.5
+超时阈值：180 秒；实际等待：180 秒
+provider 超时，已切换到下一个 provider/模型：GS88_GPT55/gpt-5.5
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：2/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：70 秒
+返回字符数：15810
+chairman provider/model/耗时：GS88_GPT55/gpt-5.5/271.117s
+final allowed_mutations:["add_entry_quality_filter_based_on_price_structure", "add_abnormal_volatility_window_filter_with_trade_count_guard", "add_liquidity_shock_guard_using_volume_or_spread_proxy", "pair_specific_tighten_only_bad_pairs", "pair_specific_restore_non_bad_pairs_if_trade_count_below_25", "controlled_widen_entry_if_previous_round_too_few_trades", "relax_global_filter_if_trade_count_below_20", "reduce_overstrict_regime_filter_if_trade_count_below_20", "adjust_stoploss_with_entry_quality_context", "add_cooldown_after_consecutive_stoplosses", "cap_concurrent_high_beta_alt_exposure", "validate_worst_month_and_max_drawdown_before_acceptance", "stress_test_slippage_and_partial_fills", "use_macro_regime_as_risk_weight_not_directional_signal", "controlled_widen_entry", "relax_global_filter", "reduce_overstrict_regime_filter", "pair_specific_restore_non_bad_pairs", "slightly_wider_initial_stop_with_same_hard_stop_framework", "improve_drawdown_control_without_removing_risk_filter", "add_or_strengthen_volume_confirmation_on_breakouts", "prefer_reentry_after_pullback_confirmation_for_trend_continuation", "pair_specific_threshold_tuning", "limit_chasing_in_abnormal_volatility_window_without_disabling_trading", "controlled_widen_entry: 适度放宽入场信号阈值，针对 BTC/USDT 和 SOL/USDT 优先", "relax_global_filter: 在非 abnormal_volatility_window 时段放宽全局 regime 过滤，避免过度抑制信号", "pair_specific_restore_non_bad_pairs: 对未显示 bad_pair 特征的标的（BTC、SOL、BNB）恢复完整信号路径", "reduce_overstrict_regime_filter: 降低 regime 判断的严格程度，允许在 moderate risk_off 区间内正常入场", "roi_ladder_compression: 压缩 ROI 第一档目标至 0.6-0.8% 范围，提升止损前盈利兑现概率", "stoploss_absolute_widen: 将 stoploss 扩大至 -1.5% 至 -2.0%，直接对抗 stoploss_to_roi_high 失败模式", "controlled_widen_entry: 允许入场条件适度放宽，目标交易数 25~35", "relax_global_filter: 允许全局制度过滤器从当前过严水平向中性调整，降低误拒率", "pair_specific_restore_non_bad_pairs: 允许 BTC/USDT、BNB/USDT 恢复标准参数", "reduce_overstrict_regime_filter: 允许对 risk_off 制度下的进入条件进行分层处理，而非二元关闭", "adjust_stoploss_width: 允许在 abnormal_volatility_window 期间扩大止损宽度以降低误触率（不替换为追踪止损）", "add_slippage_buffer: 允许在流动性代理变量恶化时增加滑点缓冲参数", "controlled_widen_entry: 适度放宽入场条件（如 RSI/EMA offset），缓解 stoploss_to_roi_high 导致的过早触损", "relax_global_filter: 在 too_few_trades 情境下允许全局 regime 过滤器适度松弛", "pair_specific_restore_non_bad_pairs: 对 SOL/BNB 等非问题 pair 恢复正常参数，不得一刀切收紧", "reduce_overstrict_regime_filter: 针对 DOGE/OP 的过严 regime 过滤进行校准，允许在更宽 regime 条件下入场", "adjust_stoploss_wider_within_risk_budget: 在不突破最大单笔风险敞口的前提下适度放宽止损距离，直接对应 stoploss_to_roi_high 失败类型", "add_abnormal_volatility_cooldown: 在异常波动窗口（如事件发布后30-60min）内暂停新开仓，降低止损触发频率", "pair_specific_risk_reweighting", "pair_specific_entry_relaxation", "pair_specific_stoploss_tuning"]
+final blocked_mutations:["adjust_roi_only", "adjust_roi_only: 禁止仅调整 ROI 而不同步处理入场/止损逻辑", "adjust_roi_only: 禁止仅调整ROI目标而不处理入场/止损结构", "adjust_roi_only: 禁止单独调整 ROI 而不同步调整 stoploss", "continue_stoploss_to_roi_high_pattern: 禁止维持导致当前失败模式的参数组合不变", "continue_tighten_all_pairs: 禁止在 too_few_trades 情境下继续收紧所有 pair 参数", "disable_BTC_SOL_BNB_breakout_participation", "force_risk_on_regime: 禁止在当前 risk_off 置信度 0.55 下强制切换为 risk_on 参数集", "further_tighten_all_pairs: 禁止在 too_few_trades 情境下继续全面收紧所有交易对", "global_across_all_pairs_tightening", "hardcode_single_macro_indicator_as_binary_on_off", "high_frequency_loss_chain: 禁止允许连续高频亏损超过 daily_loss_limit 而不触发保护机制", "ignore_stoploss_to_roi_high_failure_type", "increase_high_beta_alt_exposure_without_drawdown_guard", "max_trades_above_60", "max_trades_exceed_60: 禁止训练交易数超过60", "min_trades_below_20", "news_keyword_rule", "news_keyword_rule: 禁止基于新闻关键词构建交易规则", "news_keyword_rule: 禁止基于新闻关键词的交易规则", "news_keyword_rule: 禁止基于新闻关键词的入场/出场规则", "no-trade risk control", "no_trade", "no_trade_risk_control: 禁止以任何风控名义将交易数压至0或低于20", "no_trade_risk_control: 禁止以全面暂停交易作为风控手段", "no_trade_risk_control: 禁止以风控为由设置 no-trade 状态", "no_trade_strategy", "optimize_only_for_train_roi_without_worst_month_check", "remove_risk_filter", "remove_risk_filter: 禁止完全移除风控过滤器", "remove_risk_filter: 禁止完全移除风险过滤层", "remove_risk_filter: 禁止移除任何风险过滤器", "replace_stoploss_with_trailing", "replace_stoploss_with_trailing: 禁止", "replace_stoploss_with_trailing: 禁止以追踪止损替代固定止损", "single-factor macro hard veto for all entries", "tighten_all_pairs: 禁止在 too_few_trades 场景下继续收紧所有标的参数", "tighten_all_pairs_globally", "tighten_all_pairs_when_previous_round_too_few_trades", "validation_or_holdout_news_usage"]
+estimated_trade_count_guard:{"min_trades": 20, "ideal_min_trades": 25, "ideal_max_trades": 45, "max_trades": 60, "will_reduce_below_min": false, "reason": "主席硬约束：不允许把交易数压到 20 以下，理想 25~45，最高 60。"}
+是否可能导致交易数低于 min：no
+========== AI 投资委员会结论 ==========
+market_regime:{"risk_on_off": "risk_off", "confidence": 0.55, "evidence": [{"provider": "OPENROUTER_SONAR_PRO", "model": "perplexity/sonar-pro", "base_url": "https://openrouter.ai/api/v1", "query": "BTC ETH crypto market trend 20260501-20260525", "title": "Live market intelligence: BTC ETH crypto market trend 20260501-20260525", "url": "https://finance.yahoo.com/video/crypto-check-how-bitcoin--ethereum-prices-are-moving-154824864.html", "published_at": "", "content": "- **BTC and ETH were both broadly upward on the latest market-day snapshot**, with Yahoo Finance reporting Bitcoin up about **0.4%** and Ethereum up about **1.1%**, alongside a more optimistic tone across crypto-linked stocks.[1]\n- **The move was framed as macro/geopolitical-driven**, with Yahoo Finance linking the bounce to comments about a potential end to the Iran conflict rather than to a crypto-native catalyst.[1]\n- **Recent multi-month trend in that same source was still weak**, with Yahoo Finance saying Bitcoin had been down about **41% over six months** and Ethereum about **50% over six months** at the time of that report.[1]\n- **As of the live price pages in the results, ETH was around $1,976–$1,977**, with Kraken and bitFlyer both showing Ethereum near **$1,976** and very small day-to-day changes.[2][4]\n- **Cross-asset macro context around mid-May also looked mixed**, with Yahoo Finance noting gold down, oil up, stock futures stable, and Treasury yields rising while BTC hovered near **$82,000** and ETH near **$2,300**.[3]\n- **ETH/BTC relative strength appeared mixed-to-weak in the provided results**, because the available sources emphasize ETH’s own price resilience near the low-2,000s, but also show broader six-month downside and no clear sustained outperformance signal.[1][3][2]\n- **For offline Freqtrade regime labeling, the signal from these results is “volatile and macro-sensitive,” not cleanly trending bullish**; treat the period as one where external risk-on/risk-off headlines may dominate shor...<truncated>
+crypto_regime:{"trend": "down", "liquidity": "tight", "leverage_risk": "medium", "evidence": [{"provider": "OPENROUTER_SONAR_PRO", "model": "perplexity/sonar-pro", "base_url": "https://openrouter.ai/api/v1", "query": "BTC ETH crypto market trend 20260501-20260525", "title": "Live market intelligence: BTC ETH crypto market trend 20260501-20260525", "url": "https://finance.yahoo.com/video/crypto-check-how-bitcoin--ethereum-prices-are-moving-154824864.html", "published_at": "", "content": "- **BTC and ETH were both broadly upward on the latest market-day snapshot**, with Yahoo Finance reporting Bitcoin up about **0.4%** and Ethereum up about **1.1%**, alongside a more optimistic tone across crypto-linked stocks.[1]\n- **The move was framed as macro/geopolitical-driven**, with Yahoo Finance linking the bounce to comments about a potential end to the Iran conflict rather than to a crypto-native catalyst.[1]\n- **Recent multi-month trend in that same source was still weak**, with Yahoo Finance saying Bitcoin had been down about **41% over six months** and Ethereum about **50% over six months** at the time of that report.[1]\n- **As of the live price pages in the results, ETH was around $1,976–$1,977**, with Kraken and bitFlyer both showing Ethereum near **$1,976** and very small day-to-day changes.[2][4]\n- **Cross-asset macro context around mid-May also looked mixed**, with Yahoo Finance noting gold down, oil up, stock futures stable, and Treasury yields rising while BTC hovered near **$82,000** and ETH near **$2,300**.[3]\n- **ETH/BTC relative strength appeared mixed-to-weak in the provided results**, because the available sources emphasize ETH’s own price resilience near the low-2,000s, but also show broader six-month downside and no clear sustained outperformance signal.[1][3][2]\n- **For offline Freqtrade regime labeling, the signal from these results is “volatile and macro-sensitive,” not cleanly trending bullish**; treat the period as one where external risk-on/risk-off headline...<truncated>
+final_chairman_decision:Proceed only if mutation is materially different, risk-reducing, implementable in Freqtrade, and preserves min_trades>=20; risk-reducing does not mean no-trade.
+allowed_mutations:["add_entry_quality_filter_based_on_price_structure", "add_abnormal_volatility_window_filter_with_trade_count_guard", "add_liquidity_shock_guard_using_volume_or_spread_proxy", "pair_specific_tighten_only_bad_pairs", "pair_specific_restore_non_bad_pairs_if_trade_count_below_25", "controlled_widen_entry_if_previous_round_too_few_trades", "relax_global_filter_if_trade_count_below_20", "reduce_overstrict_regime_filter_if_trade_count_below_20", "adjust_stoploss_with_entry_quality_context", "add_cooldown_after_consecutive_stoplosses", "cap_concurrent_high_beta_alt_exposure", "validate_worst_month_and_max_drawdown_before_acceptance", "stress_test_slippage_and_partial_fills", "use_macro_regime_as_risk_weight_not_directional_signal", "controlled_widen_entry", "relax_global_filter", "reduce_overstrict_regime_filter", "pair_specific_restore_non_bad_pairs", "slightly_wider_initial_stop_with_same_hard_stop_framework", "improve_drawdown_control_without_removing_risk_filter", "add_or_strengthen_volume_confirmation_on_breakouts", "prefer_reentry_after_pullback_confirmation_for_trend_continuation", "pair_specific_threshold_tuning", "limit_chasing_in_abnormal_volatility_window_without_disabling_trading", "controlled_widen_entry: 适度放宽入场信号阈值，针对 BTC/USDT 和 SOL/USDT 优先", "relax_global_filter: 在非 abnormal_volatility_window 时段放宽全局 regime 过滤，避免过度抑制信号", "pair_specific_restore_non_bad_pairs: 对未显示 bad_pair 特征的标的（BTC、SOL、BNB）恢复完整信号路径", "reduce_overstrict_regime_filter: 降低 regime 判断的严格程度，允许在 moderate risk_off 区间内正常入场", "roi_ladder_compression: 压缩 ROI 第一档目标至 0.6-0.8% 范围，提升止损前盈利兑现概率", "stoploss_absolute_widen: 将 stoploss 扩大至 -1.5% 至 -2.0%，直接对抗 stoploss_to_roi_high 失败模式", "controlled_widen_entry: 允许入场条件适度放宽，目标交易数 25~35", "relax_global_filter: 允许全局制度过滤器从当前过严水平向中性调整，降低误拒率", "pair_specific_restore_non_bad_pairs: 允许 BTC/USDT、BNB/USDT 恢复标准参数", "reduce_overstrict_regime_filter: 允许对 risk_off 制度下的进入条件进行分层处理，而非二元关闭", "adjust_stoploss_width: 允许在 abnormal_volatility_window 期间扩大止损宽度以降低误触率（不替换为追踪止损）", "add_slip...<truncated>
+blocked_mutations:["adjust_roi_only", "adjust_roi_only: 禁止仅调整 ROI 而不同步处理入场/止损逻辑", "adjust_roi_only: 禁止仅调整ROI目标而不处理入场/止损结构", "adjust_roi_only: 禁止单独调整 ROI 而不同步调整 stoploss", "continue_stoploss_to_roi_high_pattern: 禁止维持导致当前失败模式的参数组合不变", "continue_tighten_all_pairs: 禁止在 too_few_trades 情境下继续收紧所有 pair 参数", "disable_BTC_SOL_BNB_breakout_participation", "force_risk_on_regime: 禁止在当前 risk_off 置信度 0.55 下强制切换为 risk_on 参数集", "further_tighten_all_pairs: 禁止在 too_few_trades 情境下继续全面收紧所有交易对", "global_across_all_pairs_tightening", "hardcode_single_macro_indicator_as_binary_on_off", "high_frequency_loss_chain: 禁止允许连续高频亏损超过 daily_loss_limit 而不触发保护机制", "ignore_stoploss_to_roi_high_failure_type", "increase_high_beta_alt_exposure_without_drawdown_guard", "max_trades_above_60", "max_trades_exceed_60: 禁止训练交易数超过60", "min_trades_below_20", "news_keyword_rule", "news_keyword_rule: 禁止基于新闻关键词构建交易规则", "news_keyword_rule: 禁止基于新闻关键词的交易规则", "news_keyword_rule: 禁止基于新闻关键词的入场/出场规则", "no-trade risk control", "no_trade", "no_trade_risk_control: 禁止以任何风控名义将交易数压至0或低于20", "no_trade_risk_control: 禁止以全面暂停交易作为风控手段", "no_trade_risk_control: 禁止以风控为由设置 no-trade 状态", "no_trade_strategy", "optimize_only_for_train_roi_without_worst_month_check", "remove_risk_filter", "remove_risk_filter: 禁止完全移除风控过滤器", "remove_risk_filter: 禁止完全移除风险过滤层", "remove_risk_filter: 禁止移除任何风险过滤器", "replace_stoploss_with_trailing", "replace_stoploss_with_trailing: 禁止", "replace_stoploss_with_trailing: 禁止以追踪止损替代固定止损", "single-factor macro hard veto for all entries", "tighten_all_pairs: 禁止在 too_few_trades 场景下继续收紧所有标的参数", "tighten_all_pairs_globally", "tighten_all_pairs_when_previous_round_too_few_trades", "validation_or_holdout_news_usage"]
+pair_specific_rules:{"BTC/USDT": {"bias": "stricter quality/risk gates if prior attribution is weak"}, "OP/USDT": {"bias": "avoid low-quality entries and high stoploss exposure"}, "SOL/USDT": {"bias": "preserve reasonable trend/momentum opportunities"}, "BNB/USDT": {"bias": "preserve reasonable trend/momentum opportunities"}, "DOGE/USDT": {"bias": "preserve reasonable volatility breakout opportunities without high frequency"}}
+risk_constraints:["min_trades>=20", "ideal 25~45", "max_trades<=60", "no no-trade risk control", "no replace_stoploss_with_trailing", "no adjust_roi_only", "no remove_risk_filter", "no news_keyword_rule", "no validation/holdout intel in prompt"]
+too_few_trades recovery mode: no
+========== 本轮迭代上下文 ==========
+当前轮：v001
+上一轮结果：无
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260601_110758_v001
+当前 session_best：无
+当前 session_nearest_candidate：MultiCoin_AI_Strategy_20260601_110758_v001
+本次 run 已失败 mutation_type：无
+本次 run 已成功 mutation_type：无
+策略结构探索 planned_strategy_family：trend_following
+本次 run 已尝试 strategy_family：无
+本轮 advisor prompt 已包含上一轮结果：否
+pre_run_ai_review 已注入 advisor prompt：是
+pre_run_ai_review.codegen_guidance 已注入 codegen prompt：是
+当前正式 champion：MultiCoin_AI_Strategy_20260531_014140_v001
+当前 in_memory_champion：MultiCoin_AI_Strategy_20260601_110758_v001
+run_level_actual_session_parent：MultiCoin_AI_Strategy_20260601_110758_v001
+actual_session_parent 选择原因：next_run_guidance.preferred_parent=nearest_candidate，且 nearest_candidate 策略文件有效；仅覆盖本次 run 的 session_parent，不覆盖 official best。
+当前 session_parent 候选：
+- actual_session_parent: MultiCoin_AI_Strategy_20260601_110758_v001
+- historical_best: MultiCoin_AI_Strategy_20260531_014140_v001
+- session_best: 无
+- nearest_candidate: MultiCoin_AI_Strategy_20260601_110758_v001
+- best_train_candidate: 无
+- best_validation_apr_candidate: 无
+- best_low_stoploss_candidate: 无
+- best_worst_month_candidate: 无
+
+========== 本轮父策略选择 ==========
+round_parent_source: nearest_candidate
+round_parent_strategy: MultiCoin_AI_Strategy_20260601_110758_v001
+本轮覆盖 run_level_actual_session_parent：否
+选择原因: failure_type=stoploss_to_roi_high，按受控 parent_pool 顺序选择 nearest_candidate
+本轮修复目标: 修 stoploss/ROI 风险控制
+========== mutation 选择约束 ==========
+failure_type: stoploss_to_roi_high
+allowed_mutations: ['add_regime_filter', 'avoid_choppy_market_filter', 'pair_specific_entry_threshold']
+blocked_mutations: ['adjust_roi_only', 'replace_stoploss_with_trailing']
+too_few_trades_recovery: no
+previous_trade_count: unknown
+recovery_allowed_mutations:["controlled_widen_entry", "relax_global_filter", "pair_specific_restore_non_bad_pairs", "reduce_overstrict_regime_filter"]
+recovery_blocked_mutations:["add_more_global_filters", "tighten_all_pairs", "reduce_trade_frequency", "add_choppy_filter_without_trade_guard"]
+正在调用策略顾问模型生成 mutation_spec……
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：0.1 秒
+本次请求前等待：9.9 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：46 秒
+返回字符数：5682
+策略顾问模型返回完成。
+策略顾问模型完成，将等待 5 秒后调用代码生成模型，避免中转站请求过快。
+estimated_trade_count_guard: {"estimated_total_trades_range": "28-42", "min_trades": 20, "ideal_min_trades": 25, "ideal_max_trades": 45, "max_trades": 60, "may_reduce_trades_below_min": false, "basis": "父策略训练 45 笔；新增过滤为轻中度质量过滤，预计过滤 10%~35% 低质量入场，而不是全面关闭 regime。", "pair_opportunity_plan": {"BTC/USDT": "允许收紧但不完全禁用，预计保留少量高质量趋势交易。", "OP/USDT": "重点降低低质量/高频风险，预计明显减少但不强制为 0。", "SOL/USDT": "保留主要趋势机会，避免被 BTC/OP 规则连带压制。", "BNB/USDT": "保留标准趋势机会，作为全局交易数护栏的一部分。", "DOGE/USDT": "保留正常放量趋势机会，仅过滤异常尖峰和低流动性信号。"}, "fallback_if_backtest_trades_too_low": "若训练交易数低于 20，下一轮只轻微放宽 ADX/EMA slope 或 volume 阈值，优先恢复 SOL/BNB/DOGE，不切换 family，不放宽 OP 高频入场。", "fallback_if_backtest_trades_too_high": "若训练交易数高于 60，下一轮优先提高 OP/BTC 的 trend_strength 和 cooldown/volume 要求，不放宽全局入场。"}
+whether mutation may reduce trades below min: no
+2. mutation_spec 已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/v001/mutation_spec.json
+本轮 strategy_family：trend_following
+========== Prompt 相似度审查 ==========
+advisor_prompt_similarity: 1.0000
+codegen_prompt_similarity: 1.0000
+similar_to_run: 20260602_132636
+similar_to_version: v001
+decision: retry
+AI 投资委员会并发模式：开启
+AI 投资委员会角色数量：6
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：7.5 秒
+本次请求前等待：2.5 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54
+当前模型：gpt-5.4
+尝试次数：1/5
+距离上次 AI 请求：7.6 秒
+本次请求前等待：2.4 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS48
+当前模型：claude-opus-4-8
+尝试次数：1/5
+距离上次 AI 请求：7.6 秒
+本次请求前等待：2.4 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS46
+当前模型：claude-opus-4-6
+尝试次数：1/5
+距离上次 AI 请求：7.7 秒
+本次请求前等待：2.3 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：7.7 秒
+本次请求前等待：2.3 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54_MINI
+当前模型：gpt-5.4-mini
+尝试次数：1/5
+距离上次 AI 请求：7.7 秒
+本次请求前等待：2.3 秒
+AI 正在生成策略中，已等待 10 秒……AI 正在生成策略中，已等待 10 秒……
+
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54_MINI
+实际使用模型：gpt-5.4-mini
+用时：17 秒
+返回字符数：3681
+committee role quantitative_stat_arb_reviewer: provider=GS88_GPT54_MINI, model=gpt-5.4-mini, elapsed=19.704s parse_retry=0
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54
+实际使用模型：gpt-5.4
+用时：29 秒
+返回字符数：3587
+committee role optimistic_trend_analyst: provider=GS88_GPT54, model=gpt-5.4, elapsed=32.146s parse_retry=0
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：38 秒
+返回字符数：4763
+committee role pessimistic_risk_officer: provider=GS88_GPT55, model=gpt-5.5, elapsed=41.43s parse_retry=0
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：TOSKAXY_CLAUDE_OPUS46
+实际使用模型：claude-opus-4-6
+用时：50 秒
+返回字符数：3899
+committee role conservative_risk_validator: provider=TOSKAXY_CLAUDE_OPUS46, model=claude-opus-4-6, elapsed=53.064s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：TOSKAXY_CLAUDE_OPUS48
+实际使用模型：claude-opus-4-8
+用时：51 秒
+返回字符数：4483
+committee role aggressive_momentum_trader: provider=TOSKAXY_CLAUDE_OPUS48, model=claude-opus-4-8, elapsed=54.377s parse_retry=0
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 正在生成策略中，已等待 80 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：TOSKAXY_CLAUDE_OPUS47
+实际使用模型：claude-opus-4-7
+用时：88 秒
+返回字符数：6959
+committee role macro_liquidity_analyst: provider=TOSKAXY_CLAUDE_OPUS47, model=claude-opus-4-7, elapsed=91.366s parse_retry=0
+AI 投资委员会成功角色数量：6
+AI 投资委员会失败角色数量：0
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：76 秒
+返回字符数：10749
+chairman provider/model/耗时：GS88_GPT55/gpt-5.5/86.93s
+final allowed_mutations:["add_entry_quality_filter：增加可审计的低质量入场过滤，例如避免极端 5m candle 扩张后立即追入、避免短期 ATR 异常放大时开新仓。", "add_abnormal_volatility_window_filter：仅在有限窗口内过滤异常波动，不得演变为长期 no-trade。", "pair_specific_risk_budget：对 OP/USDT、DOGE/USDT、SOL/USDT 降低高风险 setup 权重，对 BTC/USDT、BNB/USDT 保持交易数底盘。", "tighten_stoploss_contextually：允许基于波动结构微调止损触发条件，但不得用 trailing stop 替代固定 stoploss。", "improve_entry_confirmation：增加趋势确认、成交量确认、回撤确认或多指标一致性，以降低假突破止损。", "reduce_overstrict_regime_filter：若上一轮 too_few_trades，允许降低过严 regime filter。", "controlled_widen_entry：若交易数低于 20 或接近 20，允许受控放宽入场阈值，但仅针对非坏 pair 或低风险 setup。", "pair_specific_restore_non_bad_pairs：若全局过滤误杀 BTC/USDT、BNB/USDT 的有效交易，允许恢复这些 pair 的部分入场。", "relax_global_filter：若 min_trades 不达标，允许放松全局过滤器，但需保留高 beta pair 的局部风险控制。", "controlled_widen_entry", "relax_global_filter", "pair_specific_restore_non_bad_pairs", "reduce_overstrict_regime_filter", "slightly_lower_breakout_confirmation_threshold", "slightly_reduce_trend_strength_threshold_for_BTC_SOL_BNB", "enable_earlier_breakeven_transition_after_partial_profit", "add_staged_profit_taking_before_full_roi_target", "tighten_time_based_exit_for_stalled_trades", "pair_specific_position_sizing_with_lower_size_on_high_beta_pairs", "retain_abnormal_volatility_window_filter_but_shorten_its_blocking_duration", "prefer_pullback_continuation_entries_over_late_candle_chase", "controlled_widen_entry: 放宽 entry 触发条件（如扩大 EMA 偏差容忍度、降低成交量门槛），修复 stoploss_to_roi_high 过早止损问题", "relax_global_filter: 适度放宽全局 regime 过滤器（如降低 ADX/波动率最低门槛），防止 too_few_trades", "pair_specific_restore_non_bad_pairs: 对非历史 bad_pair 的 OP/USDT 和 DOGE/USDT 恢复小仓位 entry 权限", "reduce_overstrict_regime_filter: 如当前 regime filter 导致 trades < 20，必须放宽至允许 risk_off 中性状态下的突破 entry", "widen_stoploss_threshold: 针对 stoploss_to_roi_high failure，适当扩大止损空间（如从 -2% 扩至 -3% 至 -3.5%），减少过早止损", "add_volume_confirmation_for_breakout: 用成交量扩张作为突破确认，提高动量 entry 精度，减少假突破亏损", "controlled_widen_entry: 在 DXY 回落窗口或流动性改善信号下，适度放宽入场条件以恢复交易数", "relax_global_filter: 当前全局 regime_filter 疑似过紧（导致 too_few_trades），允许对非 bad_pair 放宽一档阈值", "pair_specific_restore_non_bad_pairs: 对未被标记为持续亏损对的品种，恢复其正常入场权限", "reduce_overstrict_regime_filter: 如 regime_filter 导致连续多根 K 线全部过滤，允许降低过滤灵敏度一档", "stoploss_tighten_absolute: 针对 stoploss_to_roi_high 失败类型，允许收窄 stoploss 绝对值（如从 -4% 收至 -2.5%）", "roi_table_multi_tier: 允许将单一 ROI 目标拆分为多档位（时间-收益率阶梯），以降低持仓时间过长的 tail_risk", "controlled_widen_entry: loosen entry score threshold by ≤10% to recover trade count if too_few_trades", "relax_global_filter: reduce global regime strictness if current filter produces <20 trades in backtest", "pair_specific_restore_non_bad_pairs: re-enable OP/USDT and DOGE/USDT if blocked without confirmed bad_pair evidence", "reduce_overstrict_regime_filter: if risk_off filter is blocking >50% of valid signals, convert to soft penalty (position-size reduction) rather than hard block", "roi_ladder_adjustment: adjust ROI steps to account for stoploss_to_roi_high failure pattern — lower intermediate ROI targets", "volatility_normalized_position_sizing: scale position size by pair-specific ATR regime", "pair_specific_limit_bad_pairs", "tighten_loss_tail_via_pair_specific_rules"]
+final blocked_mutations:["adjust_roi_only", "adjust_roi_only: 禁止仅调整 ROI 而不修复 entry/stoploss 逻辑", "adjust_roi_only: 禁止单独调整 ROI 而不同步调整 stoploss，会加剧 stoploss_to_roi_high 失败类型", "adjust_roi_only_without_entry_review: prohibited", "ban_all_high_beta_pairs", "continue_tightening_all_pairs_after_too_few_trades: prohibited", "disable_stoploss", "force_increase_max_trades_beyond_60: 禁止训练交易数超过 max_trades=60", "global_pair_tightening", "global_tighten_all_pairs_after_too_few_trades", "hard_block_all_alts_on_risk_off: prohibited — use soft penalty/position-size reduction instead", "high_frequency_loss_pattern: 禁止导致高频连续亏损的参数组合", "increase_entry_filters_across_all_pairs_after_too_few_trades", "increase_position_size_to_recover_roi", "max_trades_above_60", "min_trades_below_20", "news_keyword_rule", "news_keyword_rule: prohibited", "news_keyword_rule: 禁止基于新闻关键词的交易规则", "news_keyword_rule: 禁止，不可回测，不符合量化风控标准", "no-trade 风控", "no-trade_risk_control", "no_trade: prohibited — min_trades>=20 hard constraint", "no_trade_risk_control: 禁止以零交易作为风控手段", "no_trade_risk_control: 禁止，任何形式的全局停交风控均违反 min_trades>=20 硬约束", "no_trade_strategy", "over_tighten_all_pairs: 禁止，上一轮已出现 too_few_trades，不允许继续全面收紧所有对的入场条件", "overstrict_macro_hard_gate", "remove_risk_filter", "remove_risk_filter: prohibited", "remove_risk_filter: 禁止移除任何风险过滤器", "remove_risk_filter: 禁止，当前 external_event_risk 和 tail_risk 环境下不得移除任何风控过滤层", "remove_stoploss", "replace_stoploss_with_trailing", "replace_stoploss_with_trailing: prohibited", "replace_stoploss_with_trailing: 禁止以追踪止损替代固定止损", "replace_stoploss_with_trailing: 禁止，trailing stop 在 liquidity_shock 窗口内易触发误杀", "single_pair_only_strategy_if_trade_count_falls_below_20", "tighten_all_pairs_simultaneously: 如上轮 too_few_trades，禁止继续收紧所有 pair 的 entry 条件", "unbounded_event_blackout_window", "validation_or_holdout_news_usage", "仅靠 ROI 参数单独修复", "继续收紧所有 pair"]
+estimated_trade_count_guard:{"min_trades": 20, "ideal_min_trades": 25, "ideal_max_trades": 45, "max_trades": 60, "will_reduce_below_min": false, "reason": "主席硬约束：不允许把交易数压到 20 以下，理想 25~45，最高 60。"}
+是否可能导致交易数低于 min：no
+========== Prompt 相似度审查 ==========
+advisor_prompt_similarity: 1.0000
+codegen_prompt_similarity: 1.0000
+similar_to_run: 20260602_132636
+similar_to_version: v001
+decision: retry
+AI 投资委员会并发模式：开启
+AI 投资委员会角色数量：6
+准备调用 AI：
+准备调用 AI：角色：strategy_advisor准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54
+当前模型：gpt-5.4
+尝试次数：1/5
+距离上次 AI 请求：2.5 秒
+本次请求前等待：7.5 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS48
+当前模型：claude-opus-4-8
+尝试次数：1/5
+距离上次 AI 请求：2.5 秒
+本次请求前等待：7.5 秒
+
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：2.5 秒
+本次请求前等待：7.5 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS47
+当前模型：claude-opus-4-7
+尝试次数：1/5
+距离上次 AI 请求：2.6 秒
+本次请求前等待：7.4 秒
+
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：TOSKAXY_CLAUDE_OPUS46
+当前模型：claude-opus-4-6
+尝试次数：1/5
+距离上次 AI 请求：2.6 秒
+本次请求前等待：7.4 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54_MINI
+当前模型：gpt-5.4-mini
+尝试次数：1/5
+距离上次 AI 请求：2.6 秒
+本次请求前等待：7.4 秒
+bad_provider_session_blacklist add provider=TOSKAXY_CLAUDE_OPUS48 model=claude-opus-4-8 reason=model_not_found; removed_from_current_pool=1
+AI 调用失败：
+角色：strategy_advisor
+provider：TOSKAXY_CLAUDE_OPUS48
+模型：claude-opus-4-8
+错误：503 Error code: 503 - {'error': {'code': 'model_not_found', 'message': 'No available channel for model claude-opus-4-8 under group CC-Kiro (distributor) (request id: 202606030631117204422618268d9d6IN8LQgMl)', 'type': 'new_api_error'}}
+将在 10 秒后切换到下一个 provider/模型：TOSKAXY_CLAUDE_OPUS46/claude-opus-4-6
+尝试次数：1/5
+bad_provider_session_blacklist add provider=TOSKAXY_CLAUDE_OPUS46 model=claude-opus-4-6 reason=model_not_found; removed_from_current_pool=1
+AI 调用失败：
+角色：strategy_advisor
+provider：TOSKAXY_CLAUDE_OPUS46
+模型：claude-opus-4-6
+错误：503 Error code: 503 - {'error': {'code': 'model_not_found', 'message': 'No available channel for model claude-opus-4-6 under group CC-Kiro (distributor) (request id: 202606030631117484838928268d9d6SBEU4arx)', 'type': 'new_api_error'}}
+将在 10 秒后切换到下一个 provider/模型：TOSKAXY_CLAUDE_OPUS47/claude-opus-4-7
+尝试次数：1/5
+bad_provider_session_blacklist add provider=TOSKAXY_CLAUDE_OPUS47 model=claude-opus-4-7 reason=model_not_found; removed_from_current_pool=1
+AI 调用失败：
+角色：strategy_advisor
+provider：TOSKAXY_CLAUDE_OPUS47
+模型：claude-opus-4-7
+错误：503 Error code: 503 - {'error': {'code': 'model_not_found', 'message': 'No available channel for model claude-opus-4-7 under group CC-Kiro (distributor) (request id: 202606030631119282363608268d9d6T8CvSQJ6)', 'type': 'new_api_error'}}
+将在 10 秒后切换到下一个 provider/模型：GS88_GPT54_MINI/gpt-5.4-mini
+尝试次数：1/5
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+跳过本次 run 已拉黑 provider/model：TOSKAXY_CLAUDE_OPUS46/claude-opus-4-6
+跳过本次 run 已拉黑 provider/model：TOSKAXY_CLAUDE_OPUS47/claude-opus-4-7
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54_MINI
+当前模型：gpt-5.4-mini
+尝试次数：4/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+跳过本次 run 已拉黑 provider/model：TOSKAXY_CLAUDE_OPUS47/claude-opus-4-7
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54_MINI
+当前模型：gpt-5.4-mini
+尝试次数：3/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5, gpt-5.4, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-mini, glm-5.1
+当前 provider：GS88_GPT54_MINI
+当前模型：gpt-5.4-mini
+尝试次数：2/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54_MINI
+实际使用模型：gpt-5.4-mini
+用时：21 秒
+返回字符数：3325
+committee role quantitative_stat_arb_reviewer: provider=GS88_GPT54_MINI, model=gpt-5.4-mini, elapsed=28.782s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54
+实际使用模型：gpt-5.4
+用时：27 秒
+返回字符数：3176
+committee role optimistic_trend_analyst: provider=GS88_GPT54, model=gpt-5.4, elapsed=35.439s parse_retry=0
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54_MINI
+实际使用模型：gpt-5.4-mini
+用时：12 秒
+返回字符数：2739
+committee role conservative_risk_validator: provider=GS88_GPT54_MINI, model=gpt-5.4-mini, elapsed=42.608s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54_MINI
+实际使用模型：gpt-5.4-mini
+用时：14 秒
+返回字符数：2402
+committee role aggressive_momentum_trader: provider=GS88_GPT54_MINI, model=gpt-5.4-mini, elapsed=44.891s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：38 秒
+返回字符数：4286
+committee role pessimistic_risk_officer: provider=GS88_GPT55, model=gpt-5.5, elapsed=45.966s parse_retry=0
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT54_MINI
+实际使用模型：gpt-5.4-mini
+用时：16 秒
+返回字符数：2605
+committee role macro_liquidity_analyst: provider=GS88_GPT54_MINI, model=gpt-5.4-mini, elapsed=47.447s parse_retry=0
+AI 投资委员会成功角色数量：6
+AI 投资委员会失败角色数量：0
+准备调用 AI：
+角色：strategy_advisor
+模型池：gpt-5.5
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：0.0 秒
+本次请求前等待：10.0 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 正在生成策略中，已等待 80 秒……
+AI 调用成功：
+角色：strategy_advisor
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：82 秒
+返回字符数：12244
+chairman provider/model/耗时：GS88_GPT55/gpt-5.5/92.261s
+final allowed_mutations:["add_volatility_normalized_entry_filter", "add_abnormal_volatility_window_guard", "add_volume_confirmation_for_high_beta_pairs", "tighten_low_quality_breakout_entries", "pair_specific_reduce_bad_pair_exposure", "pair_specific_restore_non_bad_pairs", "controlled_widen_entry_if_too_few_trades", "relax_global_filter_if_trade_count_below_20", "reduce_overstrict_regime_filter_if_too_few_trades", "add_max_pair_concentration_guard", "add_time_based_cooldown_after_stoploss_cluster", "improve_stoploss_roi_alignment_without_replacing_stoploss_with_trailing", "add_slippage_and_liquidity_shock_stress_assumption", "controlled_widen_entry", "relax_global_filter", "reduce_overstrict_regime_filter", "lower_roi_targets_moderately", "add_time_based_exit_for_stale_trades", "tighten_pair_specific_stoploss_on_high_beta_pairs", "use_pair_specific_risk_budget", "require_volume_confirmation_on_breakouts", "cap_consecutive_entries_per_pair", "prefer_btc_sol_bnb_over_op_doge_in_allocation", "reduce_max_holding_time_when_momentum_fades", "broaden_breakout_confirmation_window", "slightly_loosen_volume_or_volatility_gate_for_selected_pairs", "increase_trade_opportunity_on_BTC_SOL_only_if_risk_caps_remain_fixed", "moderate_stoploss_distance_review", "entry_confirmation_lightening", "liquidity_sensitive_position_sizing", "pair_specific_threshold_tuning", "selective_risk_budget_rebalance_by_pair", "recalibrate_stoploss_distance_with_roi_consistency_check"]
+final blocked_mutations:["adjust_roi_only", "blanket_higher_selectivity_without_trade_count_compensation", "continue_global_tightening_for_all_pairs", "continue_tightening_all_pairs", "continue_tightening_all_pairs_after_too_few_trades", "disable_all_pairs_due_to_risk_off", "disable_non_bad_pairs_globally", "expand_stoploss_without_entry_quality_improvement", "max_trades_above_60", "min_trades_below_20", "news_keyword_rule", "no-trade", "no-trade_risk_control", "no-trade风控", "no_trade", "no_trade_risk_control", "no_trade_strategy", "remove_risk_filter", "replace_stoploss_with_trailing", "tighten_all_pairs_indiscriminately", "unbounded_position_stacking", "uniformly_raise_roi_targets", "use_validation_or_holdout_news", "仅依赖validation/holdout情报", "将交易数压到 20 以下", "继续收紧所有 pair", "继续收紧所有pair"]
+estimated_trade_count_guard:{"min_trades": 20, "ideal_min_trades": 25, "ideal_max_trades": 45, "max_trades": 60, "will_reduce_below_min": false, "reason": "主席硬约束：不允许把交易数压到 20 以下，理想 25~45，最高 60。"}
+是否可能导致交易数低于 min：no
+========== Prompt 相似度审查 ==========
+advisor_prompt_similarity: 1.0000
+codegen_prompt_similarity: 1.0000
+similar_to_run: 20260602_132636
+similar_to_version: v001
+decision: skip
+3. 正在调用代码生成模型池生成 Freqtrade 策略代码……
+codegen committee 是否开启: yes
+codegen committee enabled: yes
+codegen committee candidate_count: 3
+准备调用 AI：
+角色：code_generator
+模型池：gpt-5.4, gpt-5.5, codex-auto-review, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, deepseek-v4-pro, glm-5.1
+当前 provider：GS88_GPT54
+当前模型：gpt-5.4
+尝试次数：1/5
+距离上次 AI 请求：2.7 秒
+本次请求前等待：7.3 秒
+准备调用 AI：
+角色：code_generator
+模型池：gpt-5.4, gpt-5.5, codex-auto-review, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, deepseek-v4-pro, glm-5.1
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：1/5
+距离上次 AI 请求：2.7 秒
+本次请求前等待：7.3 秒
+准备调用 AI：
+角色：code_generator
+模型池：gpt-5.4, gpt-5.5, codex-auto-review, claude-opus-4-8, claude-opus-4-6, claude-opus-4-7, gpt-5.4-2026-03-05, deepseek-v4-pro, glm-5.1
+当前 provider：GS88_CODEX_AUTO_REVIEW
+当前模型：codex-auto-review
+尝试次数：1/5
+距离上次 AI 请求：2.7 秒
+本次请求前等待：7.3 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……AI 正在生成策略中，已等待 20 秒……
+
+AI 正在生成策略中，已等待 20 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 30 秒……
+AI 正在生成策略中，已等待 40 秒……AI 正在生成策略中，已等待 40 秒……
+
+AI 正在生成策略中，已等待 40 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 正在生成策略中，已等待 50 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：GS88_GPT54
+实际使用模型：gpt-5.4
+用时：54 秒
+返回字符数：11031
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 60 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 正在生成策略中，已等待 70 秒……
+AI 正在生成策略中，已等待 80 秒……
+AI 正在生成策略中，已等待 80 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：GS88_CODEX_AUTO_REVIEW
+实际使用模型：codex-auto-review
+用时：86 秒
+返回字符数：12966
+AI 正在生成策略中，已等待 90 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：97 秒
+返回字符数：17158
+跳过本次 run 已拉黑 provider/model：TOSKAXY_CLAUDE_OPUS48/claude-opus-4-8
+准备调用 AI：
+角色：code_generator
+模型池：claude-opus-4-8, gpt-5.5, gpt-5.4, claude-opus-4-6, codex-auto-review
+当前 provider：GS88_GPT55
+当前模型：gpt-5.5
+尝试次数：2/5
+距离上次 AI 请求：7.1 秒
+本次请求前等待：2.9 秒
+AI 正在生成策略中，已等待 10 秒……
+AI 正在生成策略中，已等待 20 秒……
+AI 调用成功：
+角色：code_generator
+实际使用 provider：GS88_GPT55
+实际使用模型：gpt-5.5
+用时：24 秒
+返回字符数：2597
+reviewer provider/model/elapsed: GS88_GPT55/gpt-5.5/27.416s
+codegen_review candidate=candidate_B score=100 hard_errors=[] soft_warnings=[]
+codegen_review candidate=candidate_C score=100 hard_errors=[] soft_warnings=[]
+codegen_review candidate=candidate_A score=80 hard_errors=[] soft_warnings=[]
+WARNING codegen reviewer selection_reason mentions ['candidate_A'] but structured selected_candidate=candidate_B; using structured selected_candidate.
+selected_candidate: candidate_B
+selection_reason: Structured selected_candidate=candidate_B is authoritative; original reviewer reason mentioned inconsistent candidate(s) ['candidate_A'] and was rewritten before saving.
+selected_candidate_consistency: {"selected_candidate": "candidate_B", "selection_reason_mentions": ["candidate_A"], "selection_reason_consistent": false, "action": "selection_reason_rewritten_to_structured_selected_candidate"}
+codegen retry triggered: no
+最终进入回测的 candidate: candidate_B
+新策略相似度检测：
+- 相似对象：无
+- 相似对象类型：none
+- 相似度：0.00
+- 相似原因：无
+- 是否允许自动继续：是
+========== 重复判定拆分 ==========
+historical_similarity: similar_to=无, score=0.00, decision=auto_continue
+current_run_similarity: duplicate_with=无, score=0.00, is_duplicate=否
+final_duplicate_decision: continue
+4. 策略代码已保存：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/v001/strategy.py
+5. 正在检查 Python 语法……
+6. 正在回测训练区间：20260501-20260525
+
+========== 回测命令 ==========
+version: v001
+strategy_name: MultiCoin_AI_Strategy_20260603_062024_v001
+timerange: 20260501-20260525
+config: user_data/backtest_results/ai_optimization_runs/run_20260603_062024/config.active_pairs.json
+strategy_file: /opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260603_062024_v001.py
+command: docker compose run --rm freqtrade backtesting --config user_data/backtest_results/ai_optimization_runs/run_20260603_062024/config.active_pairs.json --strategy MultiCoin_AI_Strategy_20260603_062024_v001 --timeframe 5m --timerange 20260501-20260525 --export trades --cache none
+cwd: /opt/freqtrade-okx/freqtrade-ai
+Docker compose 命令实际执行目录: /opt/freqtrade-okx/freqtrade-ai
+result_dir_before_count: 139
+
+========== Docker backtest 磁盘空间预检 ==========
+backtest_results: /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results
+disk_total: 10476134400 bytes (9.757 GB)
+disk_used: 8014725120 bytes (7.464 GB)
+disk_free: 1907879936 bytes (1.777 GB)
+threshold: 3.0 GB
+action: skip_docker_backtest
+处理：磁盘空间不足属于 infrastructure_failure，不写入 strategy_blacklist，不降低 strategy_family 权重，不归因到策略逻辑失败。
+
+===== 本次运行摘要 =====
+运行目录：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024
+生成策略：v001:MultiCoin_AI_Strategy_20260603_062024_v001
+有效策略：无
+无效策略：v001:MultiCoin_AI_Strategy_20260603_062024_v001(训练区间回测跳过：backtest_results 所在磁盘剩余空间低于阈值)
+当前最佳策略是否更新：否
+
+========== strategy_family_leaderboard ==========
+strategy_family_leaderboard.json：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/strategy_family_leaderboard.json
+family | attempted | advisor | committee | candidates | reviewer_rejected | prompt_duplicate | final_generated | train_backtested | valid | near_miss | high_freq | zero_trade | runtime_error | avg_score | action | reason
+trend_following | 1 | 1 | 1 | 3 | 2 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 1 | 0.0000 | disable_next_run | 出现 zero_trade_failure；出现 runtime_error_failure
+pullback_reversal | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0.0000 | observe | 按真实 round/summary 聚合
+breakout_momentum | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0.0000 | observe | 按真实 round/summary 聚合
+low_volatility_mean_reversion | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0.0000 | observe | 按真实 round/summary 聚合
+strict_risk_filter | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0.0000 | observe | 按真实 round/summary 聚合
+推荐后续 family：无
+下轮禁用 family：trend_following
+
+========== 迭代控制器结束摘要 ==========
+是否没有 official best 但 nearest_candidate 有改善：否
+是否没有 official best 但 session_best 有改善：否
+是否应该继续运行而不是早停：是
+本次没有找到有效新策略，当前最佳策略保持不变。
+本轮失败策略共同原因：
+- PF 低
+- disk_space_low
+下一轮建议：
+- 保持目标交易数 20~60，理想区间 25~45。不要低于 20，也不要高于 60。
+- 不要继续宽松高频入场
+- 优先控制止损损失
+
+========== 结束状态 ==========
+当前正式 best：来源=历史 best；策略名=MultiCoin_AI_Strategy_20260531_014140_v001；final_score=22.9549
+========== 冠军-挑战者状态 ==========
+当前最佳策略 champion：MultiCoin_AI_Strategy_20260601_110758_v001
+本轮最接近目标 challenger：MultiCoin_AI_Strategy_20260601_110758_v001
+比 baseline 差异：{'profit_total_pct_delta': 0.009407197999999894, 'profit_factor_delta': -0.060474991881671825}
+下一轮应该怎么改：优先选择未失败过的 mutation_type，继续单点小步调整。
+本轮失败模式总结：高频风险 / 止损吞噬利润 / trailing 结构失败 / 相似失败策略。
+========== 记忆写入状态 ==========
+nearest_candidate.json：已写入
+last_run_summary.json：已写入
+best_strategy.json：未更新
+strategy_memory.json：已追加
+strategy_lessons.json：已更新
+strategy_blacklist.json：已更新
+下一轮 advisor prompt 将加载 last_run_summary：是
+下一轮 advisor prompt 将加载 nearest_candidate：是
+下一轮 advisor prompt 将加载 historical_best：是
+
+========== 本次迭代统计 ==========
+计划迭代轮数：1
+策略顾问成功次数：1
+代码生成成功次数：1
+AI codegen 调用成功次数：3
+成功提取 codegen candidate strategy.py 数：3
+已接受 codegen candidate 数：3
+reviewer 拒绝 candidate 数：2
+最终 codegen 成功次数：1
+实际生成策略版本数：1
+训练回测版本数：0
+验证回测版本数：0
+验证区间回测总次数：0
+跳过验证版本数：0
+有效策略数：0
+无效策略数：1
+新 best 更新次数：0
+当前策略迭代版本：v001（仅本次 run 内版本号）
+strategy_memory 当前保留条数：200
+
+========== 全项目累计统计 ==========
+累计 run 总数：143
+累计有效 run 数：114
+累计尝试版本数/v目录数：739
+累计生成 strategy.py 数：602
+累计生成 mutation_spec.json 数：680
+累计训练回测版本数：302
+累计验证回测版本数：232
+累计 summary.json 数：715
+累计有效策略数：125
+累计 new best 次数：41
+strategy_memory 当前保留条数：200
+说明：strategy_memory 保留条数不是累计策略版本数。
+统计文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/iteration_stats.json
+详细状态：
+v001：顾问=成功 / 代码=成功 / 语法=成功 / 静态=成功 / 训练=跳过：磁盘空间不足 / 验证=跳过 / 有效=否 / 新best=否 / 原因=训练区间回测跳过：backtest_results 所在磁盘剩余空间低于阈值
+
+========== Prompt 审计文件 ==========
+Prompt 审计文件：已保存到各版本目录，如需查看请执行：find /opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024 -maxdepth 3 -type f \( -name "*prompt*" \) -print
+
+========== 当前最佳策略简述 ==========
+来源：历史 best
+策略名：MultiCoin_AI_Strategy_20260531_014140_v001
+策略文件：/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260531_014140/v001/strategy.py
+训练区间：20260501-20260525
+交易数：36
+收益USDT：-0.6419
+收益率：-0.06%
+胜率：86.11%
+Profit Factor：0.9323
+最大回撤：0.77%
+验证区间平均收益率：-0.18%
+验证区间平均 PF：0.8733
+验证区间最大回撤：1.06%
+是否疑似过拟合：否
+主要优势：本轮 final_score 最高。
+主要风险：仍需更多区间复验。
+
+========== 本次运行总耗时 ==========
+总耗时：15分30秒（930.2 秒）
+
+========== 日志保存 ==========
+完整运行日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results/ai_optimization_runs/run_20260603_062024/run.log
+
+全局日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/auto_optimize_run_20260603_062024.log
+
+最近一次日志：
+/opt/freqtrade-okx/freqtrade-ai/user_data/logs/latest.log
+Your branch is up to date with 'origin/main'.
+Already on 'main'
+Already up to date.
+From github.com:b8vipvip/freqtrade-ai-logs
+ * branch            main       -> FETCH_HEAD

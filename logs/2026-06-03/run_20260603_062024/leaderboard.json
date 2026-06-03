@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "version": "v001",
+      "run_id": "20260603_062024",
+      "strategy_class": "MultiCoin_AI_Strategy_20260603_062024_v001",
+      "strategy_file": "/opt/freqtrade-okx/freqtrade-ai/user_data/strategies/MultiCoin_AI_Strategy_20260603_062024_v001.py",
+      "strategy_family": "trend_following",
+      "is_valid": false,
+      "is_best": false,
+      "invalid_reason": "训练区间回测跳过：backtest_results 所在磁盘剩余空间低于阈值",
+      "failure_reason": "disk_space_low",
+      "failure_type": "disk_space_low",
+      "family_failure_reason": "disk_space_low",
+      "final_score": 0.0,
+      "runtime_error_failure": true,
+      "infrastructure_failure": {
+        "type": "disk_space_low",
+        "disk": {
+          "path": "/opt/freqtrade-okx/freqtrade-ai/user_data/backtest_results",
+          "disk_total_gb": 9.757,
+          "disk_used_gb": 7.464,
+          "disk_free_gb": 1.777,
+          "disk_total": 10476134400,
+          "disk_used": 8014725120,
+          "disk_free": 1907879936,
+          "threshold_gb": 3.0,
+          "ok": false,
+          "action": "skip_docker_backtest"
+        }
+      },
+      "train_backtest_status": "跳过：磁盘空间不足",
+      "advisor_model_used": "gpt-5.5",
+      "codegen_model_used": "",
+      "advisor_attempt_count": 1,
+      "codegen_attempt_count": 0,
+      "family_score": 0.0,
+      "high_frequency_failure": false,
+      "severe_high_frequency_failure": false,
+      "validation_high_frequency_failure": false,
+      "duplicate_strategy_failure": false,
+      "validation_high_frequency_details": [],
+      "low_trade_profitable_near_miss": false,
+      "trailing_failure": false
+    }
+  ]
+}
